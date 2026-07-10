@@ -1,6 +1,7 @@
 import { stripe } from '@/lib/stripe';
 import { db } from '@/lib/db/prisma';
-import { auth } from '@/lib/auth/auth';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth/auth';
 import { redirect } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';

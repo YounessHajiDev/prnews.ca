@@ -1,4 +1,5 @@
-import { auth } from '@/lib/auth/auth';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth/auth';
 import { db } from '@/lib/db/prisma';
 import { redirect } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -6,7 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { CheckCircle, XCircle, Clock } from 'lucide-react';
 
 export default async function AdminQueuePage() {
-  const session = await auth();
+  const session = await getServerSession(authOptions);
   if (!session) redirect('/login');
   if (session.user?.role !== 'ADMIN' && session.user?.role !== 'EDITOR') redirect('/app');
 
