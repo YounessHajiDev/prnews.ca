@@ -6,7 +6,11 @@ export async function POST(request: Request) {
 
   let event;
   try {
-    event = stripe.webhooks.constructEvent(body, signature, process.env.STRIPE_WEBHOOK_SECRET!);
+    event = stripe.webhooks.constructEvent(
+      body,
+      signature,
+      process.env.STRIPE_WEBHOOK_SECRET!
+    );
   } catch (err) {
     return new Response('Webhook signature verification failed', { status: 400 });
   }
@@ -14,17 +18,17 @@ export async function POST(request: Request) {
   switch (event.type) {
     case 'checkout.session.completed': {
       const session = event.data.object as any;
-      console.log('Checkout completed:', session.id);
+      console.log('Checkout session completed:', session.id);
       break;
     }
     case 'invoice.payment_succeeded': {
       const invoice = event.data.object as any;
-      console.log('Payment succeeded:', invoice.id);
+      console.log('Invoice payment succeeded:', invoice.id);
       break;
     }
-    case 'customer.subscription.updated': {
+    case 'customer.subscription.created': {
       const subscription = event.data.object as any;
-      console.log('Subscription updated:', subscription.id);
+      console.log('Subscription created:', subscription.id);
       break;
     }
     case 'customer.subscription.deleted': {
@@ -33,7 +37,7 @@ export async function POST(request: Request) {
       break;
     }
     default:
-      console.log(`Unhandled event: ${event.type}`);
+      console.log(`Unhandled event type: ${event.type}`);
   }
 
   return new Response('OK');
