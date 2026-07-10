@@ -1,7 +1,4 @@
-import { auth } from '@/lib/auth/auth';
 import { db } from '@/lib/db/prisma';
-import { redirect } from 'next/navigation';
-import { Badge } from '@/components/ui/badge';
 
 export default async function DashboardPage() {
   const session = await auth();
@@ -20,28 +17,39 @@ export default async function DashboardPage() {
     },
   });
 
-  const totalCredits = await db.creditTransaction.aggregate({
-    _sum: { amount: true },
-    where: { userId: session.user.id },
+  const totalShares = await db.analyticsEvent.count({
+    where: {
+      eventType: 'share',
+      release: { authorId: session.user.id },
+    },
+  });
+
+  const totalOutlets = await db.analyticsEvent.count({
+    where: {
+      eventType: 'outlet_click',
+      release: { authorId: session.user.id },
+    },
   });
 
   return (
     <div className="p-8">
       <h1 className="heading-lg mb-6">Dashboard</h1>
-      <div className="grid grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-4 gap-6 mb-8">
         <div className="card p-6">
           <div className="text-sm text-wire-muted mb-1">My Releases</div>
           <div className="font-display text-3xl font-bold">{myReleases.length}</div>
         </div>
         <div className="card p-6">
-          <div className="text-sm text-wire-muted mb-1">Total Views</div>
-          <div className="font-display text-3xl font-bold">{totalViews._sum.id ?? 0}</div>
+          <div className="text-sm text-wire-muted mb-1">Views</div>
+          <div className="font-display text-3xl font-bold">{totalViews}</div>
         </div>
         <div className="card p-6">
-          <div className="text-sm text-wire-muted mb-1">Credits</div>
-          <div className="font-display text-3xl font-bold">
-            {(totalCredits._sum.amount ?? 0).toString()}
-          </div>
+          <div className="text-sm text-wire-muted mb-1">Shares</div>
+          <div className="font-display text-3xl font-bold">{totalShares}</div>
+        </div>
+        <div className="card p-6">
+          <div className="text-sm text-wire-muted mb-1">Outlet Clicks</div>
+          <div className="font-display text-3xl font-bold">{totalOutlets}</div>
         </div>
       </div>
       <h2 className="heading-md mb-4">Recent Releases</h2>
@@ -70,7 +78,9 @@ export default async function DashboardPage() {
                   <td className="px-4 py-3 text-wire-muted">
                     {release.publishedAt?.toLocaleDateString()}
                   </td>
-                  <td className="px-4 py-3 text-wire-muted">—</td>
+                  <td className="px-4 py-3 text-wire-muted">
+                    {release.analytics?.length ?? 0}
+                  </td>
                 </tr>
               ))}
             </tbody>

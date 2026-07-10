@@ -1,7 +1,6 @@
-import { auth } from '@/lib/auth/auth';
 import { db } from '@/lib/db/prisma';
+import { auth } from '@/lib/auth/auth';
 import { redirect } from 'next/navigation';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, XCircle, Clock } from 'lucide-react';
 
@@ -42,17 +41,18 @@ export default async function AdminQueuePage() {
                     {release.company?.name} · Submitted by {release.author?.name || release.author?.email}
                   </p>
                 </div>
-                <p className="text-sm text-wire-muted mb-4 line-clamp-2">{release.summary}</p>
+              </div>
+              <p className="text-sm text-wire-muted mb-4 line-clamp-2">{release.summary}</p>
               <div className="flex items-center gap-3">
-                <Button size="sm" className="gap-1">
+                <button className="btn-primary flex items-center gap-1 text-sm">
                   <CheckCircle className="w-4 h-4" /> Approve
-                </Button>
-                <Button variant="outline" size="sm" className="gap-1">
+                </button>
+                <button className="btn-outline flex items-center gap-1 text-sm">
                   <XCircle className="w-4 h-4" /> Reject
-                </Button>
-                <Button variant="ghost" size="sm">
+                </button>
+                <button className="text-sm text-wire-muted hover:text-wire-charcoal">
                   Request Changes
-                </Button>
+                </button>
               </div>
             </div>
           ))}

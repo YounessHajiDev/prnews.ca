@@ -1,37 +1,54 @@
+import { db } from '@/lib/db/prisma';
+import { notFound } from 'next/navigation';
 import { ReleaseGrid } from '@/components/news/release-grid';
 import { Breadcrumb } from '@/components/layout/breadcrumb';
 
-const RELEASES = [
-  {
-    id: '1',
-    headline: 'Tech Startup Raises $15M Series A to Expand Canadian AI Solutions',
-    summary: 'MAPLE AI INC. — A Toronto-based artificial intelligence startup announced today that it has raised $15 million in Series A funding...',
-    category: 'Technology',
-    province: 'Ontario',
-    company: 'MapleAI Inc.',
-    publishedAt: new Date('2026-07-10'),
-    slug: 'tech-startup-raises-15m-series-a',
-  },
-  {
-    id: '2',
-    headline: 'BC Mining Company Announces New Sustainable Operations',
-    summary: 'VANCOUVER, BC — Pacific Minerals Corp., a leading British Columbia mining company, announced today a $50 million investment...',
-    category: 'Mining',
-    province: 'British Columbia',
-    company: 'Pacific Minerals Corp.',
-    publishedAt: new Date('2026-07-10'),
-    slug: 'bc-mining-company-sustainable-operations',
-  },
-];
+export default async function CategoryPage({
+  params,
+}: {
+  params: Promise<{ categorySlug: string }>;
+}) {
+  const { categorySlug } = await params;
 
-export default function CategoryPage() {
+  const releases = await db.pressRelease.findMany({
+    where: {
+      categorySlug,
+      status: 'PUBLISHED',
+    },
+    orderBy: { publishedAt: 'desc' },
+    take: 20,
+    include: {
+      company: { select: { name: true, slug: true } },
+    },
+  });
+
   return (
-    <section className="section">
+    <section className="section bg-wire-bg">
       <div className="container-page">
-        <Breadcrumb items={[{ label: 'News', href: '/news' }, { label: 'Technology' }]} />
-        <h1 className="heading-lg mb-2">Technology</h1>
-        <p className="text-wire-muted mb-8">Latest technology press releases from across Canada.</p>
-        <ReleaseGrid releases={RELEASES} />
+        <Breadcrumb items={[
+          { label: 'News', href: '/news' },
+          { label: categorySlug },
+        ]} />
+        <h1 className="heading-lg mb-2">{categorySlug}</h1>
+        <p className="text-wire-muted mb-8">
+          {releases.length} press releases in this category.
+        </p>
+        {releases.length === 0 ? (
+          <p className="text-wire-muted">No releases in this category yet.</p>
+        ) : (
+          <ReleaseGrid
+            releases={releases.map((r) => ({
+              id: r.id,
+              headline: r.headline,
+              summary: r.summary,
+              category: r.categorySlug,
+              province: r.province ?? undefined,
+              company: r.company?.name ?? 'PR NEWS',
+              publishedAt: r.publishedAt ?? r.createdAt,
+              slug: r.slug,
+            }))}
+          />
+        )}
       </div>
     </section>
   );
