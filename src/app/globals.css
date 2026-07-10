@@ -1,0 +1,101 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-wire-charcoal: #14161C;
+  --color-wire-amber: #D4A017;
+  --color-wire-amber-light: #EAB82A;
+  --color-wire-amber-dark: #B8860B;
+  --color-wire-bg: #FAFAF8;
+  --color-wire-surface: #FFFFFF;
+  --color-wire-border: #E5E7EB;
+  --color-wire-muted: #6B7280;
+  --color-wire-success: #059669;
+  --color-wire-warning: #D97706;
+  --color-wire-error: #DC2626;
+}
+
+@layer base {
+  * {
+    @apply border-[var(--color-wire-border)];
+  }
+
+  body {
+    @apply bg-[var(--color-wire-bg)] font-body text-[var(--color-wire-charcoal)] antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-wire-amber);
+    color: white;
+  }
+}
+
+@layer components {
+  .prose-release {
+    @apply prose prose-lg max-w-none;
+    @apply prose-headings:font-display prose-headings:text-wire-charcoal;
+    @apply prose-p:leading-relaxed;
+    @apply prose-a:text-wire-amber prose-a:no-underline hover:prose-a:underline;
+    @apply prose-img:rounded-lg prose-img:shadow-sm;
+    @apply prose-blockquote:border-l-4 prose-blockquote:border-wire-amber prose-blockquote:pl-4 prose-blockquote:italic;
+    @apply prose-strong:font-semibold;
+  }
+
+  .heading-xl {
+    @apply font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight;
+  }
+
+  .heading-lg {
+    @apply font-display text-2xl sm:text-3xl md:text-4xl font-semibold;
+  }
+
+  .heading-md {
+    @apply font-display text-xl md:text-2xl font-semibold;
+  }
+
+  .heading-sm {
+    @apply font-display text-lg md:text-xl font-semibold;
+  }
+
+  .body-large {
+    @apply font-body text-lg leading-relaxed;
+  }
+
+  .body-base {
+    @apply font-body text-base leading-relaxed;
+  }
+
+  .body-small {
+    @apply font-body text-sm leading-relaxed;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-md bg-wire-amber px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-wire-amber-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-amber focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center rounded-md border border-wire-border bg-transparent px-5 py-2.5 text-sm font-medium transition-colors hover:bg-wire-charcoal hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-amber focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .card {
+    @apply rounded-lg border border-wire-border bg-wire-surface shadow-sm;
+  }
+
+  .section {
+    @apply py-12 md:py-16 lg:py-20;
+  }
+
+  .container-page {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-narrow {
+    @apply mx-auto max-w-4xl px-4 sm:px-6 lg:px-8;
+  }
+}

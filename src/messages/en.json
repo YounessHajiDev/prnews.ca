@@ -1,0 +1,173 @@
+{
+  "site": {
+    "name": "PR NEWS",
+    "tagline": "See exactly where your story goes, before you hit send.",
+    "description": "Modern, transparent press release distribution for the Canadian market."
+  },
+  "nav": {
+    "home": "Home",
+    "news": "News",
+    "pricing": "Pricing",
+    "howItWorks": "How It Works",
+    "about": "About",
+    "contact": "Contact",
+    "resources": "Resources",
+    "journalists": "Journalists",
+    "search": "Search",
+    "app": "App",
+    "login": "Log in",
+    "signup": "Sign up",
+    "logout": "Log out",
+    "dashboard": "Dashboard",
+    "submitRelease": "Submit Release",
+    "myReleases": "My Releases",
+    "billing": "Billing",
+    "settings": "Settings"
+  },
+  "home": {
+    "hero": {
+      "headline": "Press Releases, Distributed Nationwide",
+      "subheadline": "Publish once. Reach every outlet, province, and audience. Real-time delivery confirmation included.",
+      "ctaPrimary": "Get Started",
+      "ctaSecondary": "See Pricing"
+    },
+    "stats": {
+      "releasesToday": "Releases Sent Today",
+      "outletsReached": "Media Outlets Reached",
+      "newsrooms": "Active Newsrooms"
+    },
+    "ticker": {
+      "label": "Latest Releases"
+    },
+    "features": {
+      "title": "Why PR NEWS?",
+      "transparency": {
+        "title": "Full Distribution Transparency",
+        "desc": "Track every delivery in real-time. Know exactly which outlets picked up your story."
+      },
+      "speed": {
+        "title": "Fast Turnaround",
+        "desc": "Editorial review in under 2 hours. Publish on your schedule."
+      },
+      "bilingual": {
+        "title": "Genuinely Bilingual",
+        "desc": "Publish in both English and French. Reach every Canadian audience."
+      }
+    }
+  },
+  "pricing": {
+    "title": "Simple, Transparent Pricing",
+    "subtitle": "No hidden fees. No sales calls required.",
+    "starter": {
+      "name": "Starter",
+      "description": "Perfect for one-off announcements",
+      "price": "CAD $299",
+      "features": [
+        "1 press release",
+        "National distribution",
+        "1 category",
+        "Basic analytics"
+      ],
+      "cta": "Get Started"
+    },
+    "growth": {
+      "name": "Growth",
+      "description": "For teams that publish regularly",
+      "monthlyPrice": "CAD $199/mo",
+      "features": [
+        "4 releases per month",
+        "Both English and French",
+        "Priority review (under 1 hour)",
+        "Branded newsroom",
+        "Advanced analytics"
+      ],
+      "cta": "Subscribe"
+    },
+    "agency": {
+      "name": "Agency",
+      "description": "For agencies managing multiple clients",
+      "contactSales": "Contact Sales"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "description": "Custom solutions for large organizations",
+      "contactSales": "Contact Sales"
+    }
+  },
+  "footer": {
+    "product": "Product",
+    "resources": "Resources",
+    "legal": "Legal",
+    "subscribeNewsletter": "Subscribe to our newsletter",
+    "copyright": "All rights reserved."
+  },
+  "release": {
+    "published": "Published",
+    "shared": "Share",
+    "category": "Category",
+    "related": "More From This Company",
+    "meta": {
+      "by": "by",
+      "in": "in"
+    }
+  },
+  "common": {
+    "readMore": "Read More",
+    "back": "Back",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "close": "Close",
+    "confirm": "Confirm",
+    "submit": "Submit",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success!",
+    "allCategories": "All Categories",
+    "allProvinces": "All Provinces",
+    "poweredBy": "Powered by PR NEWS",
+    "language": "Language",
+    "english": "English",
+    "français": "Français"
+  },
+  "auth": {
+    "login": {
+      "title": "Log in to your account",
+      "email": "Email",
+      "password": "Password",
+      "forgotPassword": "Forgot your password?",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up",
+      "continueWithGoogle": "Continue with Google",
+      "continueWithEmail": "Continue with email",
+      "magicLinkSent": "We've sent you a magic link. Check your inbox!"
+    },
+    "signup": {
+      "title": "Create your account",
+      "fullName": "Full name",
+      "companyName": "Company name",
+      "industry": "Industry",
+      "role": "Role",
+      "alreadyHaveAccount": "Already have an account?",
+      "login": "Log in"
+    }
+  },
+  "categories": {
+    "business": "Business",
+    "technology": "Technology",
+    "health": "Health",
+    "finance": "Finance & Economy",
+    "government": "Government & Politics",
+    "environment": "Environment",
+    "consumer": "Consumer Products",
+    "earnings": "Company Earnings",
+    "nonprofit": "Nonprofit & Public Interest",
+    "sports": "Sports & Entertainment",
+    "realEstate": "Real Estate",
+    "energy": "Energy & Mining",
+    "indigenous": "Indigenous Affairs & Reconciliation",
+    "cannabis": "Cannabis"
+  }
+}
