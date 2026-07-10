@@ -1,0 +1,173 @@
+{
+  "site": {
+    "name": "PR NEWS",
+    "tagline": "Sachez exactement où va votre histoire, avant d'appuyer sur envoyer.",
+    "description": "Distribution de communiqués de presse moderne et transparente pour le marché canadien."
+  },
+  "nav": {
+    "home": "Accueil",
+    "news": "Actualités",
+    "pricing": "Tarifs",
+    "howItWorks": "Comment ça marche",
+    "about": "À propos",
+    "contact": "Contactez-nous",
+    "resources": "Ressources",
+    "journalists": "Journalistes",
+    "search": "Recherche",
+    "app": "Application",
+    "login": "Se connecter",
+    "signup": "Créer un compte",
+    "logout": "Se déconnecter",
+    "dashboard": "Tableau de bord",
+    "submitRelease": "Soumettre un communiqué",
+    "myReleases": "Mes communiqués",
+    "billing": "Facturation",
+    "settings": "Paramètres"
+  },
+  "home": {
+    "hero": {
+      "headline": "Communicés de presse, diffusés partout au Canada",
+      "subheadline": "Publiez une fois. Touchez chaque média, province et audience. Confirmation de livraison en temps réel incluse.",
+      "ctaPrimary": "Commencer",
+      "ctaSecondary": "Voir les tarifs"
+    },
+    "stats": {
+      "releasesToday": "Communiqués envoyés aujourd'hui",
+      "outletsReached": "Médias touchés",
+      "newsrooms": "Salles de presse actives"
+    },
+    "ticker": {
+      "label": "Derniers communiqués"
+    },
+    "features": {
+      "title": "Pourquoi PR NEWS ?",
+      "transparency": {
+        "title": "Transparence totale de la diffusion",
+        "desc": "Suivez chaque livraison en temps réel. Sachez quels médias ont repris votre histoire."
+      },
+      "speed": {
+        "title": "Réactivité",
+        "desc": "Revue éditoriale en moins de 2 heures. Publiez selon vos horaires."
+      },
+      "bilingual": {
+        "title": "Vraiment bilingue",
+        "desc": "Publiez en anglais et en français. Touchez toutes les audiences canadiennes."
+      }
+    }
+  },
+  "pricing": {
+    "title": "Tarification simple et transparente",
+    "subtitle": "Pas de frais cachés. Pas d'appels de vente requis.",
+    "starter": {
+      "name": "Débutant",
+      "description": "Parfait pour une annonce ponctuelle",
+      "price": "299 $CA",
+      "features": [
+        "1 communiqué de presse",
+        "Diffusion nationale",
+        "1 catégorie",
+        "Analyses de base"
+      ],
+      "cta": "Commencer"
+    },
+    "growth": {
+      "name": "Croissance",
+      "description": "Pour les équipes qui publient régulièrement",
+      "monthlyPrice": "199 $CA/mois",
+      "features": [
+        "4 communiqués par mois",
+        "Anglais et français inclus",
+        "Revue prioritaire (moins de 1 heure)",
+        "Salle de presse personnalisée",
+        "Analyses avancées"
+      ],
+      "cta": "S'abonner"
+    },
+    "agency": {
+      "name": "Agence",
+      "description": "Pour les agences gérant plusieurs clients",
+      "contactSales": "Contacter les ventes"
+    },
+    "enterprise": {
+      "name": "Entreprise",
+      "description": "Solutions personnalisées pour les grandes organisations",
+      "contactSales": "Contacter les ventes"
+    }
+  },
+  "footer": {
+    "product": "Produit",
+    "resources": "Ressources",
+    "legal": "Juridique",
+    "subscribeNewsletter": "Abonnez-vous à notre infolettre",
+    "copyright": "Tous droits réservés."
+  },
+  "release": {
+    "published": "Publié le",
+    "shared": "Partager",
+    "category": "Catégorie",
+    "related": "Plus de cette entreprise",
+    "meta": {
+      "by": "par",
+      "in": "dans"
+    }
+  },
+  "common": {
+    "readMore": "Lire la suite",
+    "back": "Retour",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "view": "Voir",
+    "close": "Fermer",
+    "confirm": "Confirmer",
+    "submit": "Soumettre",
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "success": "Succès !",
+    "allCategories": "Toutes les catégories",
+    "allProvinces": "Toutes les provinces",
+    "poweredBy": "Propulsé par PR NEWS",
+    "language": "Langue",
+    "english": "Anglais",
+    "français": "Français"
+  },
+  "auth": {
+    "login": {
+      "title": "Connectez-vous à votre compte",
+      "email": "Courriel",
+      "password": "Mot de passe",
+      "forgotPassword": "Mot de passe oublié ?",
+      "noAccount": "Vous n'avez pas de compte ?",
+      "signUp": "Créer un compte",
+      "continueWithGoogle": "Continuer avec Google",
+      "continueWithEmail": "Continuer avec le courriel",
+      "magicLinkSent": "Nous vous avons envoyé un lien magique. Vérifiez votre boîte de réception !"
+    },
+    "signup": {
+      "title": "Créez votre compte",
+      "fullName": "Nom complet",
+      "companyName": "Nom de l'entreprise",
+      "industry": "Secteur d'activité",
+      "role": "Rôle",
+      "alreadyHaveAccount": "Vous avez déjà un compte ?",
+      "login": "Se connecter"
+    }
+  },
+  "categories": {
+    "business": "Affaires",
+    "technology": "Technologie",
+    "health": "Santé",
+    "finance": "Finance et Économie",
+    "government": "Gouvernement et Politique",
+    "environment": "Environnement",
+    "consumer": "Produits de consommation",
+    "earnings": "Résultats d'entreprise",
+    "nonprofit": "Organisme sans but lucratif",
+    "sports": "Sports et Divertissement",
+    "realEstate": "Immobilier",
+    "energy": "Énergie et Mines",
+    "indigenous": "Affaires autochtones et Réconciliation",
+    "cannabis": "Cannabis"
+  }
+}

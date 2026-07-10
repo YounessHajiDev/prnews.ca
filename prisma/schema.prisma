@@ -1,0 +1,220 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  EDITOR
+  CLIENT
+  AGENCY
+}
+
+enum ReleaseStatus {
+  DRAFT
+  SUBMITTED
+  IN_REVIEW
+  APPROVED
+  PUBLISHED
+  DISTRIBUTED
+  REJECTED
+}
+
+enum SubscriptionTier {
+  FREE
+  STARTER
+  PROFESSIONAL
+  ENTERPRISE
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String?
+  passwordHash  String?
+  emailVerified DateTime?
+  image         String?
+  role          UserRole @default(CLIENT)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  company       Company?
+  credits       CreditTransaction[]
+  releases      PressRelease[]
+  journalisms   JournalistProfile[]
+  subscriptions Subscription[]
+
+  @@map("users")
+}
+
+model Company {
+  id              String   @id @default(cuid())
+  name            String
+  slug            String   @unique
+  website         String?
+  industry        String?
+  address         String?
+  city            String?
+  province        String?
+  country         String   @default("CA")
+  bio             String?
+  logoUrl         String?
+  boilerplate     String?
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user            User?
+  releases        PressRelease[]
+  journalist      JournalistProfile?
+
+  @@map("companies")
+}
+
+model PressRelease {
+  id              String         @id @default(cuid())
+  headline        String
+  headlineFr      String?
+  slug            String
+  summary         String
+  body            String         // HTML from Tiptap
+  bodyFr          String?
+  status          ReleaseStatus  @default(DRAFT)
+  categorySlug    String
+  province        String?
+  keywords        String[]
+  language        String         @default("en") // "en", "fr", "both"
+  embargoAt       DateTime?
+  publishedAt     DateTime?
+  metaDescription String?
+  ogImageUrl      String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  authorId        String
+  author          User           @relation(fields: [authorId], references: [id])
+  companyId       String?
+  company         Company?       @relation(fields: [companyId], references: [id])
+
+  assets          MediaAsset[]
+  distributionLogs DistributionLog[]
+  analytics       AnalyticsEvent[]
+
+  @@index([status])
+  @@index([publishedAt])
+  @@index([slug])
+  @@index([categorySlug])
+  @@map("press_releases")
+}
+
+model DistributionPartner {
+  id             String   @id @default(cuid())
+  name           String
+  slug           String   @unique
+  type           String   // news-aggregator, media-outlet, social, rss-syndicate
+  feedEndpoint   String?
+  status         String   @default("active")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  logs           DistributionLog[]
+
+  @@map("distribution_partners")
+}
+
+model DistributionLog {
+  id          String   @id @default(cuid())
+  status      String   // delivered, pending, failed
+  partnerId   String
+  partner     DistributionPartner @relation(fields: [partnerId], references: [id])
+  releaseId   String
+  release     PressRelease @relation(fields: [releaseId], references: [id])
+  deliveredAt DateTime?
+  errorMessage String?
+  createdAt   DateTime @default(now())
+
+  @@index([releaseId])
+  @@index([partnerId])
+  @@map("distribution_logs")
+}
+
+model MediaAsset {
+  id         String   @id @default(cuid())
+  type       String   // image, video, pdf
+  url        String
+  altText    String?
+  createdAt  DateTime @default(now())
+
+  releaseId  String
+  release    PressRelease @relation(fields: [releaseId], references: [id])
+
+  @@map("media_assets")
+}
+
+model CreditTransaction {
+  id          String   @id @default(cuid())
+  amount      Int      // positive = purchased, negative = consumed
+  type        String   // purchase, consumption, refund
+  stripeRef   String?
+  createdAt   DateTime @default(now())
+
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+
+  @@map("credit_transactions")
+}
+
+model Subscription {
+  id                  String          @id @default(cuid())
+  stripeCustomerId    String          @unique
+  stripeSubscriptionId String?        @unique
+  tier                SubscriptionTier @default(FREE)
+  status              String          // active, canceled, past_due, trialing
+  currentPeriodEnd    DateTime?
+  trialEnd            DateTime?
+  cancelAtPeriodEnd   Boolean         @default(false)
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+
+  userId              String
+  user                User            @relation(fields: [userId], references: [id])
+
+  @@map("subscriptions")
+}
+
+model AnalyticsEvent {
+  id          String   @id @default(cuid())
+  eventType   String   // view, share, outlet_click, download, email_open
+  releaseId   String?
+  release     PressRelease? @relation(fields: [releaseId], references: [id])
+  geo         String?
+  referrer    String?
+  userAgent   String?
+  timestamp   DateTime @default(now())
+
+  @@index([releaseId])
+  @@index([timestamp])
+  @@map("analytics_events")
+}
+
+model JournalistProfile {
+  id          String   @id @default(cuid())
+  email       String
+  name        String?
+  beats       String[]
+  outlets     String?
+  verified    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id])
+  companyId   String?
+  company     Company? @relation(fields: [companyId], references: [id])
+
+  @@map("journalist_profiles")
+}
