@@ -1,6 +1,3 @@
-import * as React from 'react';
-import { cn } from '@/lib/utils';
-
 export function cn(...inputs: string[]) {
   return inputs.filter(Boolean).join(' ');
 }
