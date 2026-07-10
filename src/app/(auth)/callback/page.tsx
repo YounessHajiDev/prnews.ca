@@ -1,12 +1,5 @@
-import { type Metadata } from 'next';
 import { auth } from '@/lib/auth/auth';
 import { redirect } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-
-export const metadata: Metadata = {
-  robots: 'noindex, nofollow',
-};
 
 export default async function CallbackPage() {
   const session = await auth();
@@ -19,9 +12,9 @@ export default async function CallbackPage() {
           <h1 className="heading-md mb-2">Authentication</h1>
           <p className="text-wire-muted mb-6">Redirecting...</p>
           <form action="/api/auth/signin/google" method="POST">
-            <Button type="submit" className="w-full">
+            <button className="btn-primary w-full">
               Sign in with Google
-            </Button>
+            </button>
           </form>
         </div>
       </div>

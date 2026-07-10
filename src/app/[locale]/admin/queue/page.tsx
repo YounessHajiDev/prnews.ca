@@ -1,6 +1,7 @@
-import { db } from '@/lib/db/prisma';
 import { auth } from '@/lib/auth/auth';
+import { db } from '@/lib/db/prisma';
 import { redirect } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, XCircle, Clock } from 'lucide-react';
 
@@ -44,15 +45,15 @@ export default async function AdminQueuePage() {
               </div>
               <p className="text-sm text-wire-muted mb-4 line-clamp-2">{release.summary}</p>
               <div className="flex items-center gap-3">
-                <button className="btn-primary flex items-center gap-1 text-sm">
+                <Button variant="default" size="sm" className="gap-1">
                   <CheckCircle className="w-4 h-4" /> Approve
-                </button>
-                <button className="btn-outline flex items-center gap-1 text-sm">
+                </Button>
+                <Button variant="outline" size="sm" className="gap-1">
                   <XCircle className="w-4 h-4" /> Reject
-                </button>
-                <button className="text-sm text-wire-muted hover:text-wire-charcoal">
+                </Button>
+                <Button variant="ghost" size="sm">
                   Request Changes
-                </button>
+                </Button>
               </div>
             </div>
           ))}

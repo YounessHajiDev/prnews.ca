@@ -1,5 +1,6 @@
 import { db } from '@/lib/db/prisma';
 import { notFound } from 'next/navigation';
+import { Breadcrumb } from '@/components/layout/breadcrumb';
 
 export default async function ReleasePage({
   params,

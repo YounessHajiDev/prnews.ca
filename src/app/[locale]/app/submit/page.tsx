@@ -1,19 +1,24 @@
+import { auth } from '@/lib/auth/auth';
 import { db } from '@/lib/db/prisma';
+import { redirect } from 'next/navigation';
 
 export default async function SubmitPage() {
-  const releases = await db.pressRelease.findMany({
-    where: { status: 'DRAFT' },
+  const session = await auth();
+  if (!session) redirect('/login');
+
+  const drafts = await db.pressRelease.findMany({
+    where: { authorId: session.user.id, status: 'DRAFT' },
     orderBy: { createdAt: 'desc' },
-    take: 10,
+    take: 5,
   });
 
   return (
     <div className="p-8">
       <h1 className="heading-lg mb-6">Submit a Release</h1>
-      {releases.length > 0 && (
+      {drafts.length > 0 && (
         <div className="card p-4 mb-6">
           <h2 className="text-sm font-medium mb-2">Draft Releases</h2>
-          {releases.map((r) => (
+          {drafts.map((r) => (
             <div key={r.id} className="flex items-center justify-between py-2 border-b border-wire-border last:border-0">
               <span className="text-sm">{r.headline}</span>
               <span className="text-xs text-wire-muted">{r.createdAt.toLocaleDateString()}</span>

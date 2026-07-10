@@ -1,7 +1,8 @@
-import { db } from '@/lib/db/prisma';
 import { auth } from '@/lib/auth/auth';
+import { db } from '@/lib/db/prisma';
 import { redirect } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
+import { CheckCircle, XCircle, Clock } from 'lucide-react';
 
 export default async function ReleaseDetailPage({
   params,

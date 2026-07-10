@@ -23,7 +23,7 @@ export default async function AdminAnalyticsPage() {
         </div>
         <div className="card p-6">
           <div className="text-sm text-wire-muted mb-1">Total Views</div>
-          <div className="font-display text-3xl font-bold">{totalViews._count}</div>
+          <div className="font-display text-3xl font-bold">{totalViews}</div>
         </div>
         <div className="card p-6">
           <div className="text-sm text-wire-muted mb-1">Registered Companies</div>

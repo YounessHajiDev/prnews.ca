@@ -1,9 +1,15 @@
-import { type Metadata } from 'next';
+import { auth } from '@/lib/auth/auth';
+import { db } from '@/lib/db/prisma';
+import { redirect } from 'next/navigation';
 
-export const metadata: Metadata = {
-  robots: 'noindex, nofollow',
-};
+export default async function SettingsPage() {
+  const session = await auth();
+  if (!session) redirect('/login');
 
-export default function AppSettingsPage() {
-  return null;
+  return (
+    <div className="p-8">
+      <h1 className="heading-lg mb-6">Settings</h1>
+      <p className="text-wire-muted">Account settings — coming in Phase 2.</p>
+    </div>
+  );
 }

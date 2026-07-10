@@ -1,9 +1,25 @@
-import { type Metadata } from 'next';
+import { auth } from '@/lib/auth/auth';
+import { db } from '@/lib/db/prisma';
+import { redirect } from 'next/navigation';
 
-export const metadata: Metadata = {
-  robots: 'noindex, nofollow',
-};
+export default async function NewsroomPage() {
+  const session = await auth();
+  if (!session) redirect('/login');
 
-export default function AppNewsroomPage() {
-  return null;
+  const company = await db.company.findFirst({
+    where: { user: { id: session.user.id } },
+  });
+
+  return (
+    <div className="p-8">
+      <h1 className="heading-lg mb-6">Newsroom</h1>
+      {company ? (
+        <a href={`/newsroom/${company.slug}`} className="text-wire-amber hover:underline">
+          {company.name}
+        </a>
+      ) : (
+        <p className="text-wire-muted">No newsroom configured yet.</p>
+      )}
+    </div>
+  );
 }

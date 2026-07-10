@@ -6,6 +6,8 @@ export default async function AdminClientsPage() {
   const session = await auth();
   if (!session) redirect('/login');
   if (session.user?.role !== 'ADMIN') redirect('/app');
+
+  const clients = await db.company.findMany({
     orderBy: { createdAt: 'desc' },
     take: 20,
     include: {

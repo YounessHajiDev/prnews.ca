@@ -1,9 +1,10 @@
-import { type Metadata } from 'next';
+import { auth } from '@/lib/auth/auth';
+import { db } from '@/lib/db/prisma';
+import { redirect } from 'next/navigation';
 
-export const metadata: Metadata = {
-  robots: 'noindex, nofollow',
-};
-
-export default function AdminHomePage() {
-  return null;
+export default async function AdminHomePage() {
+  const session = await auth();
+  if (!session) redirect('/login');
+  if (session.user?.role !== 'ADMIN') redirect('/app');
+  redirect('/admin/queue');
 }

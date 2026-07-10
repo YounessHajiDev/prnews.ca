@@ -41,7 +41,6 @@ export default async function BillingPage() {
     <div className="p-8">
       <h1 className="heading-lg mb-6">Billing</h1>
 
-      {/* Current Plan */}
       <div className="card p-6 mb-6">
         <div className="flex items-center justify-between">
           <div>
@@ -67,7 +66,6 @@ export default async function BillingPage() {
         </div>
       </div>
 
-      {/* Available Plans */}
       <div className="grid md:grid-cols-2 gap-6 mb-8">
         {PLANS.map((plan) => (
           <div key={plan.name} className={`card p-6 ${plan.featured ? 'ring-2 ring-wire-amber' : ''}`}>
@@ -92,7 +90,6 @@ export default async function BillingPage() {
         ))}
       </div>
 
-      {/* Transaction History */}
       <div className="card overflow-hidden">
         <div className="p-4 border-b border-wire-border">
           <h2 className="font-display font-semibold">Transaction History</h2>

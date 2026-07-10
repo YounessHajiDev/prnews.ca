@@ -1,9 +1,8 @@
-import { type Metadata } from 'next';
+import { auth } from '@/lib/auth/auth';
+import { redirect } from 'next/navigation';
 
-export const metadata: Metadata = {
-  robots: 'noindex, nofollow',
-};
-
-export default function AppHomePage() {
-  return null;
+export default async function AppHomePage() {
+  const session = await auth();
+  if (!session) redirect('/login');
+  redirect('/app/dashboard');
 }

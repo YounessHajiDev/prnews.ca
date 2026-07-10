@@ -1,5 +1,6 @@
 import { auth } from '@/lib/auth/auth';
 import { redirect } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const session = await auth();
@@ -7,7 +8,6 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="flex min-h-screen">
-      {/* Sidebar */}
       <aside className="w-64 border-r border-wire-border bg-wire-surface p-4">
         <h2 className="font-display font-bold mb-6">Dashboard</h2>
         <nav className="space-y-2">
@@ -18,8 +18,6 @@ export default async function AppLayout({ children }: { children: React.ReactNod
           <a href="/app/billing" className="block py-2 text-sm text-wire-muted hover:text-wire-charcoal">Billing</a>
         </nav>
       </aside>
-
-      {/* Main content */}
       <main className="flex-1">
         {children}
       </main>
