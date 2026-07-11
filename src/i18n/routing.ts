@@ -1,6 +1,6 @@
-import { createSharedPathnamesNavigation } from 'next-intl/navigation';
+import { createLocalizedPathnamesNavigation } from 'next-intl/navigation';
 
-export const routing = createSharedPathnamesNavigation({
+export const routing = createLocalizedPathnamesNavigation({
   locales: ['en', 'fr'],
   defaultLocale: 'en',
 });
