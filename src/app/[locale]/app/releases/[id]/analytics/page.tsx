@@ -71,7 +71,7 @@ export default async function ReleaseAnalyticsPage({
             </tr>
           </thead>
           <tbody>
-            {release.analytics.slice(0, 20).map((event) => (
+            {release.analytics.slice(0, 20).map((event: any) => (
               <tr key={event.id} className="border-t border-wire-border">
                 <td className="px-4 py-3 capitalize">
                   <Badge variant="secondary">{event.eventType}</Badge>

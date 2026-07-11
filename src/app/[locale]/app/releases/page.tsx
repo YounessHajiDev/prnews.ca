@@ -20,7 +20,7 @@ export default async function ReleasesPage() {
         <p className="text-wire-muted">No releases yet.</p>
       ) : (
         <div className="space-y-4">
-          {releases.map((r) => (
+          {releases.map((r: any) => (
             <div key={r.id} className="card p-4 flex items-center justify-between">
               <div>
                 <h3 className="font-display font-semibold">{r.headline}</h3>

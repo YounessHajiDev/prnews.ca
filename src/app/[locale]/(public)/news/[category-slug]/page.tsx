@@ -37,7 +37,7 @@ export default async function CategoryPage({
           <p className="text-wire-muted">No releases in this category yet.</p>
         ) : (
           <ReleaseGrid
-            releases={releases.map((r) => ({
+            releases={releases.map((r: any) => ({
               id: r.id,
               headline: r.headline,
               summary: r.summary,

@@ -70,7 +70,7 @@ export default async function ReleaseDetailPage({
             </tr>
           </thead>
           <tbody>
-            {release.distributionLogs.map((log) => (
+            {release.distributionLogs.map((log: any) => (
               <tr key={log.id} className="border-t border-wire-border">
                 <td className="px-4 py-3 font-medium">{log.partner.name}</td>
                 <td className="px-4 py-3">

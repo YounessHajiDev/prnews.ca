@@ -20,7 +20,7 @@ export const GET = async () => {
     <lastmod>${new Date().toISOString()}</lastmod>
   </url>
   ${releases
-    .map((r) => `  <url>
+    .map((r: any) => `  <url>
     <loc>${baseUrl}/en/news/${r.categorySlug}/${r.slug}</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
   </url>`)

@@ -62,7 +62,7 @@ export default async function NewsroomPage({
           <p className="text-wire-muted">No releases yet from {company.name}.</p>
         ) : (
           <div className="space-y-4">
-            {company.releases.map((release) => (
+            {company.releases.map((release: any) => (
               <div key={release.id} className="card p-6">
                 <h3 className="font-display font-semibold mb-2">
                   <a href={`/news/${release.categorySlug}/${release.slug}`} className="hover:text-wire-amber">

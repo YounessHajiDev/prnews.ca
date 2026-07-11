@@ -20,7 +20,7 @@ export default async function NewsPage() {
           <p className="text-wire-muted">No releases yet.</p>
         ) : (
           <ReleaseGrid
-            releases={releases.map((r) => ({
+            releases={releases.map((r: any) => ({
               id: r.id,
               headline: r.headline,
               summary: r.summary,

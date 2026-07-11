@@ -19,7 +19,7 @@ export const GET = async () => {
     <title>PR NEWS - Canadian Press Releases</title>
     <link>https://prnews.ca</link>
     <description>Latest Canadian press releases</description>
-    ${releases.map((r) => `    <item>
+    ${releases.map((r: any) => `    <item>
       <title>${r.headline}</title>
       <link>https://prnews.ca/en/news/${r.categorySlug}/${r.slug}</link>
       <pubDate>${r.publishedAt.toUTCString()}</pubDate>

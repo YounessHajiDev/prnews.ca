@@ -71,7 +71,7 @@ export default async function DashboardPage() {
               </tr>
             </thead>
             <tbody>
-              {myReleases.map((release) => (
+              {myReleases.map((release: any) => (
                 <tr key={release.id} className="border-t border-wire-border">
                   <td className="px-4 py-3 font-medium">{release.headline}</td>
                   <td className="px-4 py-3">
