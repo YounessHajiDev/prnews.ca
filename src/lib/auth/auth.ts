@@ -1,4 +1,5 @@
-import { getServerSession, signIn, signOut, auth } from 'next-auth';
+import { getServerSession, auth } from 'next-auth';
+import { signIn, signOut } from 'next-auth/react';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
