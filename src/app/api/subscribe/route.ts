@@ -1,4 +1,4 @@
-import { stripe } from '@/lib/payments/stripe';
+import { stripe } from '@/lib/stripe';
 
 export async function POST(request: Request) {
   const { searchParams } = new URL(request.url);
