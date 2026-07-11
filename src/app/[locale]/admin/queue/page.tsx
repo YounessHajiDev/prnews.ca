@@ -1,5 +1,4 @@
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth/auth';
+import { auth } from '@/lib/auth/auth';
 import { db } from '@/lib/db/prisma';
 import { redirect } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -7,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { CheckCircle, XCircle, Clock } from 'lucide-react';
 
 export default async function AdminQueuePage() {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   if (!session) redirect('/login');
   if (session.user?.role !== 'ADMIN' && session.user?.role !== 'EDITOR') redirect('/app');
 
@@ -34,7 +33,7 @@ export default async function AdminQueuePage() {
         </div>
       ) : (
         <div className="space-y-4">
-          {pendingReleases.map((release) => (
+          {pendingReleases.map((release: any) => (
             <div key={release.id} className="card p-6">
               <div className="flex items-start justify-between mb-4">
                 <div>

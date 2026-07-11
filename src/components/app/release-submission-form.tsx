@@ -216,7 +216,7 @@ export function SubmissionWizard({ initialData, onSubmit }: SubmissionWizardProp
               <label className="block text-sm font-medium mb-1">English Body</label>
               <TiptapEditor
                 value={data.body}
-                onChange={(val) => updateField('body', val)}
+                onChange={(val: string) => updateField('body', val)}
                 placeholder="Write your press release body..."
               />
             </div>
@@ -224,7 +224,7 @@ export function SubmissionWizard({ initialData, onSubmit }: SubmissionWizardProp
               <label className="block text-sm font-medium mb-1">French Body</label>
               <TiptapEditor
                 value={data.bodyFr}
-                onChange={(val) => updateField('bodyFr', val)}
+                onChange={(val: string) => updateField('bodyFr', val)}
                 placeholder="Rédigez le corps de votre communiqué..."
               />
             </div>

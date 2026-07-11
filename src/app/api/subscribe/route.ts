@@ -1,3 +1,5 @@
+import { stripe } from '@/lib/payments/stripe';
+
 export async function POST(request: Request) {
   const { searchParams } = new URL(request.url);
   const planId = searchParams.get('plan');

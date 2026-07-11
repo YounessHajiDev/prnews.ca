@@ -1,5 +1,4 @@
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth/auth';
+import { auth } from '@/lib/auth/auth';
 import { db } from '@/lib/db/prisma';
 import { redirect } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
@@ -10,7 +9,7 @@ export default async function ReleaseDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   if (!session) redirect('/login');
 
   const { id } = await params;
@@ -30,9 +29,9 @@ export default async function ReleaseDetailPage({
     return <div className="p-8">Release not found.</div>;
   }
 
-  const delivered = release.distributionLogs.filter((l) => l.status === 'delivered').length;
-  const failed = release.distributionLogs.filter((l) => l.status === 'failed').length;
-  const pending = release.distributionLogs.filter((l) => l.status === 'pending').length;
+  const delivered = release.distributionLogs.filter((l: any) => l.status === 'delivered').length;
+  const failed = release.distributionLogs.filter((l: any) => l.status === 'failed').length;
+  const pending = release.distributionLogs.filter((l: any) => l.status === 'pending').length;
 
   return (
     <div className="p-8">

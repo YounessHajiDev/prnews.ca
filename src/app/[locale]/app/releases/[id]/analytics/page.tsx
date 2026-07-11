@@ -1,5 +1,4 @@
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth/auth';
+import { auth } from '@/lib/auth/auth';
 import { db } from '@/lib/db/prisma';
 import { redirect } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
@@ -9,7 +8,7 @@ export default async function ReleaseAnalyticsPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   if (!session) redirect('/login');
 
   const { id } = await params;
@@ -28,9 +27,9 @@ export default async function ReleaseAnalyticsPage({
     return <div className="p-8">Release not found.</div>;
   }
 
-  const totalViews = release.analytics.filter((e) => e.eventType === 'view').length;
-  const totalShares = release.analytics.filter((e) => e.eventType === 'share').length;
-  const totalOutlets = release.analytics.filter((e) => e.eventType === 'outlet_click').length;
+  const totalViews = release.analytics.filter((e: any) => e.eventType === 'view').length;
+  const totalShares = release.analytics.filter((e: any) => e.eventType === 'share').length;
+  const totalOutlets = release.analytics.filter((e: any) => e.eventType === 'outlet_click').length;
 
   return (
     <div className="p-8">

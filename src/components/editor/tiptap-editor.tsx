@@ -62,7 +62,7 @@ export function TiptapEditor({ value, onChange, placeholder = 'Write your press 
       }),
     ],
     content: value,
-    onUpdate: ({ editor }) => {
+    onUpdate: ({ editor }: { editor: any }) => {
       onChange(editor.getHTML());
     },
     editorProps: {

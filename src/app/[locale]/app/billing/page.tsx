@@ -1,7 +1,6 @@
 import { stripe } from '@/lib/stripe';
 import { db } from '@/lib/db/prisma';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth/auth';
+import { auth } from '@/lib/auth/auth';
 import { redirect } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -24,7 +23,7 @@ const PLANS = [
 ];
 
 export default async function BillingPage() {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   if (!session) redirect('/login');
 
   const subscription = await db.subscription.findFirst({
@@ -108,7 +107,7 @@ export default async function BillingPage() {
               </tr>
             </thead>
             <tbody>
-              {transactions.map((tx) => (
+              {transactions.map((tx: any) => (
                 <tr key={tx.id} className="border-t border-wire-border">
                   <td className="px-4 py-3 text-wire-muted">
                     {tx.createdAt.toLocaleDateString()}

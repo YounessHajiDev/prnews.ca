@@ -1,11 +1,11 @@
-import { getServerSession, signIn, signOut } from 'next-auth';
+import { getServerSession, signIn, signOut, auth } from 'next-auth';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { db } from '@/lib/db/prisma';
 
-export { getServerSession, signIn, signOut };
+export { getServerSession, signIn, signOut, auth };
 
 export const authOptions = {
   adapter: PrismaAdapter(db) as any,
@@ -20,7 +20,7 @@ export const authOptions = {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials) {
+      async authorize(credentials: any) {
         if (!credentials?.email || !credentials?.password) {
           return null;
         }
@@ -56,7 +56,7 @@ export const authOptions = {
     error: '/login',
   },
   callbacks: {
-    async session({ session, user }) {
+    async session({ session, user }: { session: any; user: any }) {
       return {
         ...session,
         user: {
