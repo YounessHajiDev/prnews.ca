@@ -1,4 +1,4 @@
-import { db } from '../../src/lib/db/prisma';
+import { db } from '@/lib/db/prisma';
 
 async function main() {
   console.log('Seeding database...');
