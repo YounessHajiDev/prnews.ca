@@ -1,10 +1,11 @@
-import { auth } from '@/lib/auth/auth';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth/auth';
 import { db } from '@/lib/db/prisma';
 import { redirect } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 
 export default async function DashboardPage() {
-  const session = await auth();
+  const session = await getServerSession(authOptions);
   if (!session) redirect('/login');
 
   const myReleases = await db.pressRelease.findMany({

@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth/auth';
 import createMiddleware from 'next-intl/middleware';
-import { auth } from '@/lib/auth/auth';
 import { routing } from '@/i18n/routing';
 
 const intlMiddleware = createMiddleware({
@@ -31,7 +32,7 @@ export async function middleware(request: NextRequest) {
   // Protect app and admin routes
   const isAppRoute = pathname.match(/^\/(en|fr)?(\/app)?\//);
   const isAdminRoute = pathname.match(/^\/(en|fr)?(\/admin)?\//);
-  const session = await auth();
+  const session = await getServerSession(authOptions);
 
   if ((isAppRoute || isAdminRoute) && !session) {
     const url = new URL(`/login`, request.url);
