@@ -68,9 +68,9 @@ export const authOptions = {
     },
   },
   session: {
-    strategy: 'jwt',
+    strategy: 'jwt' as const,
   },
-};
+} as any;
 
 // Re-export for use in /api/auth/[...nextauth]/route.ts
 export default NextAuth(authOptions);
