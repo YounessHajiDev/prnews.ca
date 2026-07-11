@@ -13,9 +13,6 @@ import {
   Heading2,
   Heading3,
   Link as LinkIcon,
-  AlignLeft,
-  AlignCenter,
-  AlignJustify,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
@@ -137,28 +134,6 @@ export function TiptapEditor({ value, onChange, placeholder = 'Write your press 
           title="Ordered list"
         >
           <ListOrdered className="w-4 h-4" />
-        </ToolbarButton>
-        <div className="w-px h-6 bg-white/20 mx-1" />
-        <ToolbarButton
-          active={editor.isActive({ textAlign: 'left' })}
-          onClick={() => editor.chain().focus().setTextAlign('left').run()}
-          title="Align left"
-        >
-          <AlignLeft className="w-4 h-4" />
-        </ToolbarButton>
-        <ToolbarButton
-          active={editor.isActive({ textAlign: 'center' })}
-          onClick={() => editor.chain().focus().setTextAlign('center').run()}
-          title="Center"
-        >
-          <AlignCenter className="w-4 h-4" />
-        </ToolbarButton>
-        <ToolbarButton
-          active={editor.isActive({ textAlign: 'justify' })}
-          onClick={() => editor.chain().focus().setTextAlign('justify').run()}
-          title="Justify"
-        >
-          <AlignJustify className="w-4 h-4" />
         </ToolbarButton>
         <div className="w-px h-6 bg-white/20 mx-1" />
         <ToolbarButton
