@@ -37,13 +37,34 @@
 
 @layer components {
   .prose-release {
-    @apply prose prose-lg max-w-none;
-    @apply prose-headings:font-display prose-headings:text-wire-charcoal;
-    @apply prose-p:leading-relaxed;
-    @apply prose-a:text-wire-amber prose-a:no-underline hover:prose-a:underline;
-    @apply prose-img:rounded-lg prose-img:shadow-sm;
-    @apply prose-blockquote:border-l-4 prose-blockquote:border-wire-amber prose-blockquote:pl-4 prose-blockquote:italic;
-    @apply prose-strong:font-semibold;
+    @apply text-base leading-relaxed max-w-none;
+  }
+
+  .prose-release h1,
+  .prose-release h2,
+  .prose-release h3 {
+    @apply font-display text-wire-charcoal font-semibold;
+  }
+
+  .prose-release p {
+    @apply leading-relaxed;
+  }
+
+  .prose-release a {
+    @apply text-wire-amber no-underline hover:underline;
+  }
+
+  .prose-release img {
+    @apply rounded-lg shadow-sm;
+  }
+
+  .prose-release blockquote {
+    @apply border-l-4 pl-4 italic;
+    border-color: var(--color-wire-amber);
+  }
+
+  .prose-release strong {
+    @apply font-semibold;
   }
 
   .heading-xl {
