@@ -1,11 +1,11 @@
 import { auth } from './auth';
 
 export async function getSession() {
-  return await auth();
+  return await getServerSession(authOptions);
 }
 
 export async function requireAuth() {
-  const session = await auth();
+  const session = await getServerSession(authOptions);
   if (!session?.user) {
     throw new Error('Unauthorized');
   }
@@ -14,7 +14,7 @@ export async function requireAuth() {
 
 export function requireRole(role: string) {
   return async () => {
-    const session = await auth();
+    const session = await getServerSession(authOptions);
     if (!session?.user || session.user.role !== role) {
       throw new Error('Forbidden');
     }

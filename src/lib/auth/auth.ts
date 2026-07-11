@@ -1,12 +1,11 @@
-import { getServerSession, auth } from 'next-auth';
-import { signIn, signOut } from 'next-auth/react';
+import { getServerSession, signIn, signOut } from 'next-auth';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { db } from '@/lib/db/prisma';
 
-export { getServerSession, signIn, signOut, auth };
+export { getServerSession, signIn, signOut };
 
 export const authOptions = {
   adapter: PrismaAdapter(db) as any,
