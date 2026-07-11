@@ -4,7 +4,7 @@ import { db } from '@/lib/db/prisma';
 import { redirect } from 'next/navigation';
 
 export default async function AdminAnalyticsPage() {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions) as any;
   if (!session) redirect('/login');
   if (session.user?.role !== 'ADMIN') redirect('/app');
 
