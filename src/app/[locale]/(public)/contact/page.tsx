@@ -2,13 +2,23 @@ import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { Mail, Phone, MapPin } from 'lucide-react';
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations('contact');
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'contact' });
   return { title: t('title') };
 }
 
-export default async function ContactPage() {
-  const t = await getTranslations('contact');
+export default async function ContactPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'contact' });
 
   return (
     <section className="section bg-wire-paper">

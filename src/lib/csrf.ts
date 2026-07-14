@@ -1,6 +1,6 @@
 import { headers } from 'next/headers';
 
-export function verifyOrigin(request?: Request): boolean {
+export async function verifyOrigin(request?: Request): Promise<boolean> {
   const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://prnews.ca').replace(/\/$/, '');
 
   if (request) {
@@ -12,7 +12,7 @@ export function verifyOrigin(request?: Request): boolean {
     return process.env.NODE_ENV !== 'production';
   }
 
-  const h = headers();
+  const h = await headers();
   const origin = h.get('origin');
   const referer = h.get('referer');
   if (origin) return origin === siteUrl;

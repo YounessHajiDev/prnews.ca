@@ -1,13 +1,23 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations('search');
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'search' });
   return { title: t('title') };
 }
 
-export default async function SearchPage() {
-  const t = await getTranslations('search');
+export default async function SearchPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'search' });
 
   return (
     <section className="section bg-wire-bg">

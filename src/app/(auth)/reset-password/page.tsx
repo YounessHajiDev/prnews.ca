@@ -9,12 +9,12 @@ export const dynamic = 'force-dynamic';
 export default async function ResetPasswordPage({
   searchParams,
 }: {
-  searchParams: { token?: string };
+  searchParams: Promise<{ token?: string }>;
 }) {
   const session = await getServerSession(authOptions);
   if (session) redirect('/app');
 
-  const token = searchParams.token;
+  const { token } = await searchParams;
   if (!token) {
     redirect('/forgot-password');
   }

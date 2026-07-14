@@ -8,10 +8,8 @@ export const dynamic = 'force-dynamic';
 
 export default async function AppLayout({
   children,
-  params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
 }) {
   const session = await getServerSession(authOptions);
   if (!session) redirect('/login');

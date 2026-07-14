@@ -20,7 +20,7 @@ export async function createRelease(formData: unknown) {
     return { error: 'Unauthorized' };
   }
 
-  const ip = getClientIp();
+  const ip = await getClientIp();
   const limit = await rateLimit('create-release', `${ip}:${session.user.id}`, 20, 60 * 60 * 1000);
   if (!limit.success) {
     return { error: 'Too many submissions. Please try again later.' };

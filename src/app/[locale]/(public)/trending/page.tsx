@@ -1,13 +1,23 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations('trending');
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'trending' });
   return { title: t('title') };
 }
 
-export default async function TrendingPage() {
-  const t = await getTranslations('trending');
+export default async function TrendingPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'trending' });
 
   return (
     <section className="section bg-wire-bg">

@@ -10,11 +10,7 @@ import { QueueActions } from '@/components/admin/queue-actions';
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-export default async function AdminQueuePage({
-  params,
-}: {
-  params: { locale: string };
-}) {
+export default async function AdminQueuePage() {
   const session = await getServerSession(authOptions);
   if (!session || (session.user?.role !== 'ADMIN' && session.user?.role !== 'EDITOR')) {
     notFound();

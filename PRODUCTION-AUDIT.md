@@ -22,7 +22,7 @@ This document tracks findings, fixes, and verification status for the production
 | 3 | Rate limiting on login, reset, contact, newsletter, autosave | **Fixed** | `src/lib/rate-limit.ts` provides Upstash Redis with in-memory fallback. Login, signup, password reset, newsletter, upload, release creation, Stripe endpoints, and billing portal are all rate-limited. |
 | 4 | Secrets audit | **Fixed** | No hardcoded secrets in source. `.env.example` lists all required variables. `.env` is git-ignored. Git history should still be audited before public launch. |
 | 5 | CSRF protection on state-changing routes | **Fixed** | `verifyOrigin` checks `Origin`/`Referer` against `NEXT_PUBLIC_SITE_URL` for `/api/newsletter`, `/api/upload`, `/api/stripe/checkout`, `/api/subscribe`. NextAuth provides CSRF for auth forms. Server actions use session validation. |
-| 6 | Dependency audit | **In Progress** | Resolved all `npm audit` findings except one high-severity `next` advisory chain. That advisory requires upgrading to Next.js 15/16 (a breaking React 19 migration). Current status: **1 high (`next`)** remains. Overridable transitive deps (`undici`, `uuid`, `postcss`, `glob`) have been patched via `package.json` `overrides`. |
+| 6 | Dependency audit | **Fixed** | Upgraded to Next.js 16.2.10 + React 19.2.7 + next-intl 4.13.2; `npm audit` now reports 0 high/critical advisories. Transitive dep overrides for `undici`, `uuid`, `postcss`, and `glob` remain in `package.json`. |
 | 7 | File upload hardening | **Fixed** | `/api/upload` is implemented with MIME-type allowlist (images, PDF, common video), 10 MB size cap, auth, origin check, rate limit, and Vercel Blob/local fallback. The submission wizard media step uploads files and persists returned URLs as `MediaAsset` records. |
 | 8 | Admin route protection | **Fixed** | Admin pages use `notFound()` for unauthorized sessions/roles. Middleware (`src/middleware.ts`) additionally enforces auth/role checks before any admin/app route renders. |
 
@@ -85,7 +85,7 @@ This document tracks findings, fixes, and verification status for the production
 ## Part H — Launch Gate
 
 Remaining blockers before go-live:
-1. Resolve or accept the `next` high-severity advisory (recommend scheduling Next.js 15/16 migration; do not start without user decision).
+1. ~~Resolve or accept the `next` high-severity advisory~~ **Fixed** — upgraded to Next.js 16.2.10 + React 19.2.7; `npm audit` clean.
 2. Add a cookie/consent banner **when** analytics/tracking is enabled; the consent-gating hook is already in place.
 3. Legal review of Privacy/Terms/CASL copy (currently real jurisdiction-specific text, not reviewed by counsel).
 4. Final Vercel production deploy verification with real env vars: `DATABASE_URL`, `NEXTAUTH_SECRET`, Stripe (`STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`), `RESEND_API_KEY`, `BLOB_READ_WRITE_TOKEN`, `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SENTRY_DSN`.
@@ -103,11 +103,12 @@ Local verification run (`npm run build`, `npx tsc --noEmit`, `npm run lint`) all
 - Verifies authenticated vs unauthenticated access to `/app` and `/admin/queue`
 
 Lighthouse mobile scores (local, `NEXT_PUBLIC_SITE_URL=https://prnews.ca`):
-- Home `/en`: 98/100/100/100
+- Home `/en`: 96/100/100/100
+- About `/en/about`: 96/100/100/100
 - Pricing `/en/pricing`: 95/100/100/100
 - Release detail: 97/100/100/92 (SEO 92 only because the canonical origin differs from the `localhost` test origin; production will pass when tested on `prnews.ca`)
 
-Dependency status after overrides: **1 high (`next`)** remains.
+Dependency status: `npm audit` clean after Next.js 16.2.10 / React 19.2.7 / next-intl 4.13.2 upgrade.
 
 ## Changelog
 
@@ -129,3 +130,4 @@ Dependency status after overrides: **1 high (`next`)** remains.
 - Added `LazyCanadaMap` so the real Canada vector map loads only when it approaches the viewport, improving homepage Lighthouse performance from ~74 to 98.
 - Added `@sentry/nextjs` with a conditional client initializer that only loads when `NEXT_PUBLIC_SENTRY_DSN` is set, preserving bundle size and LCP when unset.
 - Documented DB backup and uptime monitoring recommendations.
+- Migrated to Next.js 16.2.10, React 19.2.7, and next-intl 4.13.2; updated async `headers()`/`cookies()`, `params`/`searchParams` Promise types, and `next-intl` static-rendering locale handling so public pages remain SSG.

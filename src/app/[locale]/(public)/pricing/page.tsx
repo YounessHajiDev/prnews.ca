@@ -50,14 +50,24 @@ function ComparisonCell({
   );
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations('pricing');
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'pricing' });
   return { title: t('title') };
 }
 
-export default async function PricingPage() {
-  const t = await getTranslations('pricing');
-  const tc = await getTranslations('common');
+export default async function PricingPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'pricing' });
+  const tc = await getTranslations({ locale, namespace: 'common' });
   const plans = t.raw('plans') as Plan[];
   const rows = t.raw('comparisonRows') as ComparisonRow[];
   const labels = {

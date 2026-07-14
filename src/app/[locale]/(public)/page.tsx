@@ -16,15 +16,25 @@ const STATS = [
   { labelKey: 'newsrooms', value: 520 },
 ];
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations('home');
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'home' });
   return {
     title: t('hero.headline'),
   };
 }
 
-export default async function HomePage() {
-  const t = await getTranslations('home');
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'home' });
 
   return (
     <>

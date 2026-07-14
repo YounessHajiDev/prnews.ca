@@ -10,7 +10,7 @@ export async function POST() {
     return Response.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const ip = getClientIp();
+  const ip = await getClientIp();
   const limit = await rateLimit('billing-portal', `${ip}:${session.user.id}`, 10, 60 * 1000);
   if (!limit.success) {
     return Response.json({ error: 'Rate limit exceeded' }, { status: 429 });

@@ -17,7 +17,7 @@ const SignUpSchema = z.object({
 export type SignUpInput = z.infer<typeof SignUpSchema>;
 
 export async function signUp(formData: unknown) {
-  const ip = getClientIp();
+  const ip = await getClientIp();
   const limit = await rateLimit('signup', ip, 5, 60 * 60 * 1000);
   if (!limit.success) {
     return { error: 'Too many signup attempts. Please try again later.' };
@@ -71,7 +71,7 @@ const ForgotPasswordSchema = z.object({
 });
 
 export async function requestPasswordReset(formData: unknown) {
-  const ip = getClientIp();
+  const ip = await getClientIp();
   const limit = await rateLimit('password-reset', ip, 5, 60 * 60 * 1000);
   if (!limit.success) {
     return { error: 'Too many password reset attempts. Please try again later.' };

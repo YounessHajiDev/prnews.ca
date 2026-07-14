@@ -5,13 +5,29 @@ import { ReleaseGrid } from '@/components/news/release-grid';
 import { Breadcrumb } from '@/components/layout/breadcrumb';
 import { getTranslations } from 'next-intl/server';
 import { getCategoryStructuredData } from '@/lib/seo';
+import { routing } from '@/i18n/routing';
+
+export async function generateStaticParams() {
+  const categories = await db.pressRelease.groupBy({
+    by: ['categorySlug'],
+    where: { status: 'PUBLISHED' },
+  });
+
+  const params: { locale: string; 'category-slug': string }[] = [];
+  for (const locale of routing.locales) {
+    for (const c of categories) {
+      params.push({ locale, 'category-slug': c.categorySlug });
+    }
+  }
+  return params;
+}
 
 export async function generateMetadata({
   params,
 }: {
-  params: { 'category-slug': string; locale: string };
+  params: Promise<{ 'category-slug': string; locale: string }>;
 }): Promise<Metadata> {
-  const { 'category-slug': categorySlug, locale } = params;
+  const { 'category-slug': categorySlug, locale } = await params;
   const title = `${categorySlug} — PR NEWS`;
   const url = `https://prnews.ca/${locale}/news/${categorySlug}`;
   return {
@@ -38,9 +54,9 @@ export async function generateMetadata({
 export default async function CategoryPage({
   params,
 }: {
-  params: { 'category-slug': string; locale: string };
+  params: Promise<{ 'category-slug': string; locale: string }>;
 }) {
-  const { 'category-slug': categorySlug, locale } = params;
+  const { 'category-slug': categorySlug, locale } = await params;
   const t = await getTranslations({ locale, namespace: 'news' });
   const tNav = await getTranslations({ locale, namespace: 'nav' });
 
@@ -87,6 +103,7 @@ export default async function CategoryPage({
               publishedAt: r.publishedAt ?? r.createdAt,
               slug: r.slug,
             }))}
+            locale={locale}
           />
         )}
       </div>

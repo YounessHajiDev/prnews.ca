@@ -4,11 +4,7 @@ import { db } from '@/lib/db/prisma';
 import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 
-export default async function ReleaseEditPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default async function ReleaseEditPage() {
   const session = await getServerSession(authOptions);
   if (!session) redirect('/login');
 

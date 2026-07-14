@@ -6,13 +6,23 @@ interface ResourceSection {
   content: string | string[];
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations('resources');
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'resources' });
   return { title: t('title') };
 }
 
-export default async function ResourcesPage() {
-  const t = await getTranslations('resources');
+export default async function ResourcesPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'resources' });
   const sections = t.raw('sections') as ResourceSection[];
 
   return (

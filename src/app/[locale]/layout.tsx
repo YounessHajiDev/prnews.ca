@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Playfair_Display, Inter, JetBrains_Mono } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { SiteHeader } from '@/components/layout/site-header';
 import { SiteFooter } from '@/components/layout/site-footer';
@@ -37,18 +37,18 @@ export const metadata: Metadata = {
 
 interface LocaleLayoutProps {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }
 
 export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
-  const { locale } = params;
+  const { locale } = await params;
 
   if (!routing.locales.includes(locale)) {
     notFound();
   }
 
   setRequestLocale(locale);
-  const messages = await getMessages({ locale });
+  const messages = (await import(`@/messages/${locale}.json`)).default;
 
   return (
     <html

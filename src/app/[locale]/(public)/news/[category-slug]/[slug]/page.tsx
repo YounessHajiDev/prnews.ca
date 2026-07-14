@@ -6,33 +6,32 @@ import { formatDate } from '@/lib/utils';
 import { getTranslations } from 'next-intl/server';
 import { generateReleaseMetadata, getStructuredData } from '@/lib/seo';
 import { sanitizeBody } from '@/lib/sanitize';
+import { routing } from '@/i18n/routing';
 
 export const revalidate = 60;
 
-export async function generateStaticParams({
-  params,
-}: {
-  params: { locale: string };
-}) {
-  void params;
+export async function generateStaticParams() {
   const releases = await db.pressRelease.findMany({
     where: { status: 'PUBLISHED' },
     select: { slug: true, categorySlug: true },
     take: 100,
   });
 
-  return releases.map((r) => ({
-    'category-slug': r.categorySlug,
-    slug: r.slug,
-  }));
+  const allParams: { locale: string; 'category-slug': string; slug: string }[] = [];
+  for (const locale of routing.locales) {
+    for (const r of releases) {
+      allParams.push({ locale, 'category-slug': r.categorySlug, slug: r.slug });
+    }
+  }
+  return allParams;
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: { 'category-slug': string; slug: string; locale: string };
+  params: Promise<{ 'category-slug': string; slug: string; locale: string }>;
 }): Promise<Metadata> {
-  const { slug, 'category-slug': categorySlug, locale } = params;
+  const { slug, 'category-slug': categorySlug, locale } = await params;
   const release = await db.pressRelease.findFirst({
     where: { slug, categorySlug, status: 'PUBLISHED' },
     select: {
@@ -67,9 +66,9 @@ export async function generateMetadata({
 export default async function ReleasePage({
   params,
 }: {
-  params: { 'category-slug': string; slug: string; locale: string };
+  params: Promise<{ 'category-slug': string; slug: string; locale: string }>;
 }) {
-  const { 'category-slug': categorySlug, slug, locale } = params;
+  const { 'category-slug': categorySlug, slug, locale } = await params;
   const t = await getTranslations({ locale, namespace: 'news' });
   const tNav = await getTranslations({ locale, namespace: 'nav' });
 

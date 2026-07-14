@@ -5,13 +5,23 @@ import { EmptyState } from '@/components/ui/empty-state';
 import { FileText } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations('news');
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'news' });
   return { title: t('title') };
 }
 
-export default async function NewsPage() {
-  const t = await getTranslations('news');
+export default async function NewsPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'news' });
 
   const releases = await db.pressRelease.findMany({
     where: { status: 'PUBLISHED' },
@@ -49,7 +59,7 @@ export default async function NewsPage() {
             action={{ label: t('empty.action'), href: '/app/submit' }}
           />
         ) : (
-          <ReleaseGrid releases={mapped} />
+          <ReleaseGrid releases={mapped} locale={locale} />
         )}
       </div>
     </section>

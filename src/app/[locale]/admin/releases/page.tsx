@@ -4,11 +4,7 @@ import { db } from '@/lib/db/prisma';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 
-export default async function AdminReleasesPage({
-  params,
-}: {
-  params: { locale: string };
-}) {
+export default async function AdminReleasesPage() {
   const session = await getServerSession(authOptions);
   if (!session || session.user?.role !== 'ADMIN') notFound();
 

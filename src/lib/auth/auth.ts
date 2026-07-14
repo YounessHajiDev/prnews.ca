@@ -24,7 +24,7 @@ const providers: NextAuthOptions['providers'] = [
         return null;
       }
 
-      const ip = getClientIp();
+      const ip = await getClientIp();
       const limit = await rateLimit('login', `${ip}:${credentials.email.toLowerCase()}`, 10, 15 * 60 * 1000);
       if (!limit.success) {
         throw new Error('Too many login attempts. Please try again later.');

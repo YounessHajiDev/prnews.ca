@@ -10,12 +10,12 @@ import { getTranslations, getLocale } from 'next-intl/server';
 export default async function ReleaseAnalyticsPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
   const session = await getServerSession(authOptions);
   if (!session) redirect('/login');
 
-  const { id } = params;
+  const { id } = await params;
   const t = await getTranslations('analytics');
   const locale = await getLocale();
 
