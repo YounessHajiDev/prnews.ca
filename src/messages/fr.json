@@ -93,8 +93,9 @@
       "ctaSecondary": "Voir les communiqués en direct",
       "visual": {
         "title": "État de la diffusion",
+        "live": "EN DIRECT",
         "delivered": "Livré",
-        "pickedUp": "Repri",
+        "pickedUp": "Reprise",
         "audienceReach": "Portée",
         "totalViews": "Vues totales",
         "outletClicks": "Clics médias"

@@ -44,7 +44,7 @@ function HeroVisual() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/80 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-white" />
               </span>
-              LIVE
+              {tv('live')}
             </Badge>
             <span className="font-display font-semibold">{tv('title')}</span>
           </div>

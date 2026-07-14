@@ -93,6 +93,7 @@
       "ctaSecondary": "See live releases",
       "visual": {
         "title": "Distribution Status",
+        "live": "LIVE",
         "delivered": "Delivered",
         "pickedUp": "Picked up",
         "audienceReach": "Audience reach",
