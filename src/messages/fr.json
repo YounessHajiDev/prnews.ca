@@ -114,7 +114,8 @@
       "label": "Derniers communiqués"
     },
     "map": {
-      "caption": "Les nœuds de diffusion s'activent au fur et à mesure que les communiqués atteignent les salles de presse à travers le pays."
+      "caption": "Les nœuds de diffusion s'activent au fur et à mesure que les communiqués atteignent les salles de presse à travers le pays.",
+      "credit": "Données cartographiques © svg-country-maps (CC BY 4.0)"
     },
     "features": {
       "eyebrow": "FONCTIONNALITÉS",
@@ -458,7 +459,7 @@
     "reducedLabel": "Derniers :"
   },
   "canadaMap": {
-    "ariaLabel": "Carte matricielle du Canada montrant les nœuds de diffusion actifs"
+    "ariaLabel": "Carte du Canada montrant les nœuds de diffusion actifs"
   },
   "dashboard": {
     "title": "Tableau de bord",

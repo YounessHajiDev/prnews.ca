@@ -51,6 +51,7 @@ export default async function HomePage() {
             </div>
             <CanadaMap />
             <p className="mx-auto mt-6 max-w-xl text-center text-sm text-wire-slate">{t('map.caption')}</p>
+            <p className="mx-auto mt-2 max-w-xl text-center text-xs text-wire-slate/70">{t('map.credit')}</p>
           </div>
         </section>
 
