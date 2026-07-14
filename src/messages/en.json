@@ -114,7 +114,8 @@
       "label": "Latest Releases"
     },
     "map": {
-      "caption": "Live distribution nodes pulse as releases reach newsrooms across the country."
+      "caption": "Live distribution nodes pulse as releases reach newsrooms across the country.",
+      "credit": "Map data © svg-country-maps (CC BY 4.0)"
     },
     "features": {
       "eyebrow": "FEATURES",
@@ -458,7 +459,7 @@
     "reducedLabel": "Latest:"
   },
   "canadaMap": {
-    "ariaLabel": "Dot-matrix map of Canada showing active distribution nodes"
+    "ariaLabel": "Map of Canada showing active distribution nodes"
   },
   "dashboard": {
     "title": "Dashboard",
