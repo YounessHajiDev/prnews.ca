@@ -1,10 +1,4 @@
-import { stripe } from '@/lib/stripe';
-import { db } from '@/lib/db/prisma';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth/auth';
-import { redirect } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { CheckCircle } from 'lucide-react';
 
 const PLANS = [

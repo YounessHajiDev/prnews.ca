@@ -8,6 +8,8 @@ const intlMiddleware = createMiddleware({
   localePrefix: 'always',
 });
 
+const authPaths = ['/login', '/signup', '/forgot-password', '/reset-password', '/callback'];
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -22,7 +24,7 @@ export async function middleware(request: NextRequest) {
     pathname.endsWith('.jpg') ||
     pathname.endsWith('.jpeg') ||
     pathname.endsWith('.gif') ||
-    pathname.startsWith('/(auth)/')
+    authPaths.some((path) => pathname === path || pathname.startsWith(`${path}/`))
   ) {
     return NextResponse.next();
   }
@@ -32,5 +34,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|sitemap.xml|llms.txt).*)'],
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|sitemap.xml|llms.txt|robots.txt).*)'],
 };

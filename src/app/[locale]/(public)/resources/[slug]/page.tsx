@@ -4,9 +4,9 @@ import { notFound } from 'next/navigation';
 export default async function ResourcePage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
-  const { slug } = await params;
+  const { slug } = params;
 
   return (
     <section className="section bg-wire-bg">

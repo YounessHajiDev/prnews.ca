@@ -1,12 +1,13 @@
 import { stripe } from '@/lib/stripe';
 import { db } from '@/lib/db/prisma';
-import { getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth/auth';
-import { redirect } from 'next/navigation';
 
 export async function POST() {
   const session = await getServerSession(authOptions);
-  if (!session) redirect('/login');
+  if (!session) {
+    return Response.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
   try {
     const customer = await stripe.customers.list({

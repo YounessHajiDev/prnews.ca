@@ -5,9 +5,9 @@ import { Breadcrumb } from '@/components/layout/breadcrumb';
 export default async function ReleasePage({
   params,
 }: {
-  params: Promise<{ categorySlug: string; slug: string }>;
+  params: { categorySlug: string; slug: string };
 }) {
-  const { categorySlug, slug } = await params;
+  const { categorySlug, slug } = params;
 
   const release = await db.pressRelease.findFirst({
     where: {

@@ -1,6 +1,6 @@
 'use client';
 
-export default async function GlobalError({
+export default function GlobalError({
   error,
 }: {
   error: Error;

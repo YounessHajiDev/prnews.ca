@@ -42,7 +42,8 @@ model User {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  company       Company?
+  companyId     String?  @unique
+  company       Company? @relation(fields: [companyId], references: [id])
   credits       CreditTransaction[]
   releases      PressRelease[]
   journalisms   JournalistProfile[]
@@ -213,7 +214,7 @@ model JournalistProfile {
 
   userId      String?
   user        User?    @relation(fields: [userId], references: [id])
-  companyId   String?
+  companyId   String?  @unique
   company     Company? @relation(fields: [companyId], references: [id])
 
   @@map("journalist_profiles")

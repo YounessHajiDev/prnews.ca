@@ -1,4 +1,6 @@
-import { auth } from './auth';
+import { authOptions, getServerSession } from './auth';
+
+export { authOptions, getServerSession };
 
 export async function getSession() {
   return await getServerSession(authOptions);

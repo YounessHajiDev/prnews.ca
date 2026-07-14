@@ -1,4 +1,4 @@
-import { getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth/auth';
 import { redirect } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -36,7 +36,7 @@ export default async function LoginPage() {
           </div>
 
           <p className="text-sm text-wire-muted mt-4 text-center">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <a href="/signup" className="text-wire-amber hover:underline">Sign up</a>
           </p>
         </div>

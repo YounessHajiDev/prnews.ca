@@ -1,6 +1,6 @@
 'use client';
 
-export default async function ErrorBoundary({
+export default function ErrorBoundary({
   error,
 }: {
   error: Error;
