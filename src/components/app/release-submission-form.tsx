@@ -34,32 +34,28 @@ interface SubmissionWizardProps {
 
 type Step = 'basics' | 'body' | 'media' | 'distribution' | 'contact' | 'review';
 
-const STEPS: { key: Step; label: string; icon: React.ElementType }[] = [
-  { key: 'basics', label: 'Basics', icon: FileText },
-  { key: 'body', label: 'Body', icon: PenLine },
-  { key: 'media', label: 'Media', icon: ImageIcon },
-  { key: 'distribution', label: 'Distribution', icon: Send },
-  { key: 'contact', label: 'Contact', icon: Mail },
-  { key: 'review', label: 'Review', icon: Eye },
-];
+const STEP_ICONS: Record<Step, React.ElementType> = {
+  basics: FileText,
+  body: PenLine,
+  media: ImageIcon,
+  distribution: Send,
+  contact: Mail,
+  review: Eye,
+};
 
-const CATEGORIES = [
-  'Business', 'Technology', 'Health', 'Finance & Economy',
-  'Government & Politics', 'Environment', 'Consumer Products',
-  'Company Earnings', 'Nonprofit & Public Interest',
-  'Sports & Entertainment', 'Real Estate', 'Energy & Mining',
-  'Indigenous Affairs & Reconciliation', 'Cannabis',
-];
-
-const PROVINCES = [
-  'Alberta', 'British Columbia', 'Manitoba', 'New Brunswick',
-  'Newfoundland and Labrador', 'Nova Scotia', 'Ontario',
-  'Prince Edward Island', 'Quebec', 'Saskatchewan',
-  'Northwest Territories', 'Nunavut', 'Yukon',
-];
+interface Option {
+  value: string;
+  label: string;
+}
 
 export function SubmissionWizard({ initialData, onSubmit }: SubmissionWizardProps) {
-  const t = useTranslations('auth.signup');
+  const t = useTranslations('submission');
+  const steps = t.raw('steps') as Array<{ key: Step; label: string }>;
+  const categories = t.raw('categories') as Option[];
+  const provinces = t.raw('provinces') as Option[];
+  const languageOptions = t.raw('languageOptions') as Option[];
+  const distributionTiers = t.raw('distributionTiers') as Option[];
+
   const [step, setStep] = useState<Step>('basics');
   const [data, setData] = useState({
     headline: initialData?.headline ?? '',
@@ -68,7 +64,7 @@ export function SubmissionWizard({ initialData, onSubmit }: SubmissionWizardProp
     bodyFr: initialData?.bodyFr ?? '',
     summary: initialData?.summary ?? '',
     category: initialData?.category ?? '',
-    language: initialData?.language ?? 'en' as const,
+    language: initialData?.language ?? ('en' as const),
     dateline: initialData?.dateline ?? '',
     keywords: initialData?.keywords ?? [],
     embargoAt: initialData?.embargoAt ?? '',
@@ -80,27 +76,24 @@ export function SubmissionWizard({ initialData, onSubmit }: SubmissionWizardProp
     pdf: null as File | null,
   });
 
-  const updateField = useCallback(
-    (field: string, value: any) => {
-      setData((prev) => ({ ...prev, [field]: value }));
-    },
-    []
-  );
+  const updateField = useCallback((field: string, value: any) => {
+    setData((prev) => ({ ...prev, [field]: value }));
+  }, []);
 
-  const currentStepIndex = STEPS.findIndex((s) => s.key === step);
+  const currentStepIndex = steps.findIndex((s) => s.key === step);
   const canGoBack = currentStepIndex > 0;
-  const canGoForward = currentStepIndex < STEPS.length - 1;
+  const canGoForward = currentStepIndex < steps.length - 1;
   const isLastStep = step === 'review';
 
   const nextStep = () => {
     if (canGoForward) {
-      setStep(STEPS[currentStepIndex + 1].key);
+      setStep(steps[currentStepIndex + 1].key);
     }
   };
 
   const prevStep = () => {
     if (canGoBack) {
-      setStep(STEPS[currentStepIndex - 1].key);
+      setStep(steps[currentStepIndex - 1].key);
     }
   };
 
@@ -109,27 +102,30 @@ export function SubmissionWizard({ initialData, onSubmit }: SubmissionWizardProp
       {/* Progress bar */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-2">
-          {STEPS.map((s, i) => (
-            <button
-              key={s.key}
-              onClick={() => setStep(s.key)}
-              className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
-                i === currentStepIndex
-                  ? 'bg-wire-amber text-white'
-                  : i < currentStepIndex
-                    ? 'bg-wire-amber/20 text-wire-amber'
-                    : 'text-wire-muted hover:text-wire-charcoal'
-              }`}
-            >
-              <s.icon className="w-4 h-4" />
-              <span className="hidden sm:inline">{s.label}</span>
-            </button>
-          ))}
+          {steps.map((s, i) => {
+            const StepIcon = STEP_ICONS[s.key];
+            return (
+              <button
+                key={s.key}
+                onClick={() => setStep(s.key)}
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
+                  i === currentStepIndex
+                    ? 'bg-wire-amber text-white'
+                    : i < currentStepIndex
+                      ? 'bg-wire-amber/20 text-wire-amber'
+                      : 'text-wire-muted hover:text-wire-charcoal'
+                }`}
+              >
+                <StepIcon className="w-4 h-4" />
+                <span className="hidden sm:inline">{s.label}</span>
+              </button>
+            );
+          })}
         </div>
         <div className="h-1 bg-wire-border rounded-full overflow-hidden">
           <div
             className="h-full bg-wire-amber rounded-full transition-all duration-300"
-            style={{ width: `${((currentStepIndex + 1) / STEPS.length) * 100}%` }}
+            style={{ width: `${((currentStepIndex + 1) / steps.length) * 100}%` }}
           />
         </div>
       </div>
@@ -138,72 +134,72 @@ export function SubmissionWizard({ initialData, onSubmit }: SubmissionWizardProp
       <div className="card p-8">
         {step === 'basics' && (
           <div className="space-y-6">
-            <h2 className="heading-md">Release Basics</h2>
+            <h2 className="heading-md">{t('basics.title')}</h2>
             <div>
-              <label className="block text-sm font-medium mb-1">Headline (English)</label>
+              <label className="block text-sm font-medium mb-1">{t('basics.headlineEn')}</label>
               <Input
                 value={data.headline}
                 onChange={(e) => updateField('headline', e.target.value)}
-                placeholder="Your press release headline"
+                placeholder={t('basics.headlineEnPlaceholder')}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Headline (French)</label>
+              <label className="block text-sm font-medium mb-1">{t('basics.headlineFr')}</label>
               <Input
                 value={data.headlineFr}
                 onChange={(e) => updateField('headlineFr', e.target.value)}
-                placeholder="Titre du communiqué (optionnel)"
+                placeholder={t('basics.headlineFrPlaceholder')}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Summary / Lead</label>
+              <label className="block text-sm font-medium mb-1">{t('basics.summary')}</label>
               <Input
                 value={data.summary}
                 onChange={(e) => updateField('summary', e.target.value)}
-                placeholder="A brief summary of your release"
+                placeholder={t('basics.summaryPlaceholder')}
               />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-1">Category</label>
+                <label className="block text-sm font-medium mb-1">{t('basics.category')}</label>
                 <select
                   value={data.category}
                   onChange={(e) => updateField('category', e.target.value)}
                   className="w-full rounded-md border border-wire-border px-3 py-2 text-sm"
                 >
-                  <option value="">Select category</option>
-                  {CATEGORIES.map((cat) => (
-                    <option key={cat} value={cat}>{cat}</option>
+                  <option value="">{t('basics.categoryPlaceholder')}</option>
+                  {categories.map((cat) => (
+                    <option key={cat.value} value={cat.value}>{cat.label}</option>
                   ))}
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Language</label>
+                <label className="block text-sm font-medium mb-1">{t('basics.language')}</label>
                 <select
                   value={data.language}
                   onChange={(e) => updateField('language', e.target.value)}
                   className="w-full rounded-md border border-wire-border px-3 py-2 text-sm"
                 >
-                  <option value="en">English</option>
-                  <option value="fr">Français</option>
-                  <option value="both">Bilingual (EN + FR)</option>
+                  {languageOptions.map((opt) => (
+                    <option key={opt.value} value={opt.value}>{opt.label}</option>
+                  ))}
                 </select>
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Dateline (City, Province)</label>
+              <label className="block text-sm font-medium mb-1">{t('basics.dateline')}</label>
               <Input
                 value={data.dateline}
                 onChange={(e) => updateField('dateline', e.target.value)}
-                placeholder="TORONTO, ON"
+                placeholder={t('basics.datelinePlaceholder')}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Keywords (comma separated)</label>
+              <label className="block text-sm font-medium mb-1">{t('basics.keywords')}</label>
               <Input
                 value={data.keywords.join(', ')}
                 onChange={(e) => updateField('keywords', e.target.value.split(',').map((k: string) => k.trim()))}
-                placeholder="AI, technology, funding"
+                placeholder={t('basics.keywordsPlaceholder')}
               />
             </div>
           </div>
@@ -211,21 +207,19 @@ export function SubmissionWizard({ initialData, onSubmit }: SubmissionWizardProp
 
         {step === 'body' && (
           <div className="space-y-6">
-            <h2 className="heading-md">Release Body</h2>
+            <h2 className="heading-md">{t('body.title')}</h2>
             <div>
-              <label className="block text-sm font-medium mb-1">English Body</label>
+              <label className="block text-sm font-medium mb-1">{t('body.englishBody')}</label>
               <TiptapEditor
                 value={data.body}
                 onChange={(val: string) => updateField('body', val)}
-                placeholder="Write your press release body..."
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">French Body</label>
+              <label className="block text-sm font-medium mb-1">{t('body.frenchBody')}</label>
               <TiptapEditor
                 value={data.bodyFr}
                 onChange={(val: string) => updateField('bodyFr', val)}
-                placeholder="Rédigez le corps de votre communiqué..."
               />
             </div>
           </div>
@@ -233,24 +227,24 @@ export function SubmissionWizard({ initialData, onSubmit }: SubmissionWizardProp
 
         {step === 'media' && (
           <div className="space-y-6">
-            <h2 className="heading-md">Media Assets</h2>
+            <h2 className="heading-md">{t('media.title')}</h2>
             <div>
-              <label className="block text-sm font-medium mb-1">Images</label>
+              <label className="block text-sm font-medium mb-1">{t('media.images')}</label>
               <div className="border-2 border-dashed border-wire-border rounded-lg p-8 text-center">
-                <p className="text-wire-muted">Drag and drop images here, or click to browse</p>
-                <p className="text-xs text-wire-muted mt-2">JPG, PNG, WebP supported</p>
+                <p className="text-wire-muted">{t('media.dragDropImages')}</p>
+                <p className="text-xs text-wire-muted mt-2">{t('media.imageFormats')}</p>
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Video URLs</label>
+              <label className="block text-sm font-medium mb-1">{t('media.videoUrl')}</label>
               <Input
-                placeholder="YouTube or Vimeo URL"
+                placeholder={t('media.videoPlaceholder')}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">PDF / Media Kit</label>
+              <label className="block text-sm font-medium mb-1">{t('media.pdf')}</label>
               <div className="border-2 border-dashed border-wire-border rounded-lg p-8 text-center">
-                <p className="text-wire-muted">Upload PDF media kit</p>
+                <p className="text-wire-muted">{t('media.pdfPlaceholder')}</p>
               </div>
             </div>
           </div>
@@ -258,28 +252,28 @@ export function SubmissionWizard({ initialData, onSubmit }: SubmissionWizardProp
 
         {step === 'distribution' && (
           <div className="space-y-6">
-            <h2 className="heading-md">Distribution</h2>
+            <h2 className="heading-md">{t('distribution.title')}</h2>
             <div>
-              <label className="block text-sm font-medium mb-1">Distribution Tier</label>
+              <label className="block text-sm font-medium mb-1">{t('distribution.tier')}</label>
               <select className="w-full rounded-md border border-wire-border px-3 py-2 text-sm">
-                <option>National Distribution</option>
-                <option>Regional Distribution</option>
-                <option>Provincial</option>
+                {distributionTiers.map((tier) => (
+                  <option key={tier.value} value={tier.value}>{tier.label}</option>
+                ))}
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Target Provinces</label>
+              <label className="block text-sm font-medium mb-1">{t('distribution.targetProvinces')}</label>
               <div className="grid grid-cols-3 gap-2 mt-2">
-                {PROVINCES.map((prov) => (
-                  <label key={prov} className="flex items-center gap-2 text-sm">
+                {provinces.map((prov) => (
+                  <label key={prov.value} className="flex items-center gap-2 text-sm">
                     <input type="checkbox" className="rounded" />
-                    {prov}
+                    {prov.label}
                   </label>
                 ))}
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Schedule / Embargo</label>
+              <label className="block text-sm font-medium mb-1">{t('distribution.schedule')}</label>
               <Input type="datetime-local" value={data.embargoAt} onChange={(e) => updateField('embargoAt', e.target.value)} />
             </div>
           </div>
@@ -287,31 +281,31 @@ export function SubmissionWizard({ initialData, onSubmit }: SubmissionWizardProp
 
         {step === 'contact' && (
           <div className="space-y-6">
-            <h2 className="heading-md">Media Contact</h2>
-            <p className="text-sm text-wire-muted">This information is visible only to journalists and will not appear in the published release.</p>
+            <h2 className="heading-md">{t('contact.title')}</h2>
+            <p className="text-sm text-wire-muted">{t('contact.note')}</p>
             <div>
-              <label className="block text-sm font-medium mb-1">Contact Name</label>
+              <label className="block text-sm font-medium mb-1">{t('contact.name')}</label>
               <Input
                 value={data.mediaContactName}
                 onChange={(e) => updateField('mediaContactName', e.target.value)}
-                placeholder="Jane Smith"
+                placeholder={t('contact.namePlaceholder')}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Contact Email</label>
+              <label className="block text-sm font-medium mb-1">{t('contact.email')}</label>
               <Input
                 type="email"
                 value={data.mediaContactEmail}
                 onChange={(e) => updateField('mediaContactEmail', e.target.value)}
-                placeholder="jane@company.ca"
+                placeholder={t('contact.emailPlaceholder')}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Contact Phone</label>
+              <label className="block text-sm font-medium mb-1">{t('contact.phone')}</label>
               <Input
                 value={data.mediaContactPhone}
                 onChange={(e) => updateField('mediaContactPhone', e.target.value)}
-                placeholder="416-555-0100"
+                placeholder={t('contact.phonePlaceholder')}
               />
             </div>
           </div>
@@ -319,22 +313,19 @@ export function SubmissionWizard({ initialData, onSubmit }: SubmissionWizardProp
 
         {step === 'review' && (
           <div className="space-y-6">
-            <h2 className="heading-md">Review &amp; Submit</h2>
+            <h2 className="heading-md">{t('review.title')}</h2>
             <div className="bg-wire-bg rounded-lg p-6 border border-wire-border">
-              <h3 className="font-semibold mb-2">{data.headline || '(No headline)'}</h3>
+              <h3 className="font-semibold mb-2">{data.headline || t('review.noHeadline')}</h3>
               {data.summary && <p className="text-sm text-wire-muted mb-4">{data.summary}</p>}
               <div className="text-sm space-y-1">
-                <p><strong>Category:</strong> {data.category || 'Not selected'}</p>
-                <p><strong>Language:</strong> {data.language}</p>
-                <p><strong>Word count:</strong> {data.body?.split(/\s+/).length || 0} words</p>
-                <p><strong>Contact:</strong> {data.mediaContactName || 'Not set'}</p>
+                <p><strong>{t('review.category')}:</strong> {categories.find((c) => c.value === data.category)?.label || t('review.notSelected')}</p>
+                <p><strong>{t('review.language')}:</strong> {languageOptions.find((l) => l.value === data.language)?.label || data.language}</p>
+                <p><strong>{t('review.wordCount')}:</strong> {data.body?.split(/\s+/).length || 0} {t('review.words')}</p>
+                <p><strong>{t('review.contact')}:</strong> {data.mediaContactName || t('review.notSet')}</p>
               </div>
             </div>
             <div className="flex items-center gap-3 p-4 rounded-lg bg-wire-amber/10 border border-wire-amber/30">
-              <p className="text-sm text-wire-muted">
-                Submitting this release will enter it into our editorial review queue.
-                Expected turnaround: under 2 business hours.
-              </p>
+              <p className="text-sm text-wire-muted">{t('review.turnaround')}</p>
             </div>
           </div>
         )}
@@ -346,13 +337,13 @@ export function SubmissionWizard({ initialData, onSubmit }: SubmissionWizardProp
             onClick={prevStep}
             disabled={!canGoBack}
           >
-            <ChevronLeft className="w-4 h-4 mr-1" /> Back
+            <ChevronLeft className="w-4 h-4 mr-1" /> {t('navigation.back')}
           </Button>
           {isLastStep ? (
-            <Button onClick={() => onSubmit(data)}>Submit for Review</Button>
+            <Button onClick={() => onSubmit(data)}>{t('navigation.submit')}</Button>
           ) : (
             <Button onClick={nextStep}>
-              Continue <ChevronRight className="w-4 h-4 ml-1" />
+              {t('navigation.continue')} <ChevronRight className="w-4 h-4 ml-1" />
             </Button>
           )}
         </div>

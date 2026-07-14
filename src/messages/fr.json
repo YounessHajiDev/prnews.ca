@@ -22,94 +22,8 @@
     "submitRelease": "Soumettre un communiqué",
     "myReleases": "Mes communiqués",
     "billing": "Facturation",
-    "settings": "Paramètres"
-  },
-  "home": {
-    "hero": {
-      "headline": "Communicés de presse, diffusés partout au Canada",
-      "subheadline": "Publiez une fois. Touchez chaque média, province et audience. Confirmation de livraison en temps réel incluse.",
-      "ctaPrimary": "Commencer",
-      "ctaSecondary": "Voir les tarifs"
-    },
-    "stats": {
-      "releasesToday": "Communiqués envoyés aujourd'hui",
-      "outletsReached": "Médias touchés",
-      "newsrooms": "Salles de presse actives"
-    },
-    "ticker": {
-      "label": "Derniers communiqués"
-    },
-    "features": {
-      "title": "Pourquoi PR NEWS ?",
-      "transparency": {
-        "title": "Transparence totale de la diffusion",
-        "desc": "Suivez chaque livraison en temps réel. Sachez quels médias ont repris votre histoire."
-      },
-      "speed": {
-        "title": "Réactivité",
-        "desc": "Revue éditoriale en moins de 2 heures. Publiez selon vos horaires."
-      },
-      "bilingual": {
-        "title": "Vraiment bilingue",
-        "desc": "Publiez en anglais et en français. Touchez toutes les audiences canadiennes."
-      }
-    }
-  },
-  "pricing": {
-    "title": "Tarification simple et transparente",
-    "subtitle": "Pas de frais cachés. Pas d'appels de vente requis.",
-    "starter": {
-      "name": "Débutant",
-      "description": "Parfait pour une annonce ponctuelle",
-      "price": "299 $CA",
-      "features": [
-        "1 communiqué de presse",
-        "Diffusion nationale",
-        "1 catégorie",
-        "Analyses de base"
-      ],
-      "cta": "Commencer"
-    },
-    "growth": {
-      "name": "Croissance",
-      "description": "Pour les équipes qui publient régulièrement",
-      "monthlyPrice": "199 $CA/mois",
-      "features": [
-        "4 communiqués par mois",
-        "Anglais et français inclus",
-        "Revue prioritaire (moins de 1 heure)",
-        "Salle de presse personnalisée",
-        "Analyses avancées"
-      ],
-      "cta": "S'abonner"
-    },
-    "agency": {
-      "name": "Agence",
-      "description": "Pour les agences gérant plusieurs clients",
-      "contactSales": "Contacter les ventes"
-    },
-    "enterprise": {
-      "name": "Entreprise",
-      "description": "Solutions personnalisées pour les grandes organisations",
-      "contactSales": "Contacter les ventes"
-    }
-  },
-  "footer": {
-    "product": "Produit",
-    "resources": "Ressources",
-    "legal": "Juridique",
-    "subscribeNewsletter": "Abonnez-vous à notre infolettre",
-    "copyright": "Tous droits réservés."
-  },
-  "release": {
-    "published": "Publié le",
-    "shared": "Partager",
-    "category": "Catégorie",
-    "related": "Plus de cette entreprise",
-    "meta": {
-      "by": "par",
-      "in": "dans"
-    }
+    "settings": "Paramètres",
+    "team": "Équipe"
   },
   "common": {
     "readMore": "Lire la suite",
@@ -130,11 +44,513 @@
     "poweredBy": "Propulsé par PR NEWS",
     "language": "Langue",
     "english": "Anglais",
-    "français": "Français"
+    "français": "Français",
+    "goHome": "Retour à l'accueil",
+    "refresh": "Veuillez actualiser la page",
+    "somethingWentWrong": "Une erreur s'est produite",
+    "pageNotFound": "Page introuvable",
+    "pageNotFoundDescription": "La page que vous recherchez n'existe pas.",
+    "and": "et",
+    "by": "par",
+    "in": "dans",
+    "comingSoon": "Disponible dans la Phase 2.",
+    "contactUs": "Contactez-nous",
+    "email": "Courriel",
+    "emailPlaceholder": "vous@entreprise.ca",
+    "phone": "Téléphone",
+    "address": "Adresse",
+    "toggleMenu": "Basculer le menu",
+    "status": "Statut",
+    "company": "Entreprise",
+    "date": "Date",
+    "type": "Type",
+    "amount": "Montant",
+    "reference": "Référence",
+    "partner": "Partenaire",
+    "delivered": "Livré",
+    "pending": "En attente",
+    "failed": "Échoué",
+    "pressReleases": "Communiqués de presse",
+    "latest": "Derniers",
+    "live": "EN DIRECT",
+    "releases": "Communiqués",
+    "noResults": "Aucun résultat trouvé.",
+    "manage": "Gérer",
+    "subscribe": "S'abonner",
+    "backToHome": "Retour à l'accueil",
+    "contactSales": "Contacter les ventes",
+    "getStarted": "Commencer",
+    "seeLiveReleases": "Voir les communiqués en direct",
+    "createAccount": "Créer un compte",
+    "month": "mois"
+  },
+  "home": {
+    "hero": {
+      "headline": "Communiqués de presse, diffusés partout au Canada",
+      "subheadline": "Publiez une fois. Touchez chaque média, province et audience. Confirmation de livraison en temps réel incluse.",
+      "ctaPrimary": "Commencer",
+      "ctaSecondary": "Voir les communiqués en direct"
+    },
+    "stats": {
+      "releasesToday": "Communiqués envoyés aujourd'hui",
+      "outletsReached": "Médias touchés",
+      "newsrooms": "Salles de presse actives"
+    },
+    "ticker": {
+      "label": "Derniers communiqués"
+    },
+    "map": {
+      "caption": "Les nœuds de diffusion s'activent au fur et à mesure que les communiqués atteignent les salles de presse à travers le pays."
+    },
+    "features": {
+      "title": "Pourquoi PR NEWS ?",
+      "transparency": {
+        "title": "Transparence totale de la diffusion",
+        "desc": "Suivez chaque livraison en temps réel. Sachez quels médias ont repris votre histoire."
+      },
+      "speed": {
+        "title": "Réactivité",
+        "desc": "Revue éditoriale en moins de 2 heures. Publiez selon vos horaires."
+      },
+      "bilingual": {
+        "title": "Vraiment bilingue",
+        "desc": "Publiez en anglais et en français. Touchez toutes les audiences canadiennes."
+      }
+    }
+  },
+  "pricing": {
+    "title": "Tarification simple et transparente",
+    "subtitle": "Pas de frais cachés. Pas d'appels de vente requis.",
+    "comparisonTitle": "PR NEWS vs les fils de presse traditionnels",
+    "comparison": {
+      "feature": "Fonctionnalité",
+      "prnews": "PR NEWS",
+      "others": "Fils de presse traditionnels",
+      "yes": "Oui",
+      "no": "Non",
+      "partial": "Partiel"
+    },
+    "plans": [
+      {
+        "name": "Débutant",
+        "description": "Parfait pour une annonce ponctuelle",
+        "price": "299 $CA",
+        "features": ["1 communiqué de presse", "Diffusion nationale", "1 catégorie", "Analyses de base"],
+        "cta": "Commencer",
+        "href": "/api/subscribe?plan=starter"
+      },
+      {
+        "name": "Croissance",
+        "description": "Pour les équipes qui publient régulièrement",
+        "price": "199 $CA",
+        "priceSuffix": "/mois",
+        "features": ["4 communiqués par mois", "Anglais et français", "Revue prioritaire (moins de 1 heure)", "Salle de presse personnalisée", "Analyses avancées"],
+        "cta": "S'abonner",
+        "href": "/api/subscribe?plan=growth",
+        "featured": true
+      },
+      {
+        "name": "Agence",
+        "description": "Pour les agences gérant plusieurs clients",
+        "features": ["Crédits en volume", "Sièges d'équipe", "Marque blanche", "Accès API"],
+        "cta": "Contacter les ventes",
+        "href": "/contact"
+      },
+      {
+        "name": "Entreprise",
+        "description": "Solutions personnalisées pour les grandes organisations",
+        "features": ["Crédits en volume", "Sièges d'équipe", "Marque blanche", "Accès API", "Support dédié"],
+        "cta": "Contacter les ventes",
+        "href": "/contact"
+      }
+    ],
+    "comparisonRows": [
+      { "feature": "Tarification transparente et publique", "prnews": "yes", "others": "no" },
+      { "feature": "Paiement en libre-service", "prnews": "yes", "others": "no" },
+      { "feature": "Suivi de diffusion en direct", "prnews": "yes", "others": "partial" },
+      { "feature": "Publication bilingue anglais / français", "prnews": "yes", "others": "no" },
+      { "feature": "Salle de presse personnalisée", "prnews": "yes", "others": "partial" },
+      { "feature": "Aucun appel de vente requis", "prnews": "yes", "others": "no" },
+      { "feature": "Tableau de bord d'analyses en temps réel", "prnews": "yes", "others": "partial" },
+      { "feature": "Focus sur les médias canadiens", "prnews": "yes", "others": "no" }
+    ]
+  },
+  "howItWorks": {
+    "dateline": "PR NEWS · PROCESSUS",
+    "title": "Comment ça marche",
+    "subtitle": "Trois étapes simples pour diffuser votre histoire partout au pays.",
+    "steps": [
+      {
+        "step": "1",
+        "title": "Rédiger et soumettre",
+        "desc": "Utilisez notre assistant de soumission intuitif pour rédiger votre communiqué. Notre éditeur enrichi facilite la mise en forme, et la publication bilingue se fait en un seul clic."
+      },
+      {
+        "step": "2",
+        "title": "Revue éditoriale",
+        "desc": "Notre équipe éditoriale examine votre communiqué pour en assurer la qualité et la conformité. La plupart des revues sont complétées en moins de 2 heures ouvrables, avec une revue prioritaire pour les abonnés Croissance."
+      },
+      {
+        "step": "3",
+        "title": "Diffuser et suivre",
+        "desc": "Une fois approuvé, votre communiqué est diffusé à notre réseau de médias partout au Canada. Suivez chaque livraison en temps réel dans votre tableau de bord."
+      }
+    ],
+    "ctaTitle": "Prêt à commencer ?",
+    "ctaDescription": "Publiez votre premier communiqué de presse aujourd'hui."
+  },
+  "about": {
+    "dateline": "TORONTO, ON — FONDÉ EN 2026",
+    "title": "À propos de PR NEWS",
+    "intro": "PR NEWS est une plateforme canadienne de distribution de communiqués de presse conçue pour l'ère moderne. Nous croyons que chaque entreprise canadienne mérite un accès transparent, abordable et efficace à la distribution de communiqués de presse, peu importe sa taille ou son budget.",
+    "mission": "Rendre la distribution de communiqués de presse transparente, rapide et accessible à chaque entreprise canadienne.",
+    "missionCaption": "Mission de PR NEWS",
+    "closing": "Notre mission est simple : rendre la distribution de communiqués de presse transparente, rapide et accessible à chaque entreprise canadienne, des startups de Vancouver aux organismes sans but lucratif d'Halifax. Nous aidons les histoires à trouver leur audience."
+  },
+  "contact": {
+    "dateline": "PR NEWS · SERVICE CLIENT",
+    "title": "Contactez-nous",
+    "intro": "Vous avez des questions sur PR NEWS ? Nous serions ravis de vous entendre.",
+    "email": "Courriel",
+    "phone": "Téléphone",
+    "address": "Adresse"
+  },
+  "news": {
+    "title": "Actualités",
+    "subtitle": "Les derniers communiqués de presse des entreprises canadiennes.",
+    "empty": {
+      "title": "Aucun communiqué pour l'instant",
+      "description": "Les communiqués apparaîtront ici dès qu'ils seront en ligne. Revenez bientôt ou soumettez votre propre histoire.",
+      "action": "Soumettre un communiqué"
+    },
+    "category": {
+      "pressReleasesInCategory": "{count} communiqués de presse dans cette catégorie.",
+      "noReleases": "Aucun communiqué dans cette catégorie pour l'instant."
+    },
+    "detail": {
+      "company": "Entreprise",
+      "canada": "Canada"
+    }
+  },
+  "newsroom": {
+    "title": "Salle de presse",
+    "pressReleases": "Communiqués de presse",
+    "noReleases": "Aucun communiqué de {company} pour l'instant.",
+    "breadcrumb": "Salles de presse"
+  },
+  "search": {
+    "title": "Rechercher des communiqués",
+    "subtitle": "Recherchez dans tous les communiqués de presse publiés.",
+    "comingSoon": "La fonction de recherche sera bientôt disponible."
+  },
+  "trending": {
+    "title": "Tendances",
+    "subtitle": "Les sujets les plus discutés parmi les communiqués de presse canadiens.",
+    "comingSoon": "Les sujets tendance seront bientôt disponibles."
+  },
+  "journalists": {
+    "title": "Journalistes",
+    "intro": "PR NEWS offre aux journalistes un accès facile aux communiqués de presse partout au Canada. Parcourez les communiqués par catégorie, province ou sujet.",
+    "forJournalists": "Pour les journalistes",
+    "benefits": [
+      "Accès à des communiqués de presse vérifiés d'entreprises canadiennes",
+      "Possibilité de rejoindre notre liste de médias pour des alertes par sujet",
+      "Accès en embargo pour les histoires urgentes"
+    ],
+    "joinTitle": "Rejoindre notre liste de médias",
+    "joinDescription": "Inscrivez-vous pour recevoir les communiqués pertinents pour votre beat."
+  },
+  "resources": {
+    "title": "Ressources",
+    "intro": "Guides, modèles et conseils pour une distribution efficace de communiqués de presse.",
+    "sections": [
+      {
+        "title": "Comment rédiger un communiqué de presse",
+        "content": "Un communiqué de presse est une communication écrite qui rapporte un événement relativement nouveau. Son objectif est de fournir de l'information aux journalistes et au public."
+      },
+      {
+        "title": "Meilleures pratiques",
+        "content": [
+          "Gardez votre titre clair et convaincant",
+          "Commencez par l'information la plus importante",
+          "Incluez un dateline (Ville, Province — Date)",
+          "Ajoutez une citation d'un dirigeant de l'entreprise",
+          "Terminez par un boilerplate sur votre entreprise"
+        ]
+      },
+      {
+        "title": "Distribuer un communiqué de presse au Canada",
+        "content": "Pour distribuer un communiqué de presse au Canada, envisagez de contacter des médias nationaux et régionaux dans plusieurs provinces pour une portée maximale."
+      }
+    ]
+  },
+  "resource": {
+    "title": "Ressource : {slug}",
+    "comingSoon": "Le contenu sera bientôt disponible."
+  },
+  "blog": {
+    "title": "Blogue : {slug}",
+    "comingSoon": "Le contenu sera bientôt disponible."
+  },
+  "privacy": {
+    "title": "Politique de confidentialité",
+    "lastUpdated": "Dernière mise à jour : 10 juillet 2026",
+    "intro": "PR NEWS s'engage à protéger vos renseignements personnels conformément à la Loi 25 du Québec et à la LPRPDE.",
+    "sections": [
+      {
+        "title": "1. Renseignements collectés",
+        "content": "Nous collectons les renseignements que vous nous fournissez directement, tels que votre nom, votre courriel et les détails de votre entreprise lors de la création d'un compte."
+      },
+      {
+        "title": "2. Utilisation de vos renseignements",
+        "content": "Nous utilisons vos renseignements pour fournir, maintenir et améliorer nos services, et pour communiquer avec vous au sujet de nos produits."
+      },
+      {
+        "title": "3. Partage de données",
+        "content": "Nous ne vendons pas vos renseignements personnels. Nous pouvons les partager avec des fournisseurs de services qui nous aident à exploiter notre plateforme."
+      },
+      {
+        "title": "4. Vos droits",
+        "content": "En vertu de la Loi 25 du Québec et de la LPRPDE, vous avez le droit d'accéder à vos renseignements, de les corriger et de les supprimer."
+      },
+      {
+        "title": "5. Témoins",
+        "content": "Nous utilisons des témoins pour améliorer votre expérience. Vous pouvez gérer vos préférences en tout temps."
+      },
+      {
+        "title": "6. Contact",
+        "content": "Pour toute question sur la confidentialité, contactez-nous à privacy@prnews.ca."
+      }
+    ]
+  },
+  "terms": {
+    "title": "Conditions d'utilisation",
+    "lastUpdated": "Dernière mise à jour : 10 juillet 2026",
+    "intro": "Les présentes conditions d'utilisation régissent votre utilisation de la plateforme et des services de PR NEWS.",
+    "sections": [
+      {
+        "title": "1. Acceptation des conditions",
+        "content": "En accédant à nos services ou en les utilisant, vous acceptez d'être lié par les présentes conditions d'utilisation."
+      },
+      {
+        "title": "2. Utilisation des services",
+        "content": "Vous ne pouvez utiliser nos services qu'à des fins légales et conformément aux présentes conditions."
+      },
+      {
+        "title": "3. Contenu",
+        "content": "Vous conservez la propriété du contenu soumis. En soumettant du contenu, vous nous accordez une licence pour le distribuer via notre réseau."
+      },
+      {
+        "title": "4. Contenu interdit",
+        "content": "Le contenu ne doit pas être diffamatoire, illégal ou violer les droits d'autrui. Nous nous réservons le droit de refuser tout contenu."
+      },
+      {
+        "title": "5. Limitation de responsabilité",
+        "content": "PR NEWS ne sera pas responsable des dommages indirects, accidentels ou consécutifs découlant de l'utilisation de nos services."
+      },
+      {
+        "title": "6. Droit applicable",
+        "content": "Les présentes conditions sont régies par les lois de l'Ontario, au Canada, applicables à Toronto, sans égard aux principes de conflit de lois."
+      }
+    ]
+  },
+  "casl": {
+    "title": "Conformité LCAP",
+    "intro": "PR NEWS respecte la Loi canadienne anti-pourriel (LCAP). Nos pratiques courriel incluent :",
+    "practices": [
+      "Consentement explicite : nous n'envoyons des courriels qu'aux personnes qui se sont inscrites explicitement.",
+      "Identification : tous les courriels identifient clairement PR NEWS comme expéditeur.",
+      "Désinscription : chaque courriel marketing comprend un lien de désinscription en un clic.",
+      "Adresse postale : notre adresse postale apparaît dans le pied de page de chaque courriel."
+    ],
+    "contact": "Pour toute question concernant la LCAP, contactez-nous à casl@prnews.ca."
+  },
+  "accessibility": {
+    "title": "Déclaration d'accessibilité",
+    "intro": "PR NEWS s'engage à assurer l'accessibilité numérique aux personnes handicapées. Nous améliorons continuellement l'expérience utilisateur pour tous et appliquons les normes d'accessibilité pertinentes.",
+    "sections": [
+      {
+        "title": "État de conformité",
+        "content": "Les Règles pour l'accessibilité des contenus Web (WCAG) définissent les exigences pour les concepteurs et développeurs afin d'améliorer l'accessibilité des personnes handicapées. Elles définissent trois niveaux de conformité : niveau A, niveau AA et niveau AAA. PR NEWS est partiellement conforme aux WCAG 2.1 niveau AA. Partiellement conforme signifie que certaines parties du contenu ne se conforment pas entièrement à la norme d'accessibilité."
+      },
+      {
+        "title": "Commentaires",
+        "content": "Nous apprécions vos commentaires sur l'accessibilité de PR NEWS. Veuillez nous informer si vous rencontrez des obstacles d'accessibilité :"
+      }
+    ],
+    "email": "Courriel : accessibility@prnews.ca",
+    "phone": "Téléphone : 1-800-PR-NEWS"
+  },
+  "release": {
+    "published": "Publié le",
+    "shared": "Partager",
+    "category": "Catégorie",
+    "related": "Plus de cette entreprise",
+    "meta": {
+      "by": "par",
+      "in": "dans"
+    },
+    "read": "Lire"
+  },
+  "releaseCard": {
+    "read": "Lire"
+  },
+  "emptyState": {
+    "defaultTitle": "Rien à afficher",
+    "defaultDescription": "Il n'y a rien à afficher pour l'instant."
+  },
+  "wireTicker": {
+    "live": "EN DIRECT",
+    "label": "Derniers communiqués :",
+    "reducedLabel": "Derniers :"
+  },
+  "canadaMap": {
+    "ariaLabel": "Carte matricielle du Canada montrant les nœuds de diffusion actifs"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "myReleases": "Mes communiqués",
+    "views": "Vues",
+    "shares": "Partages",
+    "outletClicks": "Clics sur les médias",
+    "recentReleases": "Communiqués récents",
+    "empty": {
+      "title": "Aucun communiqué pour l'instant",
+      "description": "Soumettez votre premier communiqué de presse pour le voir apparaître ici et suivre ses performances.",
+      "action": "Soumettre un communiqué"
+    },
+    "table": {
+      "headline": "Titre",
+      "status": "Statut",
+      "published": "Publié le",
+      "views": "Vues"
+    }
+  },
+  "analytics": {
+    "title": "Analytiques : {headline}",
+    "views": "Vues",
+    "shares": "Partages",
+    "outletClicks": "Clics sur les médias",
+    "distribution": "Diffusion",
+    "recentEvents": "Événements récents",
+    "empty": {
+      "title": "Aucun événement pour l'instant",
+      "description": "Une fois votre communiqué diffusé, les vues, partages et clics apparaîtront ici."
+    },
+    "table": {
+      "event": "Événement",
+      "geo": "Géo",
+      "referrer": "Référent",
+      "timestamp": "Horodatage"
+    }
+  },
+  "releases": {
+    "title": "Mes communiqués",
+    "empty": "Aucun communiqué pour l'instant.",
+    "view": "Voir"
+  },
+  "submit": {
+    "title": "Soumettre un communiqué",
+    "drafts": "Communiqués en brouillon",
+    "comingSoon": "Assistant de soumission — disponible dans la Phase 2."
+  },
+  "billing": {
+    "title": "Facturation",
+    "currentPlan": "Forfait actuel",
+    "noSubscription": "Aucun abonnement actif",
+    "manage": "Gérer",
+    "transactionHistory": "Historique des transactions",
+    "noTransactions": "Aucune transaction pour l'instant.",
+    "table": {
+      "date": "Date",
+      "type": "Type",
+      "amount": "Montant",
+      "reference": "Référence"
+    },
+    "credits": "crédits",
+    "plans": [
+      {
+        "name": "Débutant",
+        "price": "299 $",
+        "priceSuffix": "/mois",
+        "features": ["1 communiqué", "Diffusion nationale", "Analyses de base"],
+        "priceId": "price_starter_monthly"
+      },
+      {
+        "name": "Croissance",
+        "price": "199 $",
+        "priceSuffix": "/mois",
+        "features": ["4 communiqués", "Bilingue", "Revue prioritaire", "Salle de presse"],
+        "priceId": "price_growth_monthly",
+        "featured": true
+      }
+    ]
+  },
+  "appNewsroom": {
+    "title": "Salle de presse",
+    "noNewsroom": "Aucune salle de presse configurée pour l'instant."
+  },
+  "settings": {
+    "title": "Paramètres",
+    "comingSoon": "Paramètres du compte — disponibles dans la Phase 2."
+  },
+  "team": {
+    "title": "Équipe",
+    "comingSoon": "Gestion de l'équipe — disponible dans la Phase 2."
+  },
+  "releaseDetail": {
+    "notFound": "Communiqué introuvable.",
+    "distributionStatus": "État de la diffusion",
+    "table": {
+      "partner": "Partenaire",
+      "status": "Statut",
+      "delivered": "Livré"
+    }
+  },
+  "releaseEdit": {
+    "title": "Modifier le communiqué",
+    "comingSoon": "Disponible dans la Phase 2."
+  },
+  "newsroomSettings": {
+    "title": "Paramètres de la salle de presse",
+    "comingSoon": "Gérez votre salle de presse personnalisée — disponible dans la Phase 2."
+  },
+  "admin": {
+    "queue": {
+      "title": "File d'attente",
+      "pending": "{count} en attente",
+      "noPending": "Aucun communiqué en attente de révision.",
+      "submittedBy": "Soumis par {name}",
+      "approve": "Approuver",
+      "reject": "Rejeter",
+      "requestChanges": "Demander des modifications"
+    },
+    "releases": {
+      "title": "Tous les communiqués",
+      "count": "{count} communiqués dans le système.",
+      "comingSoon": "Gestion de tous les communiqués — disponible dans la Phase 2."
+    },
+    "clients": {
+      "title": "Clients",
+      "count": "{count} clients inscrits.",
+      "comingSoon": "Gestion des clients — disponible dans la Phase 2."
+    },
+    "analytics": {
+      "title": "Analytiques de la plateforme",
+      "totalReleases": "Total des communiqués",
+      "totalViews": "Total des vues",
+      "registeredCompanies": "Entreprises inscrites"
+    },
+    "distributionPartners": {
+      "title": "Partenaires de diffusion",
+      "count": "{count} partenaires de diffusion inscrits.",
+      "comingSoon": "Disponible dans la Phase 2."
+    }
   },
   "auth": {
     "login": {
-      "title": "Connectez-vous à votre compte",
+      "title": "Se connecter",
+      "subtitle": "Accédez à votre compte PR NEWS.",
       "email": "Courriel",
       "password": "Mot de passe",
       "forgotPassword": "Mot de passe oublié ?",
@@ -142,17 +558,175 @@
       "signUp": "Créer un compte",
       "continueWithGoogle": "Continuer avec Google",
       "continueWithEmail": "Continuer avec le courriel",
-      "magicLinkSent": "Nous vous avons envoyé un lien magique. Vérifiez votre boîte de réception !"
+      "magicLinkSent": "Nous vous avons envoyé un lien magique. Vérifiez votre boîte de réception !",
+      "logInButton": "Se connecter"
     },
     "signup": {
-      "title": "Créez votre compte",
+      "title": "Créer votre compte",
+      "subtitle": "Commencez à distribuer des communiqués de presse dès aujourd'hui.",
       "fullName": "Nom complet",
       "companyName": "Nom de l'entreprise",
-      "industry": "Secteur d'activité",
-      "role": "Rôle",
+      "email": "Courriel",
+      "password": "Mot de passe",
       "alreadyHaveAccount": "Vous avez déjà un compte ?",
-      "login": "Se connecter"
+      "login": "Se connecter",
+      "createAccount": "Créer un compte"
+    },
+    "forgotPassword": {
+      "title": "Réinitialiser le mot de passe",
+      "subtitle": "Entrez votre courriel pour recevoir un lien de réinitialisation.",
+      "emailPlaceholder": "vous@exemple.com",
+      "sendResetLink": "Envoyer le lien"
+    },
+    "resetPassword": {
+      "title": "Définir un nouveau mot de passe",
+      "subtitle": "Entrez votre nouveau mot de passe.",
+      "newPasswordPlaceholder": "Nouveau mot de passe",
+      "confirmPasswordPlaceholder": "Confirmer le mot de passe",
+      "resetPassword": "Réinitialiser le mot de passe"
+    },
+    "callback": {
+      "title": "Authentification",
+      "subtitle": "Redirection en cours...",
+      "signInWithGoogle": "Se connecter avec Google"
     }
+  },
+  "submission": {
+    "steps": [
+      { "key": "basics", "label": "Informations" },
+      { "key": "body", "label": "Contenu" },
+      { "key": "media", "label": "Médias" },
+      { "key": "distribution", "label": "Diffusion" },
+      { "key": "contact", "label": "Contact" },
+      { "key": "review", "label": "Révision" }
+    ],
+    "basics": {
+      "title": "Informations de base",
+      "headlineEn": "Titre (anglais)",
+      "headlineEnPlaceholder": "Le titre de votre communiqué",
+      "headlineFr": "Titre (français)",
+      "headlineFrPlaceholder": "Titre du communiqué (optionnel)",
+      "summary": "Résumé / Chapô",
+      "summaryPlaceholder": "Un bref résumé de votre communiqué",
+      "category": "Catégorie",
+      "categoryPlaceholder": "Sélectionnez une catégorie",
+      "language": "Langue",
+      "dateline": "Dateline (Ville, Province)",
+      "datelinePlaceholder": "TORONTO, ON",
+      "keywords": "Mots-clés (séparés par des virgules)",
+      "keywordsPlaceholder": "IA, technologie, financement"
+    },
+    "languageOptions": [
+      { "value": "en", "label": "English" },
+      { "value": "fr", "label": "Français" },
+      { "value": "both", "label": "Bilingue (EN + FR)" }
+    ],
+    "categories": [
+      { "value": "Business", "label": "Affaires" },
+      { "value": "Technology", "label": "Technologie" },
+      { "value": "Health", "label": "Santé" },
+      { "value": "Finance & Economy", "label": "Finance et Économie" },
+      { "value": "Government & Politics", "label": "Gouvernement et Politique" },
+      { "value": "Environment", "label": "Environnement" },
+      { "value": "Consumer Products", "label": "Produits de consommation" },
+      { "value": "Company Earnings", "label": "Résultats d'entreprise" },
+      { "value": "Nonprofit & Public Interest", "label": "Organisme sans but lucratif" },
+      { "value": "Sports & Entertainment", "label": "Sports et Divertissement" },
+      { "value": "Real Estate", "label": "Immobilier" },
+      { "value": "Energy & Mining", "label": "Énergie et Mines" },
+      { "value": "Indigenous Affairs & Reconciliation", "label": "Affaires autochtones et Réconciliation" },
+      { "value": "Cannabis", "label": "Cannabis" }
+    ],
+    "provinces": [
+      { "value": "Alberta", "label": "Alberta" },
+      { "value": "British Columbia", "label": "Colombie-Britannique" },
+      { "value": "Manitoba", "label": "Manitoba" },
+      { "value": "New Brunswick", "label": "Nouveau-Brunswick" },
+      { "value": "Newfoundland and Labrador", "label": "Terre-Neuve-et-Labrador" },
+      { "value": "Nova Scotia", "label": "Nouvelle-Écosse" },
+      { "value": "Ontario", "label": "Ontario" },
+      { "value": "Prince Edward Island", "label": "Île-du-Prince-Édouard" },
+      { "value": "Quebec", "label": "Québec" },
+      { "value": "Saskatchewan", "label": "Saskatchewan" },
+      { "value": "Northwest Territories", "label": "Territoires du Nord-Ouest" },
+      { "value": "Nunavut", "label": "Nunavut" },
+      { "value": "Yukon", "label": "Yukon" }
+    ],
+    "body": {
+      "title": "Corps du communiqué",
+      "englishBody": "Corps en anglais",
+      "englishPlaceholder": "Rédigez le corps de votre communiqué en anglais...",
+      "frenchBody": "Corps en français",
+      "frenchPlaceholder": "Rédigez le corps de votre communiqué en français..."
+    },
+    "media": {
+      "title": "Médias",
+      "images": "Images",
+      "dragDropImages": "Glissez-déposez des images ici ou cliquez pour parcourir",
+      "imageFormats": "JPG, PNG, WebP pris en charge",
+      "videoUrl": "URLs de vidéo",
+      "videoPlaceholder": "URL YouTube ou Vimeo",
+      "pdf": "PDF / Dossier de presse",
+      "pdfPlaceholder": "Téléverser le dossier de presse PDF"
+    },
+    "distribution": {
+      "title": "Diffusion",
+      "tier": "Niveau de diffusion",
+      "targetProvinces": "Provinces cibles",
+      "schedule": "Planification / Embargo"
+    },
+    "distributionTiers": [
+      { "value": "National Distribution", "label": "Diffusion nationale" },
+      { "value": "Regional Distribution", "label": "Diffusion régionale" },
+      { "value": "Provincial", "label": "Provincial" }
+    ],
+    "contact": {
+      "title": "Contact média",
+      "note": "Ces informations sont visibles uniquement par les journalistes et n'apparaîtront pas dans le communiqué publié.",
+      "name": "Nom du contact",
+      "namePlaceholder": "Jane Smith",
+      "email": "Courriel du contact",
+      "emailPlaceholder": "jane@company.ca",
+      "phone": "Téléphone du contact",
+      "phonePlaceholder": "416-555-0100"
+    },
+    "review": {
+      "title": "Révision et soumission",
+      "noHeadline": "(Aucun titre)",
+      "category": "Catégorie",
+      "language": "Langue",
+      "wordCount": "Nombre de mots",
+      "words": "mots",
+      "contact": "Contact",
+      "notSelected": "Non sélectionné",
+      "notSet": "Non défini",
+      "turnaround": "La soumission de ce communiqué le placera dans notre file d'attente de révision éditoriale. Délai prévu : moins de 2 heures ouvrables."
+    },
+    "navigation": {
+      "back": "Retour",
+      "continue": "Continuer",
+      "submit": "Soumettre pour révision"
+    },
+    "editor": {
+      "placeholder": "Rédigez votre communiqué...",
+      "heading1": "Titre 1",
+      "heading2": "Titre 2",
+      "heading3": "Titre 3",
+      "bold": "Gras",
+      "italic": "Italique",
+      "quote": "Citation",
+      "bulletList": "Liste à puces",
+      "orderedList": "Liste numérotée",
+      "addLink": "Ajouter un lien",
+      "linkPrompt": "Entrez l'URL :"
+    }
+  },
+  "footer": {
+    "product": "Produit",
+    "resources": "Ressources",
+    "legal": "Juridique",
+    "subscribeNewsletter": "Abonnez-vous à notre infolettre",
+    "copyright": "Tous droits réservés."
   },
   "categories": {
     "business": "Affaires",

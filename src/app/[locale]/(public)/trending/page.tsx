@@ -1,13 +1,21 @@
-export const metadata = { title: 'Trending — PR NEWS' };
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
-export default function TrendingPage() {
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('trending');
+  return { title: t('title') };
+}
+
+export default async function TrendingPage() {
+  const t = await getTranslations('trending');
+
   return (
     <section className="section bg-wire-bg">
       <div className="container-narrow">
-        <h1 className="heading-lg mb-8">Trending</h1>
-        <p className="text-wire-muted mb-8">The most discussed topics across Canadian press releases.</p>
+        <h1 className="heading-lg mb-8">{t('title')}</h1>
+        <p className="text-wire-muted mb-8">{t('subtitle')}</p>
         <div className="card p-8 text-center">
-          <p className="text-wire-muted">Trending topics coming soon.</p>
+          <p className="text-wire-muted">{t('comingSoon')}</p>
         </div>
       </div>
     </section>

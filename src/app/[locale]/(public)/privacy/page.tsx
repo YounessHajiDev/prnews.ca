@@ -1,25 +1,33 @@
-export const metadata = { title: 'Privacy Policy — PR NEWS' };
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
-export default function PrivacyPage() {
+interface Section {
+  title: string;
+  content: string;
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('privacy');
+  return { title: t('title') };
+}
+
+export default async function PrivacyPage() {
+  const t = await getTranslations('privacy');
+  const sections = t.raw('sections') as Section[];
+
   return (
     <section className="section bg-wire-bg">
       <div className="container-narrow">
-        <h1 className="heading-lg mb-8">Privacy Policy</h1>
+        <h1 className="heading-lg mb-8">{t('title')}</h1>
         <div className="prose-release">
-          <p>Last updated: July 10, 2026</p>
-          <p>PR NEWS is committed to protecting your personal information in compliance with Quebec Law 25 and PIPEDA.</p>
-          <h2>1. Information We Collect</h2>
-          <p>We collect information you provide directly, such as your name, email, and company details when you create an account.</p>
-          <h2>2. How We Use Your Information</h2>
-          <p>We use your information to provide, maintain, and improve our services, and to communicate with you about our products.</p>
-          <h2>3. Data Sharing</h2>
-          <p>We do not sell your personal information. We may share information with service providers who assist us in operating our platform.</p>
-          <h2>4. Your Rights</h2>
-          <p>Under Quebec Law 25 and PIPEDA, you have the right to access, correct, and delete your personal information.</p>
-          <h2>5. Cookies</h2>
-          <p>We use cookies to enhance your experience. You can manage your cookie preferences at any time.</p>
-          <h2>6. Contact</h2>
-          <p>For privacy inquiries, contact us at privacy@prnews.ca.</p>
+          <p>{t('lastUpdated')}</p>
+          <p>{t('intro')}</p>
+          {sections.map((section, i) => (
+            <div key={i}>
+              <h2>{section.title}</h2>
+              <p>{section.content}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

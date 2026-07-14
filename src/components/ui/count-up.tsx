@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
+import { useLocale } from 'next-intl';
 
 interface CountUpProps {
   end: number;
@@ -13,6 +14,7 @@ interface CountUpProps {
 
 export function CountUp({ end, duration = 1500, prefix = '', suffix = '', className }: CountUpProps) {
   const reducedMotion = useReducedMotion();
+  const locale = useLocale();
   const [value, setValue] = useState(0);
   const [started, setStarted] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
@@ -58,7 +60,7 @@ export function CountUp({ end, duration = 1500, prefix = '', suffix = '', classN
     return () => cancelAnimationFrame(raf);
   }, [started, end, duration]);
 
-  const formatted = value.toLocaleString();
+  const formatted = value.toLocaleString(locale);
 
   return (
     <span ref={ref} className={className}>

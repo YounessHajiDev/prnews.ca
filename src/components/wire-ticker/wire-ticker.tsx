@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Badge } from '@/components/ui/badge';
 
 interface Release {
@@ -12,7 +13,7 @@ interface Release {
   province: string;
 }
 
-// Demo data — replaced by real data in Phase 2
+// Demo data — replaced by real data in Phase 2. Province keys map to messages for localization.
 const DEMO_RELEASES: Release[] = [
   {
     id: '1',
@@ -84,6 +85,7 @@ function TickerItem({ release }: { release: Release }) {
 }
 
 export function WireTicker({ releases = DEMO_RELEASES }: { releases?: Release[] }) {
+  const t = useTranslations('wireTicker');
   const reducedMotion = useReducedMotion();
 
   if (reducedMotion) {
@@ -91,10 +93,10 @@ export function WireTicker({ releases = DEMO_RELEASES }: { releases?: Release[] 
       <div className="border-b border-white/10 bg-wire-ink py-3 text-white">
         <div className="container-page flex items-center gap-3">
           <Badge variant="default" className="shrink-0 bg-wire-red text-white uppercase">
-            LIVE
+            {t('live')}
           </Badge>
           <span className="shrink-0 font-mono text-xs uppercase tracking-wider text-white/70">
-            Latest:
+            {t('reducedLabel')}
           </span>
           <div className="flex min-w-0 flex-1 items-center gap-3">
             {releases.slice(0, 2).map((release) => (
@@ -114,10 +116,10 @@ export function WireTicker({ releases = DEMO_RELEASES }: { releases?: Release[] 
     <div className="group overflow-hidden border-b border-white/10 bg-wire-ink py-3 text-white">
       <div className="container-page flex items-center gap-3">
         <Badge variant="default" className="shrink-0 bg-wire-red text-white uppercase">
-          LIVE
+          {t('live')}
         </Badge>
         <span className="hidden shrink-0 font-mono text-xs uppercase tracking-wider text-white/70 sm:inline">
-          Latest Releases:
+          {t('label')}
         </span>
         <div className="min-w-0 flex-1 overflow-hidden">
           <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">

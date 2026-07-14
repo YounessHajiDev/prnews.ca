@@ -1,20 +1,29 @@
-export const metadata = { title: 'Journalists — PR NEWS' };
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
-export default function JournalistsPage() {
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('journalists');
+  return { title: t('title') };
+}
+
+export default async function JournalistsPage() {
+  const t = await getTranslations('journalists');
+  const benefits = t.raw('benefits') as string[];
+
   return (
     <section className="section bg-wire-bg">
       <div className="container-narrow">
-        <h1 className="heading-lg mb-8">Journalists</h1>
+        <h1 className="heading-lg mb-8">{t('title')}</h1>
         <div className="prose-release">
-          <p>PR NEWS provides journalists with easy access to press releases across Canada. Browse releases by category, province, or topic.</p>
-          <h2>For Journalists</h2>
+          <p>{t('intro')}</p>
+          <h2>{t('forJournalists')}</h2>
           <ul>
-            <li>Access to verified press releases from Canadian companies</li>
-            <li>Option to join our media list for beat-matching alerts</li>
-            <li>Embargo access for time-sensitive stories</li>
+            {benefits.map((benefit, i) => (
+              <li key={i}>{benefit}</li>
+            ))}
           </ul>
-          <h2>Join Our Media List</h2>
-          <p>Sign up to receive press releases relevant to your beat.</p>
+          <h2>{t('joinTitle')}</h2>
+          <p>{t('joinDescription')}</p>
         </div>
       </div>
     </section>

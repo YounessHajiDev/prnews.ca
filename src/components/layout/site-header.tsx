@@ -17,6 +17,7 @@ const NAV_LINKS = [
 
 export function SiteHeader() {
   const t = useTranslations('nav');
+  const tc = useTranslations('common');
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -24,7 +25,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-white/10 bg-wire-ink text-white">
       <div className="container-page flex h-16 items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-brass focus-visible:ring-offset-2 rounded-sm">
+        <Link href="/" className="flex items-center gap-2 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-brass focus-visible:ring-offset-2">
           <span className="font-display text-xl font-bold tracking-tight">PR NEWS</span>
         </Link>
 
@@ -34,7 +35,7 @@ export function SiteHeader() {
             <Link
               key={link.href}
               href={link.href}
-              className={`text-sm transition-colors hover:text-wire-brass focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-brass focus-visible:ring-offset-2 rounded-sm ${
+              className={`text-sm transition-colors hover:text-wire-brass rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-brass focus-visible:ring-offset-2 ${
                 pathname === link.href || pathname?.startsWith(link.href + '/')
                   ? 'text-wire-brass font-medium'
                   : 'text-white/80'
@@ -47,12 +48,12 @@ export function SiteHeader() {
 
         {/* Right side */}
         <div className="hidden md:flex items-center gap-3">
-          <Link href="/fr/" className="text-sm text-white/80 hover:text-wire-brass focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-brass focus-visible:ring-offset-2 rounded-sm">
-            FR
+          <Link href="/fr/" className="text-sm text-white/80 hover:text-wire-brass rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-brass focus-visible:ring-offset-2">
+            {tc('français')}
           </Link>
           <span className="text-white/30">|</span>
-          <Link href="/en/" className="text-sm text-white hover:text-wire-brass focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-brass focus-visible:ring-offset-2 rounded-sm">
-            EN
+          <Link href="/en/" className="text-sm text-white hover:text-wire-brass rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-brass focus-visible:ring-offset-2">
+            {tc('english')}
           </Link>
           <Link
             href="/login"
@@ -72,7 +73,7 @@ export function SiteHeader() {
         <button
           className="md:hidden p-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-brass focus-visible:ring-offset-2"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
+          aria-label={tc('toggleMenu')}
         >
           {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
@@ -85,7 +86,7 @@ export function SiteHeader() {
             <Link
               key={link.href}
               href={link.href}
-              className="block py-2 text-white/80 hover:text-wire-brass focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-brass rounded-sm"
+              className="block py-2 text-white/80 hover:text-wire-brass rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-brass"
               onClick={() => setMenuOpen(false)}
             >
               {t(link.label)}

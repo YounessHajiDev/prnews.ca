@@ -2,10 +2,13 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth/auth';
 import { db } from '@/lib/db/prisma';
 import { redirect } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
 
 export default async function NewsroomSettingsPage() {
   const session = await getServerSession(authOptions);
   if (!session) redirect('/login');
+
+  const t = await getTranslations('newsroomSettings');
 
   const company = await db.company.findFirst({
     where: { user: { id: session.user.id } },
@@ -13,8 +16,8 @@ export default async function NewsroomSettingsPage() {
 
   return (
     <div className="p-8">
-      <h1 className="heading-lg mb-6">Newsroom Settings</h1>
-      <p className="text-wire-muted">Manage your branded newsroom — coming in Phase 2.</p>
+      <h1 className="heading-lg mb-6">{t('title')}</h1>
+      <p className="text-wire-muted">{t('comingSoon')}</p>
     </div>
   );
 }

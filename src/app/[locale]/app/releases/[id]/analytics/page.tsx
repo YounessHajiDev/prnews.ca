@@ -5,6 +5,7 @@ import { db } from '@/lib/db/prisma';
 import { notFound, redirect } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { EmptyState } from '@/components/ui/empty-state';
+import { getTranslations, getLocale } from 'next-intl/server';
 
 export default async function ReleaseAnalyticsPage({
   params,
@@ -15,6 +16,8 @@ export default async function ReleaseAnalyticsPage({
   if (!session) redirect('/login');
 
   const { id } = params;
+  const t = await getTranslations('analytics');
+  const locale = await getLocale();
 
   const release = await db.pressRelease.findUnique({
     where: { id },
@@ -38,16 +41,15 @@ export default async function ReleaseAnalyticsPage({
   const totalOutlets = release.analytics.filter((e: any) => e.eventType === 'outlet_click').length;
 
   const stats = [
-    { label: 'Views', value: totalViews, icon: BarChart3 },
-    { label: 'Shares', value: totalShares, icon: Share2 },
-    { label: 'Outlet Clicks', value: totalOutlets, icon: MousePointerClick },
-    { label: 'Distribution', value: release.distributionLogs?.length ?? 0, icon: Radio },
+    { label: t('views'), value: totalViews, icon: BarChart3 },
+    { label: t('shares'), value: totalShares, icon: Share2 },
+    { label: t('outletClicks'), value: totalOutlets, icon: MousePointerClick },
+    { label: t('distribution'), value: release.distributionLogs?.length ?? 0, icon: Radio },
   ];
 
   return (
     <div className="p-4 md:p-8">
-      <p className="dateline mb-2">ANALYTICS · {release.status}</p>
-      <h1 className="heading-lg mb-6">{release.headline}</h1>
+      <h1 className="heading-lg mb-6">{t('title', { headline: release.headline })}</h1>
 
       <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map(({ label, value, icon: Icon }) => (
@@ -63,12 +65,12 @@ export default async function ReleaseAnalyticsPage({
         ))}
       </div>
 
-      <h2 className="heading-md mb-4">Recent Events</h2>
+      <h2 className="heading-md mb-4">{t('recentEvents')}</h2>
       {release.analytics.length === 0 ? (
         <EmptyState
           icon={Activity}
-          title="No events yet"
-          description="Once your release is distributed, views, shares, and outlet clicks will appear here."
+          title={t('empty.title')}
+          description={t('empty.description')}
         />
       ) : (
         <div className="card overflow-hidden">
@@ -76,10 +78,10 @@ export default async function ReleaseAnalyticsPage({
             <table className="w-full text-sm">
               <thead className="bg-wire-paper">
                 <tr>
-                  <th className="px-4 py-3 text-left font-medium text-wire-slate">Event</th>
-                  <th className="px-4 py-3 text-left font-medium text-wire-slate">Geo</th>
-                  <th className="px-4 py-3 text-left font-medium text-wire-slate">Referrer</th>
-                  <th className="px-4 py-3 text-left font-medium text-wire-slate">Timestamp</th>
+                  <th className="px-4 py-3 text-left font-medium text-wire-slate">{t('table.event')}</th>
+                  <th className="px-4 py-3 text-left font-medium text-wire-slate">{t('table.geo')}</th>
+                  <th className="px-4 py-3 text-left font-medium text-wire-slate">{t('table.referrer')}</th>
+                  <th className="px-4 py-3 text-left font-medium text-wire-slate">{t('table.timestamp')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -93,7 +95,7 @@ export default async function ReleaseAnalyticsPage({
                     </td>
                     <td className="px-4 py-3 text-wire-slate">{event.referrer || '—'}</td>
                     <td className="px-4 py-3 font-mono text-xs text-wire-slate">
-                      {event.timestamp.toLocaleString()}
+                      {new Date(event.timestamp).toLocaleString(locale)}
                     </td>
                   </tr>
                 ))}

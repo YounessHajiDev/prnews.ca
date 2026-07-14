@@ -2,6 +2,7 @@
 
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 interface BreadcrumbItem {
   label: string;
@@ -9,19 +10,21 @@ interface BreadcrumbItem {
 }
 
 export function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
+  const t = useTranslations('nav');
+
   return (
     <nav aria-label="Breadcrumb" className="mb-6">
-      <ol className="flex items-center gap-2 text-sm text-wire-muted">
+      <ol className="flex items-center gap-2 text-sm text-wire-slate">
         <li>
-          <Link href="/" className="hover:text-wire-charcoal">Home</Link>
+          <Link href="/" className="hover:text-wire-charcoal">{t('home')}</Link>
         </li>
         {items.map((item, index) => (
           <li key={index} className="flex items-center gap-2">
-            <ChevronRight className="w-3 h-3" />
+            <ChevronRight className="h-3 w-3" />
             {item.href ? (
               <Link href={item.href} className="hover:text-wire-charcoal">{item.label}</Link>
             ) : (
-              <span className="text-wire-charcoal font-medium">{item.label}</span>
+              <span className="font-medium text-wire-charcoal">{item.label}</span>
             )}
           </li>
         ))}

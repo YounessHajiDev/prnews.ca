@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ArrowRight, Calendar, MapPin } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { formatDate } from '@/lib/utils';
+import { getTranslations, getLocale } from 'next-intl/server';
 
 interface ReleaseCardProps {
   release: {
@@ -16,7 +17,9 @@ interface ReleaseCardProps {
   };
 }
 
-export function ReleaseCard({ release }: ReleaseCardProps) {
+export async function ReleaseCard({ release }: ReleaseCardProps) {
+  const t = await getTranslations('releaseCard');
+  const locale = await getLocale();
   const href = `/news/${release.category.toLowerCase().replace(/\s+/g, '-')}/${release.slug}`;
 
   return (
@@ -34,7 +37,7 @@ export function ReleaseCard({ release }: ReleaseCardProps) {
           )}
         </div>
         <h3 className="mb-2 font-display text-lg font-semibold transition-colors group-hover:text-wire-brass">
-          <Link href={href} className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-brass focus-visible:ring-offset-2 rounded-sm">
+          <Link href={href} className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-brass focus-visible:ring-offset-2">
             {release.headline}
           </Link>
         </h3>
@@ -44,14 +47,14 @@ export function ReleaseCard({ release }: ReleaseCardProps) {
             <span className="font-medium text-wire-ink">{release.company}</span>
             <span className="flex items-center gap-1">
               <Calendar className="h-3 w-3" />
-              {formatDate(release.publishedAt)}
+              {formatDate(release.publishedAt, locale)}
             </span>
           </div>
           <Link
             href={href}
-            className="flex items-center gap-1 text-wire-brass hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-brass focus-visible:ring-offset-2 rounded-sm"
+            className="flex items-center gap-1 rounded-sm text-wire-brass hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-brass focus-visible:ring-offset-2"
           >
-            Read <ArrowRight className="h-3 w-3" />
+            {t('read')} <ArrowRight className="h-3 w-3" />
           </Link>
         </div>
       </div>
