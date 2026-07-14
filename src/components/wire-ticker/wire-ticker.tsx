@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 
 interface Release {
@@ -55,29 +56,75 @@ const DEMO_RELEASES: Release[] = [
   },
 ];
 
-export function WireTicker({ releases = DEMO_RELEASES }: { releases?: Release[] }) {
+function useReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setReduced(media.matches);
+    const handler = (e: MediaQueryListEvent) => setReduced(e.matches);
+    media.addEventListener('change', handler);
+    return () => media.removeEventListener('change', handler);
+  }, []);
+
+  return reduced;
+}
+
+function TickerItem({ release }: { release: Release }) {
   return (
-    <div className="overflow-hidden bg-wire-charcoal text-white py-3">
+    <div className="flex shrink-0 items-center gap-3 px-4">
+      <span className="font-mono text-xs uppercase tracking-wider text-white/70">
+        {release.province}
+      </span>
+      <span className="text-sm text-white">{release.headline}</span>
+      <span className="text-wire-brass">—</span>
+      <span className="font-mono text-xs text-white/60">{release.company}</span>
+    </div>
+  );
+}
+
+export function WireTicker({ releases = DEMO_RELEASES }: { releases?: Release[] }) {
+  const reducedMotion = useReducedMotion();
+
+  if (reducedMotion) {
+    return (
+      <div className="border-b border-white/10 bg-wire-ink py-3 text-white">
+        <div className="container-page flex items-center gap-3">
+          <Badge variant="default" className="shrink-0 bg-wire-red text-white uppercase">
+            LIVE
+          </Badge>
+          <span className="shrink-0 font-mono text-xs uppercase tracking-wider text-white/70">
+            Latest:
+          </span>
+          <div className="flex min-w-0 flex-1 items-center gap-3">
+            {releases.slice(0, 2).map((release) => (
+              <span key={release.id} className="truncate text-sm">
+                {release.headline} — <span className="text-white/60">{release.company}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const items = [...releases, ...releases];
+
+  return (
+    <div className="group overflow-hidden border-b border-white/10 bg-wire-ink py-3 text-white">
       <div className="container-page flex items-center gap-3">
-        <Badge variant="secondary" className="shrink-0 bg-wire-amber text-wire-charcoal">
+        <Badge variant="default" className="shrink-0 bg-wire-red text-white uppercase">
           LIVE
         </Badge>
-        <span className="text-xs font-medium uppercase tracking-wider shrink-0">Latest Releases:</span>
-        <div className="flex gap-8 animate-slide-in whitespace-nowrap">
-          {releases.map((release) => (
-            <div key={release.id} className="flex items-center gap-2 shrink-0">
-              <span className="text-sm">{release.headline}</span>
-              <span className="text-wire-amber">—</span>
-              <span className="text-xs text-white/60">{release.company} · {release.province}</span>
-            </div>
-          ))}
-          {releases.map((release) => (
-            <div key={`dup-${release.id}`} className="flex items-center gap-2 shrink-0">
-              <span className="text-sm">{release.headline}</span>
-              <span className="text-wire-amber">—</span>
-              <span className="text-xs text-white/60">{release.company} · {release.province}</span>
-            </div>
-          ))}
+        <span className="hidden shrink-0 font-mono text-xs uppercase tracking-wider text-white/70 sm:inline">
+          Latest Releases:
+        </span>
+        <div className="min-w-0 flex-1 overflow-hidden">
+          <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
+            {items.map((release, idx) => (
+              <TickerItem key={`${release.id}-${idx}`} release={release} />
+            ))}
+          </div>
         </div>
       </div>
     </div>

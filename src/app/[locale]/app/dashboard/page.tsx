@@ -1,8 +1,17 @@
+import { FileText, BarChart3, Share2, MousePointerClick } from 'lucide-react';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth/auth';
 import { db } from '@/lib/db/prisma';
 import { redirect } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
+import { EmptyState } from '@/components/ui/empty-state';
+
+const STAT_ICONS = {
+  releases: FileText,
+  views: BarChart3,
+  shares: Share2,
+  outlets: MousePointerClick,
+};
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
@@ -35,60 +44,71 @@ export default async function DashboardPage() {
     },
   });
 
+  const stats = [
+    { label: 'My Releases', value: myReleases.length, icon: STAT_ICONS.releases },
+    { label: 'Views', value: totalViews, icon: STAT_ICONS.views },
+    { label: 'Shares', value: totalShares, icon: STAT_ICONS.shares },
+    { label: 'Outlet Clicks', value: totalOutlets, icon: STAT_ICONS.outlets },
+  ];
+
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       <h1 className="heading-lg mb-6">Dashboard</h1>
-      <div className="grid grid-cols-4 gap-6 mb-8">
-        <div className="card p-6">
-          <div className="text-sm text-wire-muted mb-1">My Releases</div>
-          <div className="font-display text-3xl font-bold">{myReleases.length}</div>
-        </div>
-        <div className="card p-6">
-          <div className="text-sm text-wire-muted mb-1">Views</div>
-          <div className="font-display text-3xl font-bold">{totalViews}</div>
-        </div>
-        <div className="card p-6">
-          <div className="text-sm text-wire-muted mb-1">Shares</div>
-          <div className="font-display text-3xl font-bold">{totalShares}</div>
-        </div>
-        <div className="card p-6">
-          <div className="text-sm text-wire-muted mb-1">Outlet Clicks</div>
-          <div className="font-display text-3xl font-bold">{totalOutlets}</div>
-        </div>
+
+      <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {stats.map(({ label, value, icon: Icon }) => (
+          <div key={label} className="card flex items-center gap-4 p-5">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-wire-rule bg-wire-paper">
+              <Icon className="h-5 w-5 text-wire-brass" />
+            </div>
+            <div>
+              <div className="text-sm text-wire-slate">{label}</div>
+              <div className="font-display text-2xl font-bold">{value}</div>
+            </div>
+          </div>
+        ))}
       </div>
+
       <h2 className="heading-md mb-4">Recent Releases</h2>
       {myReleases.length === 0 ? (
-        <p className="text-wire-muted">No releases yet. Submit your first!</p>
+        <EmptyState
+          icon={FileText}
+          title="No releases yet"
+          description="Submit your first press release to see it here and track its performance."
+          action={{ label: 'Submit a release', href: '/app/submit' }}
+        />
       ) : (
         <div className="card overflow-hidden">
-          <table className="w-full text-sm">
-            <thead className="bg-wire-bg">
-              <tr>
-                <th className="text-left px-4 py-2 font-medium text-wire-muted">Headline</th>
-                <th className="text-left px-4 py-2 font-medium text-wire-muted">Status</th>
-                <th className="text-left px-4 py-2 font-medium text-wire-muted">Published</th>
-                <th className="text-left px-4 py-2 font-medium text-wire-muted">Views</th>
-              </tr>
-            </thead>
-            <tbody>
-              {myReleases.map((release: any) => (
-                <tr key={release.id} className="border-t border-wire-border">
-                  <td className="px-4 py-3 font-medium">{release.headline}</td>
-                  <td className="px-4 py-3">
-                    <Badge variant="secondary" className="capitalize">
-                      {release.status.toLowerCase()}
-                    </Badge>
-                  </td>
-                  <td className="px-4 py-3 text-wire-muted">
-                    {release.publishedAt?.toLocaleDateString()}
-                  </td>
-                  <td className="px-4 py-3 text-wire-muted">
-                    {release.analytics?.length ?? 0}
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead className="bg-wire-paper">
+                <tr>
+                  <th className="px-4 py-3 text-left font-medium text-wire-slate">Headline</th>
+                  <th className="px-4 py-3 text-left font-medium text-wire-slate">Status</th>
+                  <th className="px-4 py-3 text-left font-medium text-wire-slate">Published</th>
+                  <th className="px-4 py-3 text-left font-medium text-wire-slate">Views</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {myReleases.map((release: any) => (
+                  <tr key={release.id} className="border-t border-wire-rule">
+                    <td className="px-4 py-3 font-medium">{release.headline}</td>
+                    <td className="px-4 py-3">
+                      <Badge variant="secondary" className="capitalize">
+                        {release.status.toLowerCase()}
+                      </Badge>
+                    </td>
+                    <td className="px-4 py-3 text-wire-slate">
+                      {release.publishedAt?.toLocaleDateString()}
+                    </td>
+                    <td className="px-4 py-3 text-wire-slate">
+                      {release.analytics?.length ?? 0}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </div>

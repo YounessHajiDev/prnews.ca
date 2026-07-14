@@ -1,46 +1,31 @@
+import Link from 'next/link';
 import { WireTicker } from '@/components/wire-ticker/wire-ticker';
 import { CanadaMap } from '@/components/canada-map/canada-map';
-import { Button } from '@/components/ui/button';
-import { Shield, Zap, Languages } from 'lucide-react';
+import { CountUp } from '@/components/ui/count-up';
+import { buttonVariants } from '@/components/ui/button';
 
 const FEATURES = [
   {
-    icon: Shield,
+    index: '01',
     title: 'Full Distribution Transparency',
     desc: 'Track every delivery in real-time. Know exactly which outlets picked up your story.',
   },
   {
-    icon: Zap,
+    index: '02',
     title: 'Fast Turnaround',
     desc: 'Editorial review in under 2 hours. Publish on your schedule.',
   },
   {
-    icon: Languages,
+    index: '03',
     title: 'Genuinely Bilingual',
     desc: 'Publish in both English and French. Reach every Canadian audience.',
   },
 ];
 
 const STATS = [
-  { label: 'Releases Sent Today', value: '147' },
-  { label: 'Media Outlets Reached', value: '2,840' },
-  { label: 'Active Newsrooms', value: '520' },
-];
-
-const CANADA_PROVINCES = [
-  { name: 'British Columbia', count: 42 },
-  { name: 'Alberta', count: 31 },
-  { name: 'Saskatchewan', count: 8 },
-  { name: 'Manitoba', count: 12 },
-  { name: 'Ontario', count: 87 },
-  { name: 'Quebec', count: 65 },
-  { name: 'New Brunswick', count: 9 },
-  { name: 'Nova Scotia', count: 11 },
-  { name: 'Prince Edward Island', count: 2 },
-  { name: 'Newfoundland and Labrador', count: 5 },
-  { name: 'Yukon', count: 1 },
-  { name: 'Northwest Territories', count: 1 },
-  { name: 'Nunavut', count: 0 },
+  { label: 'Releases Sent Today', value: 147 },
+  { label: 'Media Outlets Reached', value: 2840 },
+  { label: 'Active Newsrooms', value: 520 },
 ];
 
 export default function HomePage() {
@@ -49,54 +34,71 @@ export default function HomePage() {
       <WireTicker />
       <main>
         {/* Hero */}
-        <section className="bg-wire-charcoal text-white py-20 md:py-32">
+        <section className="bg-wire-ink py-20 text-white md:py-32 lg:py-40">
           <div className="container-page">
-            <div className="max-w-3xl">
-              <h1 className="heading-xl text-white mb-6">
+            <div className="max-w-3xl animate-fade-in-up">
+              <h1 className="heading-xl mb-6 text-white">
                 Press Releases, Distributed Nationwide
               </h1>
-              <p className="body-large text-white/80 mb-8">
+              <p className="body-large mb-8 max-w-2xl text-white/80">
                 Publish once. Reach every outlet, province, and audience. Real-time delivery confirmation included.
               </p>
-              <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="text-base">Get Started</Button>
-                <Button variant="outline" size="lg" className="text-base">
-                  See Pricing
-                </Button>
+              <div className="flex flex-col gap-4 sm:flex-row">
+                <Link
+                  href="/signup"
+                  className={buttonVariants({ size: 'lg', className: 'w-full sm:w-auto' })}
+                >
+                  Get Started
+                </Link>
+                <Link
+                  href="/news"
+                  className={buttonVariants({ variant: 'outline', size: 'lg', className: 'w-full sm:w-auto' })}
+                >
+                  See live releases
+                </Link>
               </div>
             </div>
           </div>
         </section>
 
         {/* Stats + Canada Map */}
-        <section className="section bg-wire-bg">
+        <section className="section bg-wire-paper">
           <div className="container-page">
-            <div className="grid md:grid-cols-4 gap-8 mb-12">
+            <div className="mb-12 grid gap-8 sm:grid-cols-3">
               {STATS.map((stat) => (
                 <div key={stat.label} className="text-center">
-                  <div className="font-display text-3xl md:text-4xl font-bold text-wire-amber mb-1">
-                    {stat.value}
+                  <div className="mb-1 font-display text-3xl font-bold text-wire-brass md:text-4xl">
+                    <CountUp end={stat.value} />
                   </div>
-                  <div className="text-sm text-wire-muted">{stat.label}</div>
+                  <div className="text-sm uppercase tracking-wider text-wire-slate">
+                    {stat.label}
+                  </div>
                 </div>
               ))}
             </div>
-            <CanadaMap provinces={CANADA_PROVINCES} />
+            <CanadaMap />
+            <p className="mx-auto mt-6 max-w-xl text-center text-sm text-wire-slate">
+              Live distribution nodes pulse as releases reach newsrooms across the country.
+            </p>
           </div>
         </section>
 
         {/* Features */}
         <section className="section bg-wire-surface">
           <div className="container-page">
-            <h2 className="heading-lg text-center mb-12">Why PR NEWS?</h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              {FEATURES.map((feature) => (
-                <div key={feature.title} className="text-center">
-                  <div className="mx-auto w-12 h-12 rounded-lg bg-wire-amber/10 flex items-center justify-center mb-4">
-                    <feature.icon className="w-6 h-6 text-wire-amber" />
+            <h2 className="heading-lg mb-12 text-center">Why PR NEWS?</h2>
+            <div className="grid gap-8 md:grid-cols-3">
+              {FEATURES.map((feature, i) => (
+                <div
+                  key={feature.title}
+                  className="text-center"
+                  style={{ animationDelay: `${i * 100}ms` }}
+                >
+                  <div className="mb-4 font-mono text-4xl font-bold text-wire-brass">
+                    {feature.index}
                   </div>
                   <h3 className="heading-md mb-3">{feature.title}</h3>
-                  <p className="body-base text-wire-muted">{feature.desc}</p>
+                  <p className="body-base text-wire-slate">{feature.desc}</p>
                 </div>
               ))}
             </div>
