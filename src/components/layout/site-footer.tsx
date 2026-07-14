@@ -104,9 +104,6 @@ export function SiteFooter() {
             action="/api/newsletter"
             method="post"
             className="flex flex-col gap-2 sm:flex-row"
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
           >
             <label htmlFor="footer-email" className="sr-only">
               {t('footer.subscribeNewsletter')}

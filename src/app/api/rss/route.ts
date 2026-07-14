@@ -1,5 +1,8 @@
 import { db } from '@/lib/db/prisma';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 60;
+
 export const GET = async () => {
   const releases = await db.pressRelease.findMany({
     where: { status: 'PUBLISHED' },

@@ -1,22 +1,27 @@
 'use client';
 
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
-export default function ErrorBoundary({
+export default function Error({
   error,
+  reset,
 }: {
-  error: Error;
+  error: Error & { digest?: string };
+  reset: () => void;
 }) {
-  const t = useTranslations('common');
+  const t = useTranslations('error');
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-wire-bg">
-      <div className="text-center">
-        <h1 className="heading-lg mb-4">{t('somethingWentWrong')}</h1>
-        <p className="text-wire-muted mb-6">{t('refresh')}</p>
-        <Link href="/" className="btn-primary">{t('goHome')}</Link>
-      </div>
-    </div>
+    <main className="flex min-h-[70vh] flex-col items-center justify-center px-6 text-center">
+      <h1 className="font-display text-5xl font-bold text-wire-error">{t('title')}</h1>
+      <p className="mt-4 text-lg font-semibold text-wire-charcoal">{t('headline')}</p>
+      <p className="mt-2 text-wire-muted">{t('description')}</p>
+      <button
+        onClick={reset}
+        className="mt-8 inline-flex items-center justify-center rounded-md bg-wire-charcoal px-6 py-3 text-sm font-medium text-white hover:bg-wire-ink"
+      >
+        {t('retry')}
+      </button>
+    </main>
   );
 }

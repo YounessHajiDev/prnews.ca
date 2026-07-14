@@ -1,16 +1,20 @@
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 
-export default async function LocaleNotFound() {
-  const t = await getTranslations('common');
+export default async function NotFound() {
+  const t = await getTranslations('notFound');
 
   return (
-    <section className="section bg-wire-bg">
-      <div className="container-narrow text-center">
-        <h1 className="heading-lg mb-4">{t('pageNotFound')}</h1>
-        <p className="text-wire-muted mb-6">{t('pageNotFoundDescription')}</p>
-        <Link href="/" className="btn-primary">{t('goHome')}</Link>
-      </div>
-    </section>
+    <main className="flex min-h-[70vh] flex-col items-center justify-center px-6 text-center">
+      <h1 className="font-display text-6xl font-bold text-wire-brass">404</h1>
+      <p className="mt-4 text-xl font-semibold text-wire-charcoal">{t('title')}</p>
+      <p className="mt-2 text-wire-muted">{t('description')}</p>
+      <Link
+        href="/"
+        className="mt-8 inline-flex items-center justify-center rounded-md bg-wire-charcoal px-6 py-3 text-sm font-medium text-white hover:bg-wire-ink"
+      >
+        {t('backHome')}
+      </Link>
+    </main>
   );
 }

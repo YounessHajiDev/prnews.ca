@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Image from 'next/image';
 import { db } from '@/lib/db/prisma';
 import { notFound } from 'next/navigation';
 import { Breadcrumb } from '@/components/layout/breadcrumb';
@@ -55,10 +56,13 @@ export default async function NewsroomPage({
 
         <header className="mb-8">
           {company.logoUrl && (
-            <img
+            <Image
               src={company.logoUrl}
               alt={`${company.name} logo`}
-              className="w-16 h-16 rounded-lg mb-4"
+              width={64}
+              height={64}
+              className="w-16 h-16 rounded-lg mb-4 object-contain"
+              unoptimized
             />
           )}
           <h1 className="heading-lg mb-2">{company.name}</h1>

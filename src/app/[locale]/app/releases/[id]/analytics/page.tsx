@@ -36,6 +36,10 @@ export default async function ReleaseAnalyticsPage({
     notFound();
   }
 
+  if (release.authorId !== session.user.id && !['ADMIN', 'EDITOR'].includes(session.user.role as string)) {
+    notFound();
+  }
+
   const totalViews = release.analytics.filter((e: any) => e.eventType === 'view').length;
   const totalShares = release.analytics.filter((e: any) => e.eventType === 'share').length;
   const totalOutlets = release.analytics.filter((e: any) => e.eventType === 'outlet_click').length;

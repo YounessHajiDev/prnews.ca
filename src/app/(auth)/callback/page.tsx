@@ -3,6 +3,8 @@ import { authOptions } from '@/lib/auth/auth';
 import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 
+export const dynamic = 'force-dynamic';
+
 export default async function CallbackPage() {
   const session = await getServerSession(authOptions);
   if (session) redirect('/app');

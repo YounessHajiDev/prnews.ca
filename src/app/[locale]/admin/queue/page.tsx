@@ -1,16 +1,24 @@
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth/auth';
 import { db } from '@/lib/db/prisma';
-import { redirect } from 'next/navigation';
-import { Button } from '@/components/ui/button';
+import { notFound } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle, XCircle, Clock } from 'lucide-react';
+import { Clock } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
+import { QueueActions } from '@/components/admin/queue-actions';
 
-export default async function AdminQueuePage() {
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+export default async function AdminQueuePage({
+  params,
+}: {
+  params: { locale: string };
+}) {
   const session = await getServerSession(authOptions);
-  if (!session) redirect('/login');
-  if (session.user?.role !== 'ADMIN' && session.user?.role !== 'EDITOR') redirect('/app');
+  if (!session || (session.user?.role !== 'ADMIN' && session.user?.role !== 'EDITOR')) {
+    notFound();
+  }
 
   const t = await getTranslations('admin.queue');
 
@@ -48,17 +56,12 @@ export default async function AdminQueuePage() {
                 </div>
               </div>
               <p className="text-sm text-wire-muted mb-4 line-clamp-2">{release.summary}</p>
-              <div className="flex items-center gap-3">
-                <Button variant="default" size="sm" className="gap-1">
-                  <CheckCircle className="w-4 h-4" /> {t('approve')}
-                </Button>
-                <Button variant="outline" size="sm" className="gap-1">
-                  <XCircle className="w-4 h-4" /> {t('reject')}
-                </Button>
-                <Button variant="ghost" size="sm">
-                  {t('requestChanges')}
-                </Button>
-              </div>
+              <QueueActions
+                releaseId={release.id}
+                approveLabel={t('approve')}
+                rejectLabel={t('reject')}
+                requestLabel={t('requestChanges')}
+              />
             </div>
           ))}
         </div>

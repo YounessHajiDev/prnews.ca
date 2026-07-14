@@ -1,15 +1,25 @@
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth/auth';
 import { redirect } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { getTranslations } from 'next-intl/server';
+import { LoginForm } from '@/components/auth/login-form';
+
+export const dynamic = 'force-dynamic';
 
 export default async function LoginPage() {
   const session = await getServerSession(authOptions);
   if (session) redirect('/app');
 
   const t = await getTranslations('auth.login');
+  const tc = await getTranslations('common');
+
+  const strings = {
+    email: t('email'),
+    password: t('password'),
+    logInButton: t('logInButton'),
+    invalidCredentials: 'Invalid email or password.',
+    loggingIn: tc('loading'),
+  };
 
   return (
     <section className="section bg-wire-bg">
@@ -18,30 +28,19 @@ export default async function LoginPage() {
           <h1 className="heading-md mb-2">{t('title')}</h1>
           <p className="text-wire-muted mb-6">{t('subtitle')}</p>
 
-          <form className="space-y-4">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-1">{t('email')}</label>
-              <Input id="email" type="email" name="email" placeholder="you@example.com" required />
-            </div>
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium mb-1">{t('password')}</label>
-              <Input id="password" type="password" name="password" required />
-            </div>
-            <Button type="submit" className="w-full">{t('logInButton')}</Button>
-          </form>
+          <LoginForm t={strings} />
 
-          <div className="mt-6">
-            <form action="/api/auth/signin/google" method="POST">
-              <Button variant="outline" className="w-full">
-                {t('continueWithGoogle')}
-              </Button>
-            </form>
+          <div className="mt-6 flex items-center justify-between text-sm">
+            <a href="/forgot-password" className="text-wire-amber hover:underline">
+              {t('forgotPassword')}
+            </a>
+            <span className="text-wire-muted">
+              {t('noAccount')}{' '}
+              <a href="/signup" className="text-wire-amber hover:underline">
+                {t('signUp')}
+              </a>
+            </span>
           </div>
-
-          <p className="text-sm text-wire-muted mt-4 text-center">
-            {t('noAccount')}{' '}
-            <a href="/signup" className="text-wire-amber hover:underline">{t('signUp')}</a>
-          </p>
         </div>
       </div>
     </section>

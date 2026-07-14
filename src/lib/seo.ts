@@ -1,22 +1,22 @@
 export function generateReleaseMetadata(
   release: {
     headline: string;
-    headlineFr?: string;
+    headlineFr?: string | null;
     summary: string;
-    publishedAt?: Date;
+    publishedAt?: Date | null;
     slug: string;
     categorySlug: string;
-    company?: { name: string; slug: string; logoUrl?: string } | null;
+    company?: { name: string; slug: string; logoUrl?: string | null } | null;
   },
   locale: string
 ) {
   const url = `https://prnews.ca/${locale}/news/${release.categorySlug}/${release.slug}`;
   const datePublished = release.publishedAt ?? new Date();
   const companyName = release.company?.name ?? 'PR NEWS';
-  const companySlug = release.company?.slug ?? 'prnews';
+  const displayHeadline = locale === 'fr' && release.headlineFr ? release.headlineFr : release.headline;
 
   return {
-    title: release.headline,
+    title: displayHeadline,
     description: release.summary,
     alternates: {
       canonical: url,
@@ -27,7 +27,7 @@ export function generateReleaseMetadata(
     },
     openGraph: {
       type: 'article',
-      title: release.headline,
+      title: displayHeadline,
       description: release.summary,
       publishedTime: datePublished.toISOString(),
       url,
@@ -37,7 +37,7 @@ export function generateReleaseMetadata(
     },
     twitter: {
       card: 'summary_large_image',
-      title: release.headline,
+      title: displayHeadline,
       description: release.summary,
     },
     other: {
@@ -50,13 +50,13 @@ export function generateReleaseMetadata(
 
 export function getStructuredData(release: {
   headline: string;
-  headlineFr?: string;
+  headlineFr?: string | null;
   summary: string;
   body: string;
-  publishedAt?: Date;
+  publishedAt?: Date | null;
   slug: string;
   categorySlug: string;
-  company?: { name: string; slug: string; logoUrl?: string; boilerplate?: string } | null;
+  company?: { name: string; slug: string; logoUrl?: string | null; boilerplate?: string | null } | null;
 }, locale: string): string {
   const companyName = release.company?.name ?? 'PR NEWS';
   const companySlug = release.company?.slug ?? 'prnews';

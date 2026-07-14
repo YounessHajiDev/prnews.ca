@@ -32,15 +32,18 @@ enum SubscriptionTier {
 }
 
 model User {
-  id            String   @id @default(cuid())
-  email         String   @unique
-  name          String?
-  passwordHash  String?
-  emailVerified DateTime?
-  image         String?
-  role          UserRole @default(CLIENT)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id                  String   @id @default(cuid())
+  email               String   @unique
+  name                String?
+  passwordHash        String?
+  emailVerified       DateTime?
+  unsubscribedAt      DateTime?
+  passwordResetToken  String?
+  passwordResetExpires DateTime?
+  image               String?
+  role                UserRole @default(CLIENT)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
 
   companyId     String?  @unique
   company       Company? @relation(fields: [companyId], references: [id])
@@ -50,6 +53,26 @@ model User {
   subscriptions Subscription[]
 
   @@map("users")
+}
+
+model Subscriber {
+  id             String   @id @default(cuid())
+  email          String   @unique
+  token          String   @unique @default(cuid())
+  unsubscribedAt DateTime?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("subscribers")
+}
+
+model ProcessedStripeEvent {
+  id        String   @id @default(cuid())
+  eventId   String   @unique
+  type      String
+  createdAt DateTime @default(now())
+
+  @@map("processed_stripe_events")
 }
 
 model Company {

@@ -1,13 +1,12 @@
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth/auth';
 import { db } from '@/lib/db/prisma';
-import { redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 
 export default async function AdminDistributionPage() {
   const session = await getServerSession(authOptions);
-  if (!session) redirect('/login');
-  if (session.user?.role !== 'ADMIN') redirect('/app');
+  if (!session || session.user?.role !== 'ADMIN') notFound();
 
   const t = await getTranslations('admin.distributionPartners');
 

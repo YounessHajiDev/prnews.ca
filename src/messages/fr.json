@@ -717,11 +717,16 @@
       "title": "Médias",
       "images": "Images",
       "dragDropImages": "Glissez-déposez des images ici ou cliquez pour parcourir",
-      "imageFormats": "JPG, PNG, WebP pris en charge",
+      "imageFormats": "JPG, PNG, WebP, GIF, SVG. Max 10 Mo chacune.",
       "videoUrl": "URLs de vidéo",
       "videoPlaceholder": "URL YouTube ou Vimeo",
       "pdf": "PDF / Dossier de presse",
-      "pdfPlaceholder": "Téléverser le dossier de presse PDF"
+      "pdfPlaceholder": "Téléverser le dossier de presse PDF",
+      "uploading": "Téléversement en cours...",
+      "uploadError": "Le téléversement a échoué. Veuillez essayer un fichier plus petit ou un autre format.",
+      "addVideo": "Ajouter une vidéo",
+      "remove": "Retirer",
+      "changePdf": "Changer le PDF"
     },
     "distribution": {
       "title": "Diffusion",
@@ -781,6 +786,17 @@
     "legal": "Juridique",
     "subscribeNewsletter": "Abonnez-vous à notre infolettre",
     "copyright": "Tous droits réservés."
+  },
+  "notFound": {
+    "title": "Page non trouvée",
+    "description": "Désolé, nous n'avons pas trouvé la page recherchée.",
+    "backHome": "Retour à l'accueil"
+  },
+  "error": {
+    "title": "Erreur",
+    "headline": "Quelque chose s'est mal passé",
+    "description": "Nous avons rencontré une erreur inattendue. Veuillez réessayer ou contacter le support si le problème persiste.",
+    "retry": "Réessayer"
   },
   "categories": {
     "business": "Affaires",

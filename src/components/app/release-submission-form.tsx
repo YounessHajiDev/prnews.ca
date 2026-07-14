@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useTransition, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,6 +15,8 @@ import {
   Send,
   Mail,
   Eye,
+  Loader2,
+  X,
 } from 'lucide-react';
 
 interface SubmissionWizardProps {
@@ -29,7 +32,7 @@ interface SubmissionWizardProps {
     keywords?: string[];
     embargoAt?: string;
   };
-  onSubmit: (data: any) => void;
+  onSubmit: (data: any) => Promise<{ success?: boolean; error?: string; releaseId?: string }>;
 }
 
 type Step = 'basics' | 'body' | 'media' | 'distribution' | 'contact' | 'review';
@@ -71,13 +74,78 @@ export function SubmissionWizard({ initialData, onSubmit }: SubmissionWizardProp
     mediaContactName: '',
     mediaContactEmail: '',
     mediaContactPhone: '',
-    images: [] as File[],
-    videos: [] as string[],
-    pdf: null as File | null,
+    imageUrls: [] as string[],
+    videoUrls: [] as string[],
+    pdfUrl: null as string | null,
   });
+
+  const [isPending, startTransition] = useTransition();
+  const [submitError, setSubmitError] = useState('');
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState('');
+  const router = useRouter();
+  const imageInputRef = useRef<HTMLInputElement>(null);
+  const pdfInputRef = useRef<HTMLInputElement>(null);
 
   const updateField = useCallback((field: string, value: any) => {
     setData((prev) => ({ ...prev, [field]: value }));
+  }, []);
+
+  const uploadFiles = useCallback(async (files: FileList | null, type: 'image' | 'pdf') => {
+    if (!files || files.length === 0) return;
+    setUploading(true);
+    setUploadError('');
+    try {
+      const newUrls: string[] = [];
+      for (const file of Array.from(files)) {
+        const formData = new FormData();
+        formData.append('file', file);
+        const res = await fetch('/api/upload', { method: 'POST', body: formData });
+        const json = await res.json();
+        if (!res.ok) {
+          throw new Error(json.error || 'Upload failed');
+        }
+        newUrls.push(json.url);
+      }
+      if (type === 'image') {
+        setData((prev) => ({ ...prev, imageUrls: [...prev.imageUrls, ...newUrls] }));
+      } else if (type === 'pdf') {
+        setData((prev) => ({ ...prev, pdfUrl: newUrls[0] || null }));
+      }
+    } catch (err: any) {
+      setUploadError(t('media.uploadError'));
+    } finally {
+      setUploading(false);
+    }
+  }, [t]);
+
+  const removeImage = useCallback((url: string) => {
+    setData((prev) => ({ ...prev, imageUrls: prev.imageUrls.filter((u) => u !== url) }));
+  }, []);
+
+  const addVideo = useCallback(() => {
+    setData((prev) => ({ ...prev, videoUrls: [...prev.videoUrls, ''] }));
+  }, []);
+
+  const updateVideo = useCallback((index: number, value: string) => {
+    setData((prev) => {
+      const urls = [...prev.videoUrls];
+      urls[index] = value;
+      return { ...prev, videoUrls: urls };
+    });
+  }, []);
+
+  const removeVideo = useCallback((index: number) => {
+    setData((prev) => {
+      const urls = [...prev.videoUrls];
+      urls.splice(index, 1);
+      return { ...prev, videoUrls: urls };
+    });
+  }, []);
+
+  const removePdf = useCallback(() => {
+    setData((prev) => ({ ...prev, pdfUrl: null }));
   }, []);
 
   const currentStepIndex = steps.findIndex((s) => s.key === step);
@@ -228,25 +296,121 @@ export function SubmissionWizard({ initialData, onSubmit }: SubmissionWizardProp
         {step === 'media' && (
           <div className="space-y-6">
             <h2 className="heading-md">{t('media.title')}</h2>
+
             <div>
               <label className="block text-sm font-medium mb-1">{t('media.images')}</label>
-              <div className="border-2 border-dashed border-wire-border rounded-lg p-8 text-center">
-                <p className="text-wire-muted">{t('media.dragDropImages')}</p>
-                <p className="text-xs text-wire-muted mt-2">{t('media.imageFormats')}</p>
-              </div>
+              <input
+                ref={imageInputRef}
+                type="file"
+                accept="image/*"
+                multiple
+                className="hidden"
+                onChange={(e) => uploadFiles(e.target.files, 'image')}
+              />
+              <button
+                type="button"
+                onClick={() => imageInputRef.current?.click()}
+                disabled={uploading}
+                className="w-full border-2 border-dashed border-wire-border rounded-lg p-6 text-center hover:bg-wire-bg transition-colors disabled:opacity-50"
+              >
+                {uploading ? (
+                  <span className="inline-flex items-center gap-2 text-wire-muted">
+                    <Loader2 className="w-4 h-4 animate-spin" /> {t('media.uploading')}
+                  </span>
+                ) : (
+                  <>
+                    <p className="text-wire-muted">{t('media.dragDropImages')}</p>
+                    <p className="text-xs text-wire-muted mt-2">{t('media.imageFormats')}</p>
+                  </>
+                )}
+              </button>
+              {data.imageUrls.length > 0 && (
+                <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  {data.imageUrls.map((url) => (
+                    <div key={url} className="relative group aspect-square rounded-lg border border-wire-border overflow-hidden bg-wire-bg">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={url} alt="" className="w-full h-full object-cover" />
+                      <button
+                        type="button"
+                        onClick={() => removeImage(url)}
+                        className="absolute top-1 right-1 p-1 bg-wire-ink text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                        aria-label={t('media.remove')}
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
+
             <div>
               <label className="block text-sm font-medium mb-1">{t('media.videoUrl')}</label>
-              <Input
-                placeholder={t('media.videoPlaceholder')}
-              />
+              {data.videoUrls.map((url, i) => (
+                <div key={i} className="flex items-center gap-2 mb-2">
+                  <Input
+                    value={url}
+                    onChange={(e) => updateVideo(i, e.target.value)}
+                    placeholder={t('media.videoPlaceholder')}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeVideo(i)}
+                    className="p-2 text-wire-muted hover:text-wire-error"
+                    aria-label={t('media.remove')}
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              ))}
+              <Button type="button" variant="outline" size="sm" onClick={addVideo}>
+                {t('media.addVideo')}
+              </Button>
             </div>
+
             <div>
               <label className="block text-sm font-medium mb-1">{t('media.pdf')}</label>
-              <div className="border-2 border-dashed border-wire-border rounded-lg p-8 text-center">
-                <p className="text-wire-muted">{t('media.pdfPlaceholder')}</p>
-              </div>
+              <input
+                ref={pdfInputRef}
+                type="file"
+                accept="application/pdf"
+                className="hidden"
+                onChange={(e) => uploadFiles(e.target.files, 'pdf')}
+              />
+              {data.pdfUrl ? (
+                <div className="flex items-center justify-between p-3 rounded-lg border border-wire-border bg-wire-bg">
+                  <a href={data.pdfUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-wire-amber hover:underline truncate">
+                    {data.pdfUrl.split('/').pop()}
+                  </a>
+                  <button
+                    type="button"
+                    onClick={removePdf}
+                    className="text-sm text-wire-muted hover:text-wire-ink"
+                  >
+                    {t('media.changePdf')}
+                  </button>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => pdfInputRef.current?.click()}
+                  disabled={uploading}
+                  className="w-full border-2 border-dashed border-wire-border rounded-lg p-6 text-center hover:bg-wire-bg transition-colors disabled:opacity-50"
+                >
+                  {uploading ? (
+                    <span className="inline-flex items-center gap-2 text-wire-muted">
+                      <Loader2 className="w-4 h-4 animate-spin" /> {t('media.uploading')}
+                    </span>
+                  ) : (
+                    <p className="text-wire-muted">{t('media.pdfPlaceholder')}</p>
+                  )}
+                </button>
+              )}
             </div>
+
+            {uploadError && (
+              <p className="text-sm text-red-600" role="alert">{uploadError}</p>
+            )}
           </div>
         )}
 
@@ -322,6 +486,9 @@ export function SubmissionWizard({ initialData, onSubmit }: SubmissionWizardProp
                 <p><strong>{t('review.language')}:</strong> {languageOptions.find((l) => l.value === data.language)?.label || data.language}</p>
                 <p><strong>{t('review.wordCount')}:</strong> {data.body?.split(/\s+/).length || 0} {t('review.words')}</p>
                 <p><strong>{t('review.contact')}:</strong> {data.mediaContactName || t('review.notSet')}</p>
+                {data.imageUrls.length > 0 && <p><strong>{t('media.images')}:</strong> {data.imageUrls.length}</p>}
+                {data.videoUrls.length > 0 && <p><strong>{t('media.videoUrl')}:</strong> {data.videoUrls.length}</p>}
+                {data.pdfUrl && <p><strong>{t('media.pdf')}:</strong> {data.pdfUrl.split('/').pop()}</p>}
               </div>
             </div>
             <div className="flex items-center gap-3 p-4 rounded-lg bg-wire-amber/10 border border-wire-amber/30">
@@ -335,18 +502,43 @@ export function SubmissionWizard({ initialData, onSubmit }: SubmissionWizardProp
           <Button
             variant="outline"
             onClick={prevStep}
-            disabled={!canGoBack}
+            disabled={!canGoBack || isPending}
           >
             <ChevronLeft className="w-4 h-4 mr-1" /> {t('navigation.back')}
           </Button>
           {isLastStep ? (
-            <Button onClick={() => onSubmit(data)}>{t('navigation.submit')}</Button>
+            <Button
+              onClick={() => {
+                setSubmitError('');
+                setSubmitSuccess(false);
+                startTransition(async () => {
+                  const result = await onSubmit(data);
+                  if (result?.error) {
+                    setSubmitError(result.error);
+                  } else if (result?.success) {
+                    setSubmitSuccess(true);
+                    setTimeout(() => router.push('/app/releases'), 1500);
+                  }
+                });
+              }}
+              disabled={isPending}
+            >
+              {isPending ? 'Submitting...' : t('navigation.submit')}
+            </Button>
           ) : (
-            <Button onClick={nextStep}>
+            <Button onClick={nextStep} disabled={isPending}>
               {t('navigation.continue')} <ChevronRight className="w-4 h-4 ml-1" />
             </Button>
           )}
         </div>
+        {submitError && (
+          <p className="mt-4 text-sm text-red-600" role="alert">{submitError}</p>
+        )}
+        {submitSuccess && (
+          <p className="mt-4 text-sm text-green-600" role="status">
+            Submitted for review. Redirecting...
+          </p>
+        )}
       </div>
     </div>
   );

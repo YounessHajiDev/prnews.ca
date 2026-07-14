@@ -85,7 +85,6 @@ export default async function BillingPage() {
             </ul>
             <form action="/api/stripe/checkout" method="POST">
               <input type="hidden" name="priceId" value={plan.priceId} />
-              <input type="hidden" name="userId" value={session.user.id} />
               <Button type="submit" className="w-full" variant={plan.featured ? 'default' : 'outline'}>
                 {tc('subscribe')}
               </Button>

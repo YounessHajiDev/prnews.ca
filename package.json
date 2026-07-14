@@ -31,6 +31,9 @@
     "@tiptap/pm": "^2.11.7",
     "@tiptap/react": "^2.11.7",
     "@tiptap/starter-kit": "^2.11.7",
+    "@types/sanitize-html": "^2.16.1",
+    "@upstash/ratelimit": "^2.0.8",
+    "@upstash/redis": "^1.38.0",
     "@vercel/blob": "^0.27.3",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.1",
@@ -42,8 +45,16 @@
     "react": "^18",
     "react-dom": "^18",
     "resend": "^4.2.0",
+    "sanitize-html": "^2.17.5",
     "stripe": "^17.7.0",
-    "tailwind-merge": "^3.0.2"
+    "tailwind-merge": "^3.0.2",
+    "zod": "^4.4.3"
+  },
+  "overrides": {
+    "glob": "^10.5.0",
+    "postcss": "^8.5.10",
+    "undici": "^6.27.0",
+    "uuid": "^11.1.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",
@@ -53,7 +64,7 @@
     "@types/react-dom": "^18",
     "eslint": "^8.57.1",
     "eslint-config-next": "^14.2.35",
-    "postcss": "^8",
+    "postcss": "^8.5.10",
     "prisma": "^6.0.0",
     "tailwindcss": "^4.0.0",
     "tsx": "^4.19.0",
