@@ -22,12 +22,17 @@ export default async function TermsPage() {
         <div className="prose-release">
           <p>{t('lastUpdated')}</p>
           <p>{t('intro')}</p>
-          {sections.map((section, i) => (
-            <div key={i}>
-              <h2>{section.title}</h2>
-              <p>{section.content}</p>
-            </div>
-          ))}
+          {sections.map((section, i) => {
+            const paragraphs = section.content.split('\n\n').filter(Boolean);
+            return (
+              <div key={i}>
+                <h2>{section.title}</h2>
+                {paragraphs.map((paragraph, j) => (
+                  <p key={j}>{paragraph}</p>
+                ))}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

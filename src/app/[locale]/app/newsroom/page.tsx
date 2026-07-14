@@ -18,7 +18,7 @@ export default async function NewsroomPage() {
     <div className="p-8">
       <h1 className="heading-lg mb-6">{t('title')}</h1>
       {company ? (
-        <a href={`/newsroom/${company.slug}`} className="text-wire-amber hover:underline">
+        <a href={`/newsroom/${company.slug}`} className="text-wire-brass-dark hover:underline">
           {company.name}
         </a>
       ) : (

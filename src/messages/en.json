@@ -130,8 +130,8 @@
         "desc": "Editorial review in under 2 hours. Publish on your schedule."
       },
       "bilingual": {
-        "title": "Genuinely Bilingual",
-        "desc": "Publish in both English and French. Reach every Canadian audience."
+        "title": "Bilingual Publishing",
+        "desc": "Publish in English, French, or both. Reach every Canadian audience your story deserves."
       },
       "reach": {
         "title": "National + Local Reach",
@@ -198,7 +198,7 @@
         "description": "For teams that publish regularly",
         "price": "CAD $199",
         "priceSuffix": "/month",
-        "features": ["4 press releases per month", "English and French", "Priority review (under 1 hour)", "Branded newsroom", "Advanced analytics"],
+        "features": ["4 press releases per month", "Bilingual publishing available", "Priority review (under 1 hour)", "Branded newsroom", "Advanced analytics"],
         "cta": "Subscribe",
         "href": "/api/subscribe?plan=growth",
         "featured": true
@@ -222,7 +222,7 @@
       { "feature": "Transparent, public pricing", "prnews": "yes", "others": "no" },
       { "feature": "Self-serve checkout", "prnews": "yes", "others": "no" },
       { "feature": "Live distribution tracking", "prnews": "yes", "others": "partial" },
-      { "feature": "Bilingual English / French publishing", "prnews": "yes", "others": "no" },
+      { "feature": "Bilingual English / French publishing available", "prnews": "yes", "others": "no" },
       { "feature": "Branded newsroom", "prnews": "yes", "others": "partial" },
       { "feature": "No sales call required", "prnews": "yes", "others": "no" },
       { "feature": "Real-time analytics dashboard", "prnews": "yes", "others": "partial" },
@@ -348,76 +348,133 @@
   },
   "privacy": {
     "title": "Privacy Policy",
-    "lastUpdated": "Last updated: July 10, 2026",
-    "intro": "PR NEWS is committed to protecting your personal information in compliance with Quebec Law 25 and PIPEDA.",
+    "lastUpdated": "Last updated: July 14, 2026",
+    "intro": "This Privacy Policy describes how PR NEWS ('we', 'us', 'our') collects, uses, stores, and protects personal information through our platform at prnews.ca and related services.",
     "sections": [
       {
-        "title": "1. Information We Collect",
-        "content": "We collect information you provide directly, such as your name, email, and company details when you create an account."
+        "title": "1. Overview",
+        "content": "We act as the controller of personal information processed through the PR NEWS platform. We are committed to compliance with Canada's Personal Information Protection and Electronic Documents Act (PIPEDA) and, where applicable, Quebec's Law 25."
       },
       {
-        "title": "2. How We Use Your Information",
-        "content": "We use your information to provide, maintain, and improve our services, and to communicate with you about our products."
+        "title": "2. Information We Collect",
+        "content": "We collect information you provide directly, such as your name, email address, company name, billing details, and press release content. We also collect technical information including IP address, browser type, and device information through standard server logs."
       },
       {
-        "title": "3. Data Sharing",
-        "content": "We do not sell your personal information. We may share information with service providers who assist us in operating our platform."
+        "title": "3. How We Use Your Information",
+        "content": "We use your information to create and manage your account, process payments, distribute press releases, provide customer support, enforce our Terms of Service, and comply with legal obligations. We may also send transactional emails and service announcements."
       },
       {
-        "title": "4. Your Rights",
-        "content": "Under Quebec Law 25 and PIPEDA, you have the right to access, correct, and delete your personal information."
+        "title": "4. Legal Basis and Consent",
+        "content": "By creating an account or subscribing, you consent to the processing described in this policy. You may withdraw consent for marketing communications at any time by using the unsubscribe link in our emails."
       },
       {
-        "title": "5. Cookies",
-        "content": "We use cookies to enhance your experience. You can manage your cookie preferences at any time."
+        "title": "5. Third-Party Processors",
+        "content": "We rely on the following service providers to operate the platform: Stripe for payment processing; Resend for email delivery; Vercel for application hosting and Blob storage; and the PostgreSQL database host configured in your deployment (for example Supabase, AWS RDS, Neon, or Vercel Postgres). We only share personal information necessary for these providers to perform their services.\n\nEach processor is bound by a contract that requires appropriate security and confidentiality measures. You should also review the privacy policies of these providers for details on how they handle data."
       },
       {
-        "title": "6. Contact",
-        "content": "For privacy inquiries, contact us at privacy@prnews.ca."
+        "title": "6. Data Retention",
+        "content": "Account and billing information is retained for as long as your account is active and for seven (7) years afterward to meet tax and legal obligations. Press release content is retained while published and may remain in backup archives for up to one (1) year after deletion."
+      },
+      {
+        "title": "7. Cookies and Tracking Technologies",
+        "content": "At launch, PR NEWS does not use advertising or analytics cookies. Only essential session and security cookies (such as those required for login and CSRF protection) are used.\n\nIf we add analytics or advertising scripts in the future, we will obtain your consent through a cookie banner before loading them. See our Cookie/Consent hook in src/lib/analytics.ts for the integration point."
+      },
+      {
+        "title": "8. Your Rights",
+        "content": "Under PIPEDA and Quebec Law 25, you have the right to access, correct, delete, and port your personal information. You also have the right to withdraw consent and to file a complaint with the Office of the Privacy Commissioner of Canada."
+      },
+      {
+        "title": "9. Data Subject Access Requests",
+        "content": "To request access, correction, or deletion of your personal information, email us at privacy@prnews.ca. We will respond within thirty (30) days and may request identity verification before fulfilling your request."
+      },
+      {
+        "title": "10. Security",
+        "content": "We use industry-standard measures including encryption in transit (TLS), hashed passwords, and access controls. No system is completely secure; you are responsible for keeping your account credentials safe."
+      },
+      {
+        "title": "11. Children's Privacy",
+        "content": "PR NEWS is not intended for individuals under the age of 18. We do not knowingly collect personal information from children."
+      },
+      {
+        "title": "12. Changes to This Policy",
+        "content": "We may update this Privacy Policy from time to time. We will notify users of material changes by email or by posting a notice on the platform."
+      },
+      {
+        "title": "13. Contact",
+        "content": "For privacy questions or data subject requests, contact us at privacy@prnews.ca."
       }
     ]
   },
   "terms": {
     "title": "Terms of Service",
-    "lastUpdated": "Last updated: July 10, 2026",
-    "intro": "These Terms of Service govern your use of the PR NEWS platform and services.",
+    "lastUpdated": "Last updated: July 14, 2026",
+    "intro": "These Terms of Service ('Terms') govern your access to and use of the PR NEWS platform, website, and services ('Services'). By creating an account, subscribing, or using the Services, you agree to these Terms.",
     "sections": [
       {
         "title": "1. Acceptance of Terms",
-        "content": "By accessing or using our services, you agree to be bound by these Terms of Service."
+        "content": "By accessing or using PR NEWS, you represent that you have the authority to agree to these Terms and that you will comply with all applicable laws and regulations."
       },
       {
-        "title": "2. Use of Services",
-        "content": "You may use our services only for lawful purposes and in accordance with these terms."
+        "title": "2. Account Registration",
+        "content": "You must provide accurate and complete information when creating an account. You are responsible for maintaining the confidentiality of your credentials and for all activity under your account."
       },
       {
-        "title": "3. Content",
-        "content": "You retain ownership of the content you submit. By submitting content, you grant us a license to distribute it through our network."
+        "title": "3. Use of Services",
+        "content": "You may use the Services only for lawful purposes. You may not attempt to access restricted areas, interfere with other users, or misuse the platform's infrastructure."
       },
       {
-        "title": "4. Prohibited Content",
-        "content": "Content must not be defamatory, illegal, or violate the rights of others. We reserve the right to reject any content."
+        "title": "4. Content and License",
+        "content": "You retain ownership of the press releases, images, and other content you submit ('Your Content'). By submitting Your Content, you grant PR NEWS a non-exclusive, royalty-free, worldwide license to distribute, display, and reproduce it through our network for the purpose of providing the Services.\n\nYou confirm that you have the right to grant this license and that Your Content does not infringe any third-party rights."
       },
       {
-        "title": "5. Limitation of Liability",
-        "content": "PR NEWS shall not be liable for any indirect, incidental, or consequential damages arising from the use of our services."
+        "title": "5. Prohibited Content",
+        "content": "You may not submit content that is illegal, defamatory, fraudulent, hateful, discriminatory, infringing, or otherwise harmful. We reserve the right to refuse or remove any content and to suspend accounts that violate this policy."
       },
       {
-        "title": "6. Governing Law",
-        "content": "These terms are governed by the laws of Ontario, Canada, applicable in Toronto without regard to conflict of law principles."
+        "title": "6. Payments and Subscriptions",
+        "content": "Payments are processed through Stripe. Subscription fees are billed in advance; one-time release fees are charged at checkout. You may cancel your subscription through the billing portal or by contacting us. Fees are non-refundable unless required by law."
+      },
+      {
+        "title": "7. Service Levels",
+        "content": "We aim to complete editorial review within two (2) business hours for standard submissions and one (1) hour for Growth subscribers. Distribution timing depends on the target outlets and any embargo you set."
+      },
+      {
+        "title": "8. Termination",
+        "content": "We may suspend or terminate your account for violation of these Terms or for non-payment. You may delete your account at any time; upon deletion, your press releases may be removed from public pages but may persist in backups and distribution partner caches."
+      },
+      {
+        "title": "9. Disclaimer of Warranties",
+        "content": "The Services are provided 'as is' and 'as available' without warranties of any kind. We do not guarantee pickup by any media outlet or specific audience reach."
+      },
+      {
+        "title": "10. Limitation of Liability",
+        "content": "To the fullest extent permitted by law, PR NEWS shall not be liable for indirect, incidental, special, consequential, or punitive damages, or for lost profits or revenue, arising out of or related to your use of the Services."
+      },
+      {
+        "title": "11. Governing Law",
+        "content": "These Terms are governed by the laws of Ontario, Canada, and any disputes shall be resolved in the courts of Toronto, Ontario, without regard to conflict of law principles."
+      },
+      {
+        "title": "12. Changes to These Terms",
+        "content": "We may modify these Terms from time to time. Material changes will be posted on the site and, where appropriate, notified by email. Continued use after changes constitutes acceptance."
+      },
+      {
+        "title": "13. Contact",
+        "content": "For questions about these Terms, contact us at legal@prnews.ca."
       }
     ]
   },
   "casl": {
     "title": "CASL Compliance",
-    "intro": "PR NEWS complies with Canada's Anti-Spam Legislation (CASL). Our email practices include:",
+    "intro": "PR NEWS complies with Canada's Anti-Spam Legislation (CASL). This page describes our practices for sending commercial electronic messages (CEMs) and managing consent.",
     "practices": [
-      "Explicit consent: We only send emails to people who have explicitly opted in.",
-      "Identification: All emails clearly identify PR NEWS as the sender.",
-      "Unsubscribe: Every marketing email includes a one-click unsubscribe link.",
-      "Physical address: Our mailing address appears in the footer of every email."
+      "Consent: We only send CEMs to individuals who have provided express or implied consent to receive them. Consent is recorded at the time of signup or subscription.",
+      "Identification: Every CEM clearly identifies PR NEWS as the sender and includes our current mailing address and a way to contact us.",
+      "Unsubscribe: Every marketing and promotional email includes a one-click unsubscribe link. Requests are processed within ten (10) business days or immediately through the automated link.",
+      "No unsolicited automated distribution: We do not add purchased or scraped contacts to our lists.",
+      "Record keeping: Consent records, unsubscribe requests, and sender identification details are retained for at least three (3) years from the date of the message, in line with CASL guidance."
     ],
-    "contact": "For CASL-related inquiries, contact us at casl@prnews.ca."
+    "contact": "For CASL-related questions, contact us at casl@prnews.ca."
   },
   "accessibility": {
     "title": "Accessibility Statement",
@@ -717,11 +774,16 @@
       "title": "Media Assets",
       "images": "Images",
       "dragDropImages": "Drag and drop images here, or click to browse",
-      "imageFormats": "JPG, PNG, WebP supported",
+      "imageFormats": "JPG, PNG, WebP, GIF, SVG. Max 10 MB each.",
       "videoUrl": "Video URLs",
       "videoPlaceholder": "YouTube or Vimeo URL",
       "pdf": "PDF / Media Kit",
-      "pdfPlaceholder": "Upload PDF media kit"
+      "pdfPlaceholder": "Upload PDF media kit",
+      "uploading": "Uploading...",
+      "uploadError": "Upload failed. Please try a smaller file or a different format.",
+      "addVideo": "Add video",
+      "remove": "Remove",
+      "changePdf": "Change PDF"
     },
     "distribution": {
       "title": "Distribution",
@@ -781,6 +843,17 @@
     "legal": "Legal",
     "subscribeNewsletter": "Subscribe to our newsletter",
     "copyright": "All rights reserved."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "Sorry, we couldn't find the page you were looking for.",
+    "backHome": "Back to home"
+  },
+  "error": {
+    "title": "Error",
+    "headline": "Something went wrong",
+    "description": "We encountered an unexpected error. Please try again or contact support if the problem persists.",
+    "retry": "Try again"
   },
   "categories": {
     "business": "Business",

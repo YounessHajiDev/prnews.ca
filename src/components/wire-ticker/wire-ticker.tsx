@@ -17,7 +17,7 @@ interface Release {
 const DEMO_RELEASES: Release[] = [
   {
     id: '1',
-    headline: 'Tech Startup Raises $15M Series A to Expand Canadian AI Solutions',
+    headline: 'Tech Startup Raises $15M to Expand Canadian AI Solutions',
     company: 'MapleAI Inc.',
     category: 'Technology',
     date: '2026-07-10',
@@ -25,7 +25,7 @@ const DEMO_RELEASES: Release[] = [
   },
   {
     id: '2',
-    headline: 'BC Mining Company Announces New Sustainable Operations',
+    headline: 'BC Mining Firm Announces Sustainable Operations',
     company: 'Pacific Minerals Corp.',
     category: 'Mining',
     date: '2026-07-10',
@@ -38,22 +38,6 @@ const DEMO_RELEASES: Release[] = [
     category: 'Health',
     date: '2026-07-09',
     province: 'Quebec',
-  },
-  {
-    id: '4',
-    headline: 'Alberta Oil Sands Operator Invests $50M in Green Technology',
-    company: 'Northern Energy Solutions',
-    category: 'Energy',
-    date: '2026-07-09',
-    province: 'Alberta',
-  },
-  {
-    id: '5',
-    headline: 'Toronto Real Estate Market Shows Strong Q2 Recovery',
-    company: 'Urban Capital Realty',
-    category: 'Real Estate',
-    date: '2026-07-08',
-    province: 'Ontario',
   },
 ];
 

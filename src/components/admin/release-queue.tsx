@@ -77,7 +77,7 @@ export function ReleaseQueue() {
                 </Badge>
               </td>
               <td className="px-4 py-3">
-                <button className="text-wire-amber hover:underline text-sm">Review</button>
+                <button className="text-wire-brass-dark hover:underline text-sm">Review</button>
               </td>
             </tr>
           ))}

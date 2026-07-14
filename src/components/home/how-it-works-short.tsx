@@ -38,11 +38,11 @@ export function HowItWorksShort() {
             const Icon = STEP_ICONS[i];
             return (
               <AnimatedSection key={step.title} animation="fade-up" delay={i * 150} className="relative">
-                <div className="relative z-10 mx-auto mb-6 flex h-18 w-18 items-center justify-center rounded-full border-2 border-wire-brass bg-wire-paper text-wire-brass shadow-sm">
+                <div className="relative z-10 mx-auto mb-6 flex h-18 w-18 items-center justify-center rounded-full border-2 border-wire-brass bg-wire-paper text-wire-brass-dark shadow-sm">
                   <Icon className="h-7 w-7" />
                 </div>
                 <div className="text-center">
-                  <div className="mb-2 font-mono text-sm text-wire-brass">0{i + 1}</div>
+                  <div className="mb-2 font-mono text-sm text-wire-brass-dark">0{i + 1}</div>
                   <h3 className="heading-sm mb-2">{step.title}</h3>
                   <p className="body-base text-wire-slate">{step.desc}</p>
                 </div>

@@ -1,38 +1,10 @@
-export const GET = () => {
-  const text = `# PR NEWS (prnews.ca)
+export async function GET() {
+  const content = `# PR NEWS — Canadian press release distribution\n\n- URL: https://prnews.ca\n- Languages: English (en-CA), French (fr-CA)\n- Core offering: Self-serve press release writing, editorial review, and nationwide distribution to Canadian media outlets.\n- Public pages: /, /news, /pricing, /how-it-works, /about, /contact, /journalists, /resources, /newsroom/{company-slug}, /news/{category-slug}/{slug}\n- Auth: /login, /signup, /forgot-password, /reset-password\n- Dashboard: /app, /app/submit, /app/releases, /app/billing\n- Legal: /privacy, /terms, /accessibility-statement, /casl-compliance\n`;
 
-## About
-PR NEWS is a Canadian press release distribution platform.
-
-## Pages
-- /en — English homepage
-- /en/news — Latest releases
-- /en/pricing — Transparent pricing
-- /en/how-it-works — How distribution works
-- /en/resources — Guides and templates
-- /en/about — About PR NEWS
-- /en/contact — Contact information
-
-## News Categories
-- Business
-- Technology
-- Health
-- Finance & Economy
-- Government & Politics
-- Environment
-- Real Estate
-- Energy & Mining
-- Cannabis
-
-## Distribution Network
-PR NEWS distributes press releases to media outlets across all Canadian provinces.
-
-## Contact
-- Email: hello@prnews.ca
-- Phone: 1-800-PR-NEWS
-`;
-
-  return new Response(text, {
-    headers: { 'Content-Type': 'text/plain' },
+  return new Response(content, {
+    headers: {
+      'Content-Type': 'text/plain; charset=utf-8',
+      'Cache-Control': 'public, max-age=86400',
+    },
   });
-};
+}

@@ -13,12 +13,12 @@ function HeroVisual() {
       {/* floating accent cards */}
       <div className="absolute -left-8 -top-6 z-20 hidden animate-float rounded-lg border border-wire-border bg-white p-4 shadow-lg sm:block" style={{ animationDelay: '0s' }}>
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-wire-brass/10 text-wire-brass">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-wire-brass/10 text-wire-brass-dark">
             <BarChart3 className="h-5 w-5" />
           </div>
           <div>
             <div className="text-xs text-wire-slate">{tv('totalViews')}</div>
-            <div className="font-display text-lg font-bold">12,847</div>
+            <div className="font-display text-lg font-bold text-wire-ink">12,847</div>
           </div>
         </div>
       </div>
@@ -30,13 +30,13 @@ function HeroVisual() {
           </div>
           <div>
             <div className="text-xs text-wire-slate">{tv('outletClicks')}</div>
-            <div className="font-display text-lg font-bold">+482</div>
+            <div className="font-display text-lg font-bold text-wire-ink">+482</div>
           </div>
         </div>
       </div>
 
       {/* main dashboard card */}
-      <div className="animate-fade-in-up relative rounded-2xl border border-wire-border bg-white/95 p-6 shadow-2xl backdrop-blur-sm" style={{ animationDelay: '300ms' }}>
+      <div className="animate-slide-up relative rounded-2xl border border-wire-border bg-white p-6 text-wire-ink shadow-2xl" style={{ animationDelay: '300ms' }}>
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Badge className="gap-1.5 bg-wire-red text-white hover:bg-wire-red">
@@ -93,26 +93,26 @@ export function Hero() {
       {/* ambient background */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(184,146,74,0.15),transparent_50%)]" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(184,146,74,0.10),transparent_40%)]" />
-      <div className="pointer-events-none absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-wire-brass/10 blur-3xl animate-pulse-soft" />
-      <div className="pointer-events-none absolute -right-32 bottom-1/4 h-96 w-96 rounded-full bg-wire-brass/5 blur-3xl animate-pulse-soft" style={{ animationDelay: '1.5s' }} />
+      <div className="pointer-events-none absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-wire-brass/10" />
+      <div className="pointer-events-none absolute -right-32 bottom-1/4 h-96 w-96 rounded-full bg-wire-brass/5" />
 
       <div className="container-page relative z-10">
         <div className="grid items-center gap-16 lg:grid-cols-2">
           <div className="max-w-2xl">
-            <div className="mb-6 inline-flex animate-fade-in-up items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-xs uppercase tracking-widest text-wire-brass-light" style={{ animationDelay: '0ms' }}>
+            <div className="mb-6 inline-flex animate-slide-up items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-xs uppercase tracking-widest text-wire-brass-light">
               <span className="h-1.5 w-1.5 rounded-full bg-wire-brass-light animate-pulse" />
               {t('eyebrow')}
             </div>
 
-            <h1 className="heading-xl mb-6 animate-fade-in-up text-white" style={{ animationDelay: '80ms' }}>
+            <h1 className="heading-xl mb-6 text-white">
               {t('headline')}
             </h1>
 
-            <p className="body-large mb-10 animate-fade-in-up max-w-xl text-white/80" style={{ animationDelay: '160ms' }}>
+            <p className="body-large mb-10 animate-slide-up max-w-xl text-white/80" style={{ animationDelay: '160ms' }}>
               {t('subheadline')}
             </p>
 
-            <div className="flex flex-col gap-4 sm:flex-row animate-fade-in-up" style={{ animationDelay: '240ms' }}>
+            <div className="flex flex-col gap-4 sm:flex-row animate-slide-up" style={{ animationDelay: '240ms' }}>
               <Link href="/signup" className={buttonVariants({ size: 'lg', className: 'w-full sm:w-auto px-8' })}>
                 {t('ctaPrimary')}
               </Link>

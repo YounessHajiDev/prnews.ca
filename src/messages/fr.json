@@ -130,8 +130,8 @@
         "desc": "Revue éditoriale en moins de 2 heures. Publiez selon vos horaires."
       },
       "bilingual": {
-        "title": "Vraiment bilingue",
-        "desc": "Publiez en anglais et en français. Touchez toutes les audiences canadiennes."
+        "title": "Publication bilingue",
+        "desc": "Publiez en anglais, en français ou les deux. Touchez toutes les audiences canadiennes."
       },
       "reach": {
         "title": "Portée nationale et locale",
@@ -198,7 +198,7 @@
         "description": "Pour les équipes qui publient régulièrement",
         "price": "199 $CA",
         "priceSuffix": "/mois",
-        "features": ["4 communiqués par mois", "Anglais et français", "Revue prioritaire (moins de 1 heure)", "Salle de presse personnalisée", "Analyses avancées"],
+        "features": ["4 communiqués par mois", "Publication bilingue disponible", "Revue prioritaire (moins de 1 heure)", "Salle de presse personnalisée", "Analyses avancées"],
         "cta": "S'abonner",
         "href": "/api/subscribe?plan=growth",
         "featured": true
@@ -222,7 +222,7 @@
       { "feature": "Tarification transparente et publique", "prnews": "yes", "others": "no" },
       { "feature": "Paiement en libre-service", "prnews": "yes", "others": "no" },
       { "feature": "Suivi de diffusion en direct", "prnews": "yes", "others": "partial" },
-      { "feature": "Publication bilingue anglais / français", "prnews": "yes", "others": "no" },
+      { "feature": "Publication bilingue anglais / français disponible", "prnews": "yes", "others": "no" },
       { "feature": "Salle de presse personnalisée", "prnews": "yes", "others": "partial" },
       { "feature": "Aucun appel de vente requis", "prnews": "yes", "others": "no" },
       { "feature": "Tableau de bord d'analyses en temps réel", "prnews": "yes", "others": "partial" },
@@ -348,74 +348,131 @@
   },
   "privacy": {
     "title": "Politique de confidentialité",
-    "lastUpdated": "Dernière mise à jour : 10 juillet 2026",
-    "intro": "PR NEWS s'engage à protéger vos renseignements personnels conformément à la Loi 25 du Québec et à la LPRPDE.",
+    "lastUpdated": "Dernière mise à jour : 14 juillet 2026",
+    "intro": "La présente politique de confidentialité décrit comment PR NEWS (« nous », « notre ») recueille, utilise, conserve et protège les renseignements personnels via sa plateforme prnews.ca et ses services connexes.",
     "sections": [
       {
-        "title": "1. Renseignements collectés",
-        "content": "Nous collectons les renseignements que vous nous fournissez directement, tels que votre nom, votre courriel et les détails de votre entreprise lors de la création d'un compte."
+        "title": "1. Aperçu",
+        "content": "Nous agissons à titre de responsable des renseignements personnels traités par la plateforme PR NEWS. Nous nous engageons à respecter la Loi sur la protection des renseignements personnels et les documents électroniques (LPRPDE) du Canada et, le cas échéant, la Loi 25 du Québec."
       },
       {
-        "title": "2. Utilisation de vos renseignements",
-        "content": "Nous utilisons vos renseignements pour fournir, maintenir et améliorer nos services, et pour communiquer avec vous au sujet de nos produits."
+        "title": "2. Renseignements que nous recueillons",
+        "content": "Nous recueillons les renseignements que vous nous fournissez directement, tels que votre nom, votre adresse courriel, le nom de votre entreprise, les détails de facturation et le contenu de vos communiqués. Nous recueillons également des renseignements techniques, notamment l'adresse IP, le type de navigateur et les renseignements sur l'appareil, au moyen des journaux de serveur standard."
       },
       {
-        "title": "3. Partage de données",
-        "content": "Nous ne vendons pas vos renseignements personnels. Nous pouvons les partager avec des fournisseurs de services qui nous aident à exploiter notre plateforme."
+        "title": "3. Comment nous utilisons vos renseignements",
+        "content": "Nous utilisons vos renseignements pour créer et gérer votre compte, traiter les paiements, distribuer vos communiqués, offrir du soutien technique, appliquer nos Conditions d'utilisation et respecter nos obligations légales. Nous pouvons également vous envoyer des courriels transactionnels et des annonces de service."
       },
       {
-        "title": "4. Vos droits",
-        "content": "En vertu de la Loi 25 du Québec et de la LPRPDE, vous avez le droit d'accéder à vos renseignements, de les corriger et de les supprimer."
+        "title": "4. Fondement juridique et consentement",
+        "content": "En créant un compte ou en vous abonnant, vous consentez au traitement décrit dans la présente politique. Vous pouvez retirer votre consentement aux communications de marketing en tout temps en utilisant le lien de désabonnement dans nos courriels."
       },
       {
-        "title": "5. Témoins",
-        "content": "Nous utilisons des témoins pour améliorer votre expérience. Vous pouvez gérer vos préférences en tout temps."
+        "title": "5. Fournisseurs de services tiers",
+        "content": "Nous comptons sur les fournisseurs de services suivants pour exploiter la plateforme : Stripe pour le traitement des paiements; Resend pour l'envoi de courriels; Vercel pour l'hébergement de l'application et le stockage Blob; et l'hôte de base de données PostgreSQL configuré dans votre déploiement (par exemple Supabase, AWS RDS, Neon ou Vercel Postgres). Nous ne partageons que les renseignements personnels nécessaires à ces fournisseurs pour exécuter leurs services.\n\nChaque fournisseur est lié par un contrat qui exige des mesures de sécurité et de confidentialité appropriées. Vous devriez également consulter les politiques de confidentialité de ces fournisseurs pour savoir comment ils traitent les données."
       },
       {
-        "title": "6. Contact",
-        "content": "Pour toute question sur la confidentialité, contactez-nous à privacy@prnews.ca."
+        "title": "6. Conservation des données",
+        "content": "Les renseignements de compte et de facturation sont conservés tant que votre compte est actif, puis pendant sept (7) ans après la fermeture afin de répondre aux obligations fiscales et légales. Le contenu des communiqués est conservé pendant la période de publication et peut demeurer dans les archives de sauvegarde jusqu'à un (1) an après la suppression."
+      },
+      {
+        "title": "7. Témoins et technologies de suivi",
+        "content": "À son lancement, PR NEWS n'utilise pas de témoins publicitaires ou analytiques. Seuls les témoins essentiels de session et de sécurité (tels que ceux requis pour la connexion et la protection CSRF) sont utilisés.\n\nSi nous ajoutons des scripts d'analyse ou de publicité à l'avenir, nous obtiendrons votre consentement au moyen d'une bannière de témoins avant de les charger. Voir notre point d'accroche pour les témoins et le consentement dans src/lib/analytics.ts."
+      },
+      {
+        "title": "8. Vos droits",
+        "content": "En vertu de la LPRPDE et de la Loi 25 du Québec, vous avez le droit d'accéder à vos renseignements personnels, de les corriger, de les supprimer et de les porter. Vous avez également le droit de retirer votre consentement et de déposer une plainte auprès du Commissariat à la protection de la vie privée du Canada."
+      },
+      {
+        "title": "9. Demandes d'accès aux données",
+        "content": "Pour demander l'accès, la correction ou la suppression de vos renseignements personnels, envoyez-nous un courriel à privacy@prnews.ca. Nous répondrons dans les trente (30) jours et pourrions vous demander de vérifier votre identité avant de donner suite à votre demande."
+      },
+      {
+        "title": "10. Sécurité",
+        "content": "Nous utilisons des mesures conformes aux normes de l'industrie, notamment le chiffrement en transit (TLS), les mots de passe hachés et les contrôles d'accès. Aucun système n'est entièrement sécurisé; vous êtes responsable de la sécurité de vos identifiants de compte."
+      },
+      {
+        "title": "11. Confidentialité des enfants",
+        "content": "PR NEWS ne s'adresse pas aux personnes de moins de 18 ans. Nous ne recueillons pas sciemment de renseignements personnels auprès d'enfants."
+      },
+      {
+        "title": "12. Modifications à cette politique",
+        "content": "Nous pouvons mettre à jour la présente politique de temps à autre. Nous informerons les utilisateurs des changements importants par courriel ou en affichant un avis sur la plateforme."
+      },
+      {
+        "title": "13. Contact",
+        "content": "Pour toute question sur la confidentialité ou pour une demande d'accès aux données, contactez-nous à privacy@prnews.ca."
       }
     ]
   },
   "terms": {
     "title": "Conditions d'utilisation",
-    "lastUpdated": "Dernière mise à jour : 10 juillet 2026",
-    "intro": "Les présentes conditions d'utilisation régissent votre utilisation de la plateforme et des services de PR NEWS.",
+    "lastUpdated": "Dernière mise à jour : 14 juillet 2026",
+    "intro": "Les présentes Conditions d'utilisation (« Conditions ») régissent votre accès à la plateforme, au site Web et aux services de PR NEWS (« Services »). En créant un compte, en vous abonnant ou en utilisant les Services, vous acceptez les présentes Conditions.",
     "sections": [
       {
         "title": "1. Acceptation des conditions",
-        "content": "En accédant à nos services ou en les utilisant, vous acceptez d'être lié par les présentes conditions d'utilisation."
+        "content": "En accédant à PR NEWS ou en l'utilisant, vous déclarez avoir l'autorité d'accepter les présentes Conditions et vous vous engagez à respecter toutes les lois et règlements applicables."
       },
       {
-        "title": "2. Utilisation des services",
-        "content": "Vous ne pouvez utiliser nos services qu'à des fins légales et conformément aux présentes conditions."
+        "title": "2. Création d'un compte",
+        "content": "Vous devez fournir des renseignements exacts et complets lors de la création de votre compte. Vous êtes responsable de la confidentialité de vos identifiants et de toute activité sous votre compte."
       },
       {
-        "title": "3. Contenu",
-        "content": "Vous conservez la propriété du contenu soumis. En soumettant du contenu, vous nous accordez une licence pour le distribuer via notre réseau."
+        "title": "3. Utilisation des Services",
+        "content": "Vous ne pouvez utiliser les Services qu'à des fins légales. Vous ne devez pas tenter d'accéder à des zones restreintes, perturber d'autres utilisateurs ou utiliser abusivement l'infrastructure de la plateforme."
       },
       {
-        "title": "4. Contenu interdit",
-        "content": "Le contenu ne doit pas être diffamatoire, illégal ou violer les droits d'autrui. Nous nous réservons le droit de refuser tout contenu."
+        "title": "4. Contenu et licence",
+        "content": "Vous conservez la propriété des communiqués, images et autres contenus que vous soumettez (« Votre contenu »). En soumettant Votre contenu, vous accordez à PR NEWS une licence non exclusive, libre de redevances et mondiale pour le distribuer, l'afficher et le reproduire via notre réseau dans le but de fournir les Services.\n\nVous confirmez que vous avez le droit d'accorder cette licence et que Votre contenu ne viole aucun droit de tiers."
       },
       {
-        "title": "5. Limitation de responsabilité",
-        "content": "PR NEWS ne sera pas responsable des dommages indirects, accidentels ou consécutifs découlant de l'utilisation de nos services."
+        "title": "5. Contenu interdit",
+        "content": "Vous ne pouvez soumettre de contenu illégal, diffamatoire, frauduleux, haineux, discriminatoire, portant atteinte aux droits d'autrui ou autrement préjudiciable. Nous nous réservons le droit de refuser ou de supprimer tout contenu et de suspendre les comptes qui violent cette politique."
       },
       {
-        "title": "6. Droit applicable",
-        "content": "Les présentes conditions sont régies par les lois de l'Ontario, au Canada, applicables à Toronto, sans égard aux principes de conflit de lois."
+        "title": "6. Paiements et abonnements",
+        "content": "Les paiements sont traités par Stripe. Les frais d'abonnement sont facturés d'avance; les frais de communiqué ponctuel sont facturés au moment du paiement. Vous pouvez annuler votre abonnement par l'intermédiaire du portail de facturation ou en nous contactant. Les frais sont non remboursables, sauf si la loi l'exige."
+      },
+      {
+        "title": "7. Niveaux de service",
+        "content": "Nous visons à terminer la révision éditoriale dans les deux (2) heures ouvrables pour les soumissions standard et dans une (1) heure pour les abonnés Croissance. Le moment de la distribution dépend des médias ciblés et de tout embargo que vous avez défini."
+      },
+      {
+        "title": "8. Résiliation",
+        "content": "Nous pouvons suspendre ou résilier votre compte en cas de violation des présentes Conditions ou de non-paiement. Vous pouvez supprimer votre compte en tout temps; après la suppression, vos communiqués peuvent être retirés des pages publiques, mais peuvent demeurer dans les sauvegardes et les caches des partenaires de distribution."
+      },
+      {
+        "title": "9. Avis de non-responsabilité",
+        "content": "Les Services sont fournis « tels quels » et « sous réserve de disponibilité » sans garantie d'aucune sorte. Nous ne garantissons pas la reprise par un média particulier ni une portée d'audience spécifique."
+      },
+      {
+        "title": "10. Limitation de responsabilité",
+        "content": "Dans la mesure maximale permise par la loi, PR NEWS ne sera pas responsable des dommages indirects, accidentels, spéciaux, consécutifs ou punitifs, ni des pertes de profits ou de revenus, découlant de ou liés à votre utilisation des Services."
+      },
+      {
+        "title": "11. Droit applicable",
+        "content": "Les présentes Conditions sont régies par les lois de l'Ontario, au Canada, et tout litige sera tranché devant les tribunaux de Toronto, en Ontario, sans égard aux principes de conflit de lois."
+      },
+      {
+        "title": "12. Modifications aux présentes conditions",
+        "content": "Nous pouvons modifier les présentes Conditions de temps à autre. Les changements importants seront affichés sur le site et, le cas échéant, communiqués par courriel. L'utilisation continue après les modifications vaut acceptation."
+      },
+      {
+        "title": "13. Contact",
+        "content": "Pour toute question concernant les présentes Conditions, contactez-nous à legal@prnews.ca."
       }
     ]
   },
   "casl": {
     "title": "Conformité LCAP",
-    "intro": "PR NEWS respecte la Loi canadienne anti-pourriel (LCAP). Nos pratiques courriel incluent :",
+    "intro": "PR NEWS respecte la Loi canadienne anti-pourriel (LCAP). Cette page décrit nos pratiques pour l'envoi de messages électroniques commerciaux (MEC) et la gestion du consentement.",
     "practices": [
-      "Consentement explicite : nous n'envoyons des courriels qu'aux personnes qui se sont inscrites explicitement.",
-      "Identification : tous les courriels identifient clairement PR NEWS comme expéditeur.",
-      "Désinscription : chaque courriel marketing comprend un lien de désinscription en un clic.",
-      "Adresse postale : notre adresse postale apparaît dans le pied de page de chaque courriel."
+      "Consentement : nous n'envoyons des MEC qu'aux personnes ayant donné un consentement exprès ou implicite. Le consentement est enregistré au moment de l'inscription ou de l'abonnement.",
+      "Identification : chaque MEC identifie clairement PR NEWS comme expéditeur et indique notre adresse postale actuelle et un moyen de nous contacter.",
+      "Désabonnement : chaque courriel de marketing ou promotion comporte un lien de désabonnement en un clic. Les demandes sont traitées dans les dix (10) jours ouvrables ou immédiatement par l'intermédiaire du lien automatisé.",
+      "Aucune distribution automatisée non sollicitée : nous n'ajoutons pas de contacts achetés ou extraits à nos listes.",
+      "Adresse : notre adresse postale et nos coordonnées d'expéditeur figurent dans le pied de page de chaque MEC."
     ],
     "contact": "Pour toute question concernant la LCAP, contactez-nous à casl@prnews.ca."
   },
@@ -717,11 +774,16 @@
       "title": "Médias",
       "images": "Images",
       "dragDropImages": "Glissez-déposez des images ici ou cliquez pour parcourir",
-      "imageFormats": "JPG, PNG, WebP pris en charge",
+      "imageFormats": "JPG, PNG, WebP, GIF, SVG. Max 10 Mo chacune.",
       "videoUrl": "URLs de vidéo",
       "videoPlaceholder": "URL YouTube ou Vimeo",
       "pdf": "PDF / Dossier de presse",
-      "pdfPlaceholder": "Téléverser le dossier de presse PDF"
+      "pdfPlaceholder": "Téléverser le dossier de presse PDF",
+      "uploading": "Téléversement en cours...",
+      "uploadError": "Le téléversement a échoué. Veuillez essayer un fichier plus petit ou un autre format.",
+      "addVideo": "Ajouter une vidéo",
+      "remove": "Retirer",
+      "changePdf": "Changer le PDF"
     },
     "distribution": {
       "title": "Diffusion",
@@ -781,6 +843,17 @@
     "legal": "Juridique",
     "subscribeNewsletter": "Abonnez-vous à notre infolettre",
     "copyright": "Tous droits réservés."
+  },
+  "notFound": {
+    "title": "Page non trouvée",
+    "description": "Désolé, nous n'avons pas trouvé la page recherchée.",
+    "backHome": "Retour à l'accueil"
+  },
+  "error": {
+    "title": "Erreur",
+    "headline": "Quelque chose s'est mal passé",
+    "description": "Nous avons rencontré une erreur inattendue. Veuillez réessayer ou contacter le support si le problème persiste.",
+    "retry": "Réessayer"
   },
   "categories": {
     "business": "Affaires",

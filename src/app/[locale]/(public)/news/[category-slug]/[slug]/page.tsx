@@ -1,39 +1,80 @@
 import { Metadata } from 'next';
-import { db } from '@/lib/db/prisma';
 import { notFound } from 'next/navigation';
+import { db } from '@/lib/db/prisma';
 import { Breadcrumb } from '@/components/layout/breadcrumb';
 import { formatDate } from '@/lib/utils';
-import { getTranslations, getLocale } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
+import { generateReleaseMetadata, getStructuredData } from '@/lib/seo';
+import { sanitizeBody } from '@/lib/sanitize';
+
+export const revalidate = 60;
+
+export async function generateStaticParams({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  void params;
+  const releases = await db.pressRelease.findMany({
+    where: { status: 'PUBLISHED' },
+    select: { slug: true, categorySlug: true },
+    take: 100,
+  });
+
+  return releases.map((r) => ({
+    'category-slug': r.categorySlug,
+    slug: r.slug,
+  }));
+}
 
 export async function generateMetadata({
   params,
 }: {
-  params: { categorySlug: string; slug: string };
+  params: { 'category-slug': string; slug: string; locale: string };
 }): Promise<Metadata> {
-  const { slug, categorySlug } = params;
+  const { slug, 'category-slug': categorySlug, locale } = params;
   const release = await db.pressRelease.findFirst({
     where: { slug, categorySlug, status: 'PUBLISHED' },
-    select: { headline: true },
+    select: {
+      headline: true,
+      headlineFr: true,
+      summary: true,
+      slug: true,
+      publishedAt: true,
+      categorySlug: true,
+      company: { select: { name: true, slug: true, logoUrl: true } },
+      ogImageUrl: true,
+    },
   });
-  return { title: release?.headline || 'Release' };
+
+  if (!release) return { title: 'Release' };
+
+  const ogImage = release.ogImageUrl || `${process.env.NEXT_PUBLIC_SITE_URL || 'https://prnews.ca'}/api/og?title=${encodeURIComponent(release.headline)}`;
+
+  return {
+    ...generateReleaseMetadata(release, locale),
+    openGraph: {
+      ...generateReleaseMetadata(release, locale).openGraph,
+      images: [{ url: ogImage }],
+    },
+    twitter: {
+      ...generateReleaseMetadata(release, locale).twitter,
+      images: [ogImage],
+    },
+  };
 }
 
 export default async function ReleasePage({
   params,
 }: {
-  params: { categorySlug: string; slug: string };
+  params: { 'category-slug': string; slug: string; locale: string };
 }) {
-  const { categorySlug, slug } = params;
-  const t = await getTranslations('news');
-  const tNav = await getTranslations('nav');
-  const locale = await getLocale();
+  const { 'category-slug': categorySlug, slug, locale } = params;
+  const t = await getTranslations({ locale, namespace: 'news' });
+  const tNav = await getTranslations({ locale, namespace: 'nav' });
 
   const release = await db.pressRelease.findFirst({
-    where: {
-      slug,
-      categorySlug,
-      status: 'PUBLISHED',
-    },
+    where: { slug, categorySlug, status: 'PUBLISHED' },
     include: {
       company: true,
       author: { select: { name: true } },
@@ -45,13 +86,22 @@ export default async function ReleasePage({
     notFound();
   }
 
+  const isFrench = locale === 'fr' && (release.language === 'fr' || release.language === 'both');
+  const headline = isFrench && release.headlineFr ? release.headlineFr : release.headline;
+  const body = isFrench && release.bodyFr ? release.bodyFr : release.body;
+  const structuredData = getStructuredData(release, locale);
+
   return (
     <article className="section bg-wire-bg">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: structuredData }}
+      />
       <div className="container-narrow">
         <Breadcrumb items={[
           { label: tNav('news'), href: '/news' },
           { label: categorySlug, href: `/news/${categorySlug}` },
-          { label: release.headline },
+          { label: headline },
         ]} />
 
         <header className="mb-8">
@@ -60,13 +110,13 @@ export default async function ReleasePage({
             <span>&middot;</span>
             <span>{release.categorySlug}</span>
           </div>
-          <h1 className="heading-lg mb-4">{release.headline}</h1>
+          <h1 className="heading-lg mb-4">{headline}</h1>
           <p className="text-lg text-wire-muted">{release.summary}</p>
         </header>
 
         <div
           className="prose-release mb-12"
-          dangerouslySetInnerHTML={{ __html: release.body }}
+          dangerouslySetInnerHTML={{ __html: sanitizeBody(body) }}
         />
 
         <footer className="border-t border-wire-border pt-8">

@@ -41,7 +41,7 @@ function ToolbarButton({
       title={title}
       className={`p-2 rounded transition-colors ${
         active
-          ? 'bg-wire-amber text-white'
+          ? 'bg-wire-brass-dark text-white'
           : 'hover:bg-wire-charcoal hover:text-white text-white/70'
       }`}
     >

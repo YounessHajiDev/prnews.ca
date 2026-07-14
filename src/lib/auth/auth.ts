@@ -4,6 +4,7 @@ import { getServerSession } from 'next-auth/next';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import { db } from '@/lib/db/prisma';
+import { getClientIp, rateLimit } from '@/lib/rate-limit';
 
 export { getServerSession };
 
@@ -21,6 +22,12 @@ const providers: NextAuthOptions['providers'] = [
     async authorize(credentials: Record<string, string> | undefined) {
       if (!credentials?.email || !credentials?.password) {
         return null;
+      }
+
+      const ip = getClientIp();
+      const limit = await rateLimit('login', `${ip}:${credentials.email.toLowerCase()}`, 10, 15 * 60 * 1000);
+      if (!limit.success) {
+        throw new Error('Too many login attempts. Please try again later.');
       }
 
       const user = await db.user.findUnique({

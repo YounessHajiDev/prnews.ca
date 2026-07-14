@@ -4,6 +4,8 @@ import { db } from '@/lib/db/prisma';
 import { redirect } from 'next/navigation';
 import { getTranslations, getLocale } from 'next-intl/server';
 import { formatDate } from '@/lib/utils';
+import { SubmissionWizard } from '@/components/app/release-submission-form';
+import { createRelease } from '@/lib/actions/releases';
 
 export default async function SubmitPage() {
   const session = await getServerSession(authOptions);
@@ -32,7 +34,7 @@ export default async function SubmitPage() {
           ))}
         </div>
       )}
-      <p className="text-wire-muted">{t('comingSoon')}</p>
+      <SubmissionWizard onSubmit={createRelease} />
     </div>
   );
 }

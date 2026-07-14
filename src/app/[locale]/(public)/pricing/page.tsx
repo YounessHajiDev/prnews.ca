@@ -80,7 +80,7 @@ export default async function PricingPage() {
               key={plan.name}
               className={`card flex flex-col p-8 ${plan.featured ? 'ring-2 ring-wire-brass' : ''}`}
             >
-              <h3 className="font-display text-xl font-bold">{plan.name}</h3>
+              <h2 className="font-display text-xl font-bold">{plan.name}</h2>
               <p className="mb-4 text-sm text-wire-slate">{plan.description}</p>
               {plan.price ? (
                 <div className="mb-6">
@@ -93,7 +93,7 @@ export default async function PricingPage() {
               <ul className="mb-8 flex-1 space-y-3">
                 {plan.features.map((f) => (
                   <li key={f} className="flex items-start gap-2 text-sm">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-wire-brass" />
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-wire-brass-dark" />
                     {f}
                   </li>
                 ))}
@@ -121,7 +121,7 @@ export default async function PricingPage() {
               <thead>
                 <tr className="border-b border-wire-rule">
                   <th className="p-4 font-semibold">{t('comparison.feature')}</th>
-                  <th className="p-4 font-semibold text-wire-brass">{t('comparison.prnews')}</th>
+                  <th className="p-4 font-semibold text-wire-brass-dark">{t('comparison.prnews')}</th>
                   <th className="p-4 font-semibold text-wire-slate">{t('comparison.others')}</th>
                 </tr>
               </thead>

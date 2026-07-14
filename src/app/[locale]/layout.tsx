@@ -5,24 +5,25 @@ import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { SiteHeader } from '@/components/layout/site-header';
 import { SiteFooter } from '@/components/layout/site-footer';
+import { SentryInit } from '@/components/providers/sentry-init';
 import { routing } from '@/i18n/routing';
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-display',
-  display: 'swap',
+  display: 'optional',
 });
 
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-body',
-  display: 'swap',
+  display: 'optional',
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-mono',
-  display: 'swap',
+  display: 'optional',
 });
 
 export const metadata: Metadata = {
@@ -63,6 +64,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
             <SiteFooter />
           </div>
         </NextIntlClientProvider>
+        <SentryInit />
       </body>
     </html>
   );

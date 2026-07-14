@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth/auth';
 import { db } from '@/lib/db/prisma';
-import { redirect } from 'next/navigation';
+import { redirect, notFound } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { getTranslations, getLocale } from 'next-intl/server';
 import { formatDate } from '@/lib/utils';
@@ -23,7 +23,7 @@ export default async function ReleaseDetailPage({
     where: { id },
     include: {
       company: { select: { name: true, slug: true } },
-      author: { select: { name: true } },
+      author: { select: { name: true, email: true } },
       distributionLogs: {
         include: { partner: true },
       },
@@ -31,7 +31,12 @@ export default async function ReleaseDetailPage({
   });
 
   if (!release) {
-    return <div className="p-8">{t('notFound')}</div>;
+    notFound();
+  }
+
+  // Multi-tenant isolation: users can only see their own releases; admins/editors can see all
+  if (release.authorId !== session.user.id && !['ADMIN', 'EDITOR'].includes(session.user.role as string)) {
+    notFound();
   }
 
   const delivered = release.distributionLogs.filter((l: any) => l.status === 'delivered').length;

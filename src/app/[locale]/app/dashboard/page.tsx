@@ -65,7 +65,7 @@ export default async function DashboardPage() {
         {stats.map(({ label, value, icon: Icon }) => (
           <div key={label} className="card flex items-center gap-4 p-5">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-wire-rule bg-wire-paper">
-              <Icon className="h-5 w-5 text-wire-brass" />
+              <Icon className="h-5 w-5 text-wire-brass-dark" />
             </div>
             <div>
               <div className="text-sm text-wire-slate">{label}</div>
