@@ -29,7 +29,7 @@ export default async function HowItWorksPage() {
         <div className="space-y-10">
           {steps.map(({ step, title, desc }) => (
             <div key={step} className="flex gap-5">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-wire-rule bg-wire-surface font-mono text-xl font-bold text-wire-brass">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-wire-rule bg-wire-surface font-mono text-xl font-bold text-wire-brass-dark">
                 {step}
               </div>
               <div className="pt-1">

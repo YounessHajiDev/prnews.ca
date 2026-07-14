@@ -15,7 +15,7 @@ export function EmptyState({ icon: Icon, title, description, action, className }
   return (
     <div className={cn('flex flex-col items-center justify-center py-16 text-center', className || '')}>
       <div className="mb-4 rounded-full border border-wire-brass/20 bg-wire-brass/10 p-4">
-        <Icon className="h-8 w-8 text-wire-brass" aria-hidden="true" />
+        <Icon className="h-8 w-8 text-wire-brass-dark" aria-hidden="true" />
       </div>
       <h2 className="heading-sm mb-2">{title}</h2>
       <p className="body-small max-w-sm text-wire-slate">{description}</p>

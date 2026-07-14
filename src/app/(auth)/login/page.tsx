@@ -31,12 +31,12 @@ export default async function LoginPage() {
           <LoginForm t={strings} />
 
           <div className="mt-6 flex items-center justify-between text-sm">
-            <a href="/forgot-password" className="text-wire-amber hover:underline">
+            <a href="/forgot-password" className="text-wire-brass-dark hover:underline">
               {t('forgotPassword')}
             </a>
             <span className="text-wire-muted">
               {t('noAccount')}{' '}
-              <a href="/signup" className="text-wire-amber hover:underline">
+              <a href="/signup" className="text-wire-brass-dark hover:underline">
                 {t('signUp')}
               </a>
             </span>

@@ -4,29 +4,49 @@ import { db } from '@/lib/db/prisma';
 import { notFound } from 'next/navigation';
 import { Breadcrumb } from '@/components/layout/breadcrumb';
 import { formatDate } from '@/lib/utils';
-import { getTranslations, getLocale } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
+import { getNewsroomStructuredData } from '@/lib/seo';
 
 export async function generateMetadata({
   params,
 }: {
-  params: { companySlug: string };
+  params: { 'company-slug': string; locale: string };
 }): Promise<Metadata> {
-  const { companySlug } = params;
+  const { 'company-slug': companySlug, locale } = params;
   const company = await db.company.findUnique({
     where: { slug: companySlug },
-    select: { name: true },
+    select: { name: true, bio: true },
   });
-  return { title: company?.name || 'Newsroom' };
+  const title = company?.name || 'Newsroom';
+  const url = `https://prnews.ca/${locale}/newsroom/${companySlug}`;
+  return {
+    title,
+    description: company?.bio || `${title} newsroom on PR NEWS`,
+    alternates: {
+      canonical: url,
+      languages: {
+        'en-CA': `https://prnews.ca/en/newsroom/${companySlug}`,
+        'fr-CA': `https://prnews.ca/fr/newsroom/${companySlug}`,
+        'x-default': `https://prnews.ca/en/newsroom/${companySlug}`,
+      },
+    },
+    openGraph: {
+      title,
+      description: company?.bio || `${title} newsroom on PR NEWS`,
+      url,
+      siteName: 'PR NEWS',
+      locale: locale === 'fr' ? 'fr_CA' : 'en_CA',
+    },
+  };
 }
 
 export default async function NewsroomPage({
   params,
 }: {
-  params: { companySlug: string };
+  params: { 'company-slug': string; locale: string };
 }) {
-  const { companySlug } = params;
-  const t = await getTranslations('newsroom');
-  const locale = await getLocale();
+  const { 'company-slug': companySlug, locale } = params;
+  const t = await getTranslations({ locale, namespace: 'newsroom' });
 
   const company = await db.company.findUnique({
     where: { slug: companySlug },
@@ -48,6 +68,20 @@ export default async function NewsroomPage({
 
   return (
     <section className="section bg-wire-bg">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: getNewsroomStructuredData(
+            {
+              name: company.name,
+              slug: company.slug,
+              logoUrl: company.logoUrl || undefined,
+              boilerplate: company.boilerplate || undefined,
+            },
+            locale
+          ),
+        }}
+      />
       <div className="container-narrow">
         <Breadcrumb items={[
           { label: t('breadcrumb'), href: '/newsroom' },
@@ -72,7 +106,7 @@ export default async function NewsroomPage({
               href={company.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-wire-amber hover:underline"
+              className="text-sm text-wire-brass-dark hover:underline"
             >
               {company.website}
             </a>
@@ -87,7 +121,7 @@ export default async function NewsroomPage({
             {company.releases.map((release: any) => (
               <div key={release.id} className="card p-6">
                 <h3 className="font-display font-semibold mb-2">
-                  <a href={`/news/${release.categorySlug}/${release.slug}`} className="hover:text-wire-amber">
+                  <a href={`/news/${release.categorySlug}/${release.slug}`} className="hover:text-wire-brass-dark">
                     {release.headline}
                   </a>
                 </h3>

@@ -34,7 +34,7 @@ export default async function ReleasesPage() {
                   {r.publishedAt ? formatDate(r.publishedAt, locale) : '—'} · {r.status.toLowerCase()}
                 </p>
               </div>
-              <a href={`/app/releases/${r.id}`} className="text-sm text-wire-amber hover:underline">
+              <a href={`/app/releases/${r.id}`} className="text-sm text-wire-brass-dark hover:underline">
                 {t('view')}
               </a>
             </div>

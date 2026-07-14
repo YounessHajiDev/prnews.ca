@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { WireTicker } from '@/components/wire-ticker/wire-ticker';
-import { CanadaMap } from '@/components/canada-map/canada-map';
 import { CountUp } from '@/components/ui/count-up';
+import { LazyCanadaMap } from '@/components/canada-map/lazy-canada-map';
 import { Hero } from '@/components/home/hero';
 import { TrustBar } from '@/components/home/trust-bar';
 import { FeatureGrid } from '@/components/home/feature-grid';
@@ -40,7 +40,7 @@ export default async function HomePage() {
             <div className="mb-12 grid gap-8 sm:grid-cols-3">
               {STATS.map((stat) => (
                 <div key={stat.labelKey} className="text-center">
-                  <div className="mb-1 font-display text-3xl font-bold text-wire-brass md:text-4xl">
+                  <div className="mb-1 font-display text-3xl font-bold text-wire-brass-dark md:text-4xl">
                     <CountUp end={stat.value} />
                   </div>
                   <div className="text-sm uppercase tracking-wider text-wire-slate">
@@ -49,9 +49,9 @@ export default async function HomePage() {
                 </div>
               ))}
             </div>
-            <CanadaMap />
+            <LazyCanadaMap />
             <p className="mx-auto mt-6 max-w-xl text-center text-sm text-wire-slate">{t('map.caption')}</p>
-            <p className="mx-auto mt-2 max-w-xl text-center text-xs text-wire-slate/70">{t('map.credit')}</p>
+            <p className="mx-auto mt-2 max-w-xl text-center text-xs text-wire-slate">{t('map.credit')}</p>
           </div>
         </section>
 

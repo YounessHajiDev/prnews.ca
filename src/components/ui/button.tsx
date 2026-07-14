@@ -12,12 +12,12 @@ const buttonVariants = (props: { variant?: ButtonProps['variant']; size?: Button
   const base =
     'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-brass focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50';
   const variants: Record<string, string> = {
-    default: 'bg-wire-brass text-white hover:bg-wire-brass-dark',
+    default: 'bg-wire-brass text-wire-ink hover:bg-wire-brass-dark hover:text-white',
     destructive: 'bg-wire-red text-white hover:bg-wire-red/90',
     outline: 'border border-wire-rule bg-wire-surface text-wire-ink hover:bg-wire-ink hover:text-white',
     secondary: 'bg-wire-slate text-white hover:bg-wire-slate/80',
     ghost: 'hover:bg-wire-ink hover:text-white',
-    link: 'text-wire-brass underline-offset-4 hover:underline',
+    link: 'text-wire-brass-dark underline-offset-4 hover:underline',
   };
   const sizes: Record<string, string> = {
     default: 'h-10 px-4 py-2',

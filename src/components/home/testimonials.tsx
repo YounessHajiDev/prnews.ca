@@ -32,7 +32,7 @@ export function Testimonials() {
           {items.map((item, i) => (
             <AnimatedSection key={item.author} animation="fade-up" delay={i * 120}>
               <div className="card flex h-full flex-col p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                <Quote className="mb-6 h-8 w-8 text-wire-brass" />
+                <Quote className="mb-6 h-8 w-8 text-wire-brass-dark" />
                 <blockquote className="mb-8 flex-1 text-lg leading-relaxed">
                   &ldquo;{item.quote}&rdquo;
                 </blockquote>

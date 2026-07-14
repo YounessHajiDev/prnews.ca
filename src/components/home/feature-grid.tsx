@@ -33,7 +33,7 @@ export function FeatureGrid() {
           {FEATURES.map(({ key, icon: Icon }, i) => (
             <AnimatedSection key={key} animation="fade-up" delay={i * 100} className="group">
               <div className="card h-full p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-wire-brass/40">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg border border-wire-brass/20 bg-wire-brass/10 text-wire-brass transition-colors group-hover:bg-wire-brass group-hover:text-white">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg border border-wire-brass/20 bg-wire-brass/10 text-wire-brass-dark transition-colors group-hover:bg-wire-brass group-hover:text-wire-ink">
                   <Icon className="h-6 w-6" />
                 </div>
                 <h3 className="heading-sm mb-2">{t(`features.${key}.title`)}</h3>

@@ -3,31 +3,36 @@ import { notFound } from 'next/navigation';
 import { db } from '@/lib/db/prisma';
 import { Breadcrumb } from '@/components/layout/breadcrumb';
 import { formatDate } from '@/lib/utils';
-import { getTranslations, getLocale } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 import { generateReleaseMetadata, getStructuredData } from '@/lib/seo';
 import { sanitizeBody } from '@/lib/sanitize';
 
 export const revalidate = 60;
 
-export async function generateStaticParams() {
+export async function generateStaticParams({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  void params;
   const releases = await db.pressRelease.findMany({
     where: { status: 'PUBLISHED' },
     select: { slug: true, categorySlug: true },
     take: 100,
   });
 
-  return releases.flatMap((r) => [
-    { categorySlug: r.categorySlug, slug: r.slug, locale: 'en' },
-    { categorySlug: r.categorySlug, slug: r.slug, locale: 'fr' },
-  ]);
+  return releases.map((r) => ({
+    'category-slug': r.categorySlug,
+    slug: r.slug,
+  }));
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: { categorySlug: string; slug: string; locale: string };
+  params: { 'category-slug': string; slug: string; locale: string };
 }): Promise<Metadata> {
-  const { slug, categorySlug, locale } = params;
+  const { slug, 'category-slug': categorySlug, locale } = params;
   const release = await db.pressRelease.findFirst({
     where: { slug, categorySlug, status: 'PUBLISHED' },
     select: {
@@ -62,11 +67,11 @@ export async function generateMetadata({
 export default async function ReleasePage({
   params,
 }: {
-  params: { categorySlug: string; slug: string; locale: string };
+  params: { 'category-slug': string; slug: string; locale: string };
 }) {
-  const { categorySlug, slug, locale } = params;
-  const t = await getTranslations('news');
-  const tNav = await getTranslations('nav');
+  const { 'category-slug': categorySlug, slug, locale } = params;
+  const t = await getTranslations({ locale, namespace: 'news' });
+  const tNav = await getTranslations({ locale, namespace: 'nav' });
 
   const release = await db.pressRelease.findFirst({
     where: { slug, categorySlug, status: 'PUBLISHED' },

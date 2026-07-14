@@ -21,8 +21,9 @@ export function generateReleaseMetadata(
     alternates: {
       canonical: url,
       languages: {
-        en: `/en/news/${release.categorySlug}/${release.slug}`,
-        fr: `/fr/news/${release.categorySlug}/${release.slug}`,
+        'en-CA': `https://prnews.ca/en/news/${release.categorySlug}/${release.slug}`,
+        'fr-CA': `https://prnews.ca/fr/news/${release.categorySlug}/${release.slug}`,
+        'x-default': `https://prnews.ca/en/news/${release.categorySlug}/${release.slug}`,
       } satisfies Record<string, string>,
     },
     openGraph: {
@@ -169,6 +170,53 @@ export function getNewsroomStructuredData(company: {
             '@type': 'ListItem',
             position: 3,
             name: company.name,
+            item: url,
+          },
+        ],
+      },
+    ],
+  };
+
+  return JSON.stringify(data, null, 2);
+}
+
+export function getCategoryStructuredData(categorySlug: string, locale: string): string {
+  const url = `https://prnews.ca/${locale}/news/${categorySlug}`;
+
+  const data = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'CollectionPage',
+        '@id': url,
+        name: categorySlug,
+        url,
+        inLanguage: locale === 'fr' ? 'fr-CA' : 'en-CA',
+        isPartOf: {
+          '@type': 'WebSite',
+          name: 'PR NEWS',
+          url: 'https://prnews.ca',
+        },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://prnews.ca',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'News',
+            item: `https://prnews.ca/${locale}/news`,
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: categorySlug,
             item: url,
           },
         ],

@@ -4,24 +4,45 @@ import { notFound } from 'next/navigation';
 import { ReleaseGrid } from '@/components/news/release-grid';
 import { Breadcrumb } from '@/components/layout/breadcrumb';
 import { getTranslations } from 'next-intl/server';
+import { getCategoryStructuredData } from '@/lib/seo';
 
 export async function generateMetadata({
   params,
 }: {
-  params: { categorySlug: string };
+  params: { 'category-slug': string; locale: string };
 }): Promise<Metadata> {
-  const { categorySlug } = params;
-  return { title: `${categorySlug} — PR NEWS` };
+  const { 'category-slug': categorySlug, locale } = params;
+  const title = `${categorySlug} — PR NEWS`;
+  const url = `https://prnews.ca/${locale}/news/${categorySlug}`;
+  return {
+    title,
+    description: `Latest ${categorySlug} press releases on PR NEWS`,
+    alternates: {
+      canonical: url,
+      languages: {
+        'en-CA': `https://prnews.ca/en/news/${categorySlug}`,
+        'fr-CA': `https://prnews.ca/fr/news/${categorySlug}`,
+        'x-default': `https://prnews.ca/en/news/${categorySlug}`,
+      },
+    },
+    openGraph: {
+      title,
+      description: `Latest ${categorySlug} press releases on PR NEWS`,
+      url,
+      siteName: 'PR NEWS',
+      locale: locale === 'fr' ? 'fr_CA' : 'en_CA',
+    },
+  };
 }
 
 export default async function CategoryPage({
   params,
 }: {
-  params: { categorySlug: string };
+  params: { 'category-slug': string; locale: string };
 }) {
-  const { categorySlug } = params;
-  const t = await getTranslations('news');
-  const tNav = await getTranslations('nav');
+  const { 'category-slug': categorySlug, locale } = params;
+  const t = await getTranslations({ locale, namespace: 'news' });
+  const tNav = await getTranslations({ locale, namespace: 'nav' });
 
   const releases = await db.pressRelease.findMany({
     where: {
@@ -37,6 +58,12 @@ export default async function CategoryPage({
 
   return (
     <section className="section bg-wire-bg">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: getCategoryStructuredData(categorySlug, locale),
+        }}
+      />
       <div className="container-page">
         <Breadcrumb items={[
           { label: tNav('news'), href: '/news' },

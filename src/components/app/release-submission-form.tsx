@@ -178,9 +178,9 @@ export function SubmissionWizard({ initialData, onSubmit }: SubmissionWizardProp
                 onClick={() => setStep(s.key)}
                 className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
                   i === currentStepIndex
-                    ? 'bg-wire-amber text-white'
+                    ? 'bg-wire-brass-dark text-white'
                     : i < currentStepIndex
-                      ? 'bg-wire-amber/20 text-wire-amber'
+                      ? 'bg-wire-brass/20 text-wire-brass-dark'
                       : 'text-wire-muted hover:text-wire-charcoal'
                 }`}
               >
@@ -192,7 +192,7 @@ export function SubmissionWizard({ initialData, onSubmit }: SubmissionWizardProp
         </div>
         <div className="h-1 bg-wire-border rounded-full overflow-hidden">
           <div
-            className="h-full bg-wire-amber rounded-full transition-all duration-300"
+            className="h-full bg-wire-brass-dark rounded-full transition-all duration-300"
             style={{ width: `${((currentStepIndex + 1) / steps.length) * 100}%` }}
           />
         </div>
@@ -379,7 +379,7 @@ export function SubmissionWizard({ initialData, onSubmit }: SubmissionWizardProp
               />
               {data.pdfUrl ? (
                 <div className="flex items-center justify-between p-3 rounded-lg border border-wire-border bg-wire-bg">
-                  <a href={data.pdfUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-wire-amber hover:underline truncate">
+                  <a href={data.pdfUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-wire-brass-dark hover:underline truncate">
                     {data.pdfUrl.split('/').pop()}
                   </a>
                   <button
@@ -491,7 +491,7 @@ export function SubmissionWizard({ initialData, onSubmit }: SubmissionWizardProp
                 {data.pdfUrl && <p><strong>{t('media.pdf')}:</strong> {data.pdfUrl.split('/').pop()}</p>}
               </div>
             </div>
-            <div className="flex items-center gap-3 p-4 rounded-lg bg-wire-amber/10 border border-wire-amber/30">
+            <div className="flex items-center gap-3 p-4 rounded-lg bg-wire-brass/10 border border-wire-brass/30">
               <p className="text-sm text-wire-muted">{t('review.turnaround')}</p>
             </div>
           </div>

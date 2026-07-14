@@ -33,7 +33,7 @@ export default async function SignupPage() {
 
           <p className="text-sm text-wire-muted mt-4 text-center">
             {t('alreadyHaveAccount')}{' '}
-            <a href="/login" className="text-wire-amber hover:underline">
+            <a href="/login" className="text-wire-brass-dark hover:underline">
               {t('login')}
             </a>
           </p>

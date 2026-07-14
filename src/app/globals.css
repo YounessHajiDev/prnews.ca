@@ -15,7 +15,7 @@
   /* Brass accent */
   --color-wire-brass: #B8924A;
   --color-wire-brass-light: #D1B27A;
-  --color-wire-brass-dark: #8F7238;
+  --color-wire-brass-dark: #7A5F26;
 
   /* Status / wire-red (reserved for live/delivery states) */
   --color-wire-red: #B23A2E;
@@ -24,9 +24,9 @@
   --color-wire-error: #B23A2E;
 
   /* Utility neutrals */
-  --color-wire-slate: #6B7280;
+  --color-wire-slate: #4B5563;
   --color-wire-rule: #E4E0D6;
-  --color-wire-muted: #6B7280;
+  --color-wire-muted: #4B5563;
 
   /* Legacy aliases — keep until components are fully migrated */
   --color-wire-charcoal: #14161C;
@@ -42,6 +42,7 @@
   --animate-marquee-slow: marquee 60s linear infinite;
   --animate-pulse-node: pulse-node 2.5s ease-in-out infinite;
   --animate-fade-in-up: fade-in-up 0.8s ease-out both;
+  --animate-slide-up: slide-up 0.7s ease-out both;
 
   @keyframes marquee {
     0% { transform: translateX(0); }
@@ -56,6 +57,11 @@
   @keyframes fade-in-up {
     0% { opacity: 0; transform: translateY(12px); }
     100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slide-up {
+    0% { transform: translateY(12px); }
+    100% { transform: translateY(0); }
   }
 
   --animate-fade-in: fade-in 0.8s ease-out both;
@@ -119,7 +125,7 @@
 
   ::selection {
     background-color: var(--color-wire-brass);
-    color: white;
+    color: var(--color-wire-ink);
   }
 }
 
@@ -139,7 +145,7 @@
   }
 
   .prose-release a {
-    @apply text-[var(--color-wire-brass)] no-underline hover:underline;
+    @apply text-[var(--color-wire-brass-dark)] no-underline hover:underline;
   }
 
   .prose-release img {
@@ -184,7 +190,7 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-md bg-[var(--color-wire-brass)] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[var(--color-wire-brass-dark)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-wire-brass)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+    @apply inline-flex items-center justify-center rounded-md bg-[var(--color-wire-brass)] px-5 py-2.5 text-sm font-medium text-[var(--color-wire-ink)] transition-colors hover:bg-[var(--color-wire-brass-dark)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-wire-brass)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
   }
 
   .btn-outline {

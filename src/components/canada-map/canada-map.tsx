@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
 import CanadaMapData from '@svg-country-maps/canada';
@@ -16,7 +16,7 @@ interface CanadaMapProps {
   distributionPoints?: DistributionPoint[];
 }
 
-const GRID_STEP = 16;
+const GRID_STEP = 56;
 
 function mulberry32(seed: number) {
   return function () {
@@ -34,7 +34,23 @@ function seededRandom(seed: number) {
 export function CanadaMap({ distributionPoints }: CanadaMapProps) {
   const t = useTranslations('canadaMap');
   const reducedMotion = useReducedMotion();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
   const [activeIds, setActiveIds] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setVisible(true);
+      },
+      { threshold: 0.1, rootMargin: '100px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const viewBoxParts = CanadaMapData.viewBox.split(' ').map(Number);
   const viewBoxW = viewBoxParts[2] ?? 793;
@@ -61,7 +77,7 @@ export function CanadaMap({ distributionPoints }: CanadaMapProps) {
   }, [viewBoxW, viewBoxH]);
 
   useEffect(() => {
-    if (reducedMotion) {
+    if (!visible || reducedMotion) {
       setActiveIds(new Set());
       return;
     }
@@ -79,7 +95,7 @@ export function CanadaMap({ distributionPoints }: CanadaMapProps) {
     pickActive();
     const interval = setInterval(pickActive, 3000);
     return () => clearInterval(interval);
-  }, [dots, reducedMotion]);
+  }, [dots, reducedMotion, visible]);
 
   const dataActiveIds = useMemo(
     () => new Set((distributionPoints ?? []).filter((p) => p.active).map((p) => p.id)),
@@ -88,7 +104,16 @@ export function CanadaMap({ distributionPoints }: CanadaMapProps) {
   const effectiveActiveIds = distributionPoints?.length ? dataActiveIds : activeIds;
 
   return (
-    <div className="relative mx-auto flex h-[55vh] max-h-[520px] w-full items-center justify-center">
+    <div
+      ref={containerRef}
+      className="relative mx-auto flex h-[55vh] max-h-[520px] w-full items-center justify-center"
+    >
+      {!visible ? (
+        <div
+          className="h-full w-full animate-pulse rounded-2xl bg-wire-paper"
+          aria-hidden="true"
+        />
+      ) : (
       <svg
         viewBox={CanadaMapData.viewBox}
         className="h-full w-auto"
@@ -140,6 +165,7 @@ export function CanadaMap({ distributionPoints }: CanadaMapProps) {
           ))}
         </g>
       </svg>
+      )}
     </div>
   );
 }

@@ -36,7 +36,7 @@ export async function ReleaseCard({ release }: ReleaseCardProps) {
             </span>
           )}
         </div>
-        <h3 className="mb-2 font-display text-lg font-semibold transition-colors group-hover:text-wire-brass">
+        <h3 className="mb-2 font-display text-lg font-semibold transition-colors group-hover:text-wire-brass-dark">
           <Link href={href} className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-brass focus-visible:ring-offset-2">
             {release.headline}
           </Link>
@@ -52,7 +52,7 @@ export async function ReleaseCard({ release }: ReleaseCardProps) {
           </div>
           <Link
             href={href}
-            className="flex items-center gap-1 rounded-sm text-wire-brass hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-brass focus-visible:ring-offset-2"
+            className="flex items-center gap-1 rounded-sm text-wire-brass-dark hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-brass focus-visible:ring-offset-2"
           >
             {t('read')} <ArrowRight className="h-3 w-3" />
           </Link>
