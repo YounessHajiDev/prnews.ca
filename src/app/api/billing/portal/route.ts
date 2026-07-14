@@ -1,5 +1,4 @@
 import { stripe } from '@/lib/stripe';
-import { db } from '@/lib/db/prisma';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth/auth';
 
@@ -7,6 +6,13 @@ export async function POST() {
   const session = await getServerSession(authOptions);
   if (!session) {
     return Response.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  if (!stripe) {
+    return Response.json(
+      { error: 'Stripe is not configured' },
+      { status: 503 }
+    );
   }
 
   try {
