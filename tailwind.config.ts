@@ -7,17 +7,26 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'wire-charcoal': '#14161C',
-        'wire-amber': '#D4A017',
-        'wire-amber-light': '#EAB82A',
-        'wire-amber-dark': '#B8860B',
-        'wire-bg': '#FAFAF8',
+        'wire-ink': '#14161C',
+        'wire-paper': '#F7F5EF',
         'wire-surface': '#FFFFFF',
-        'wire-border': '#E5E7EB',
+        'wire-brass': '#B8924A',
+        'wire-brass-light': '#D1B27A',
+        'wire-brass-dark': '#8F7238',
+        'wire-red': '#B23A2E',
+        'wire-slate': '#6B7280',
+        'wire-rule': '#E4E0D6',
+        // Legacy aliases
+        'wire-charcoal': '#14161C',
+        'wire-bg': '#F7F5EF',
+        'wire-amber': '#B8924A',
+        'wire-amber-light': '#D1B27A',
+        'wire-amber-dark': '#8F7238',
+        'wire-border': '#E4E0D6',
         'wire-muted': '#6B7280',
-        'wire-success': '#059669',
-        'wire-warning': '#D97706',
-        'wire-error': '#DC2626',
+        'wire-success': '#0F5C3E',
+        'wire-warning': '#A66A18',
+        'wire-error': '#B23A2E',
       },
       fontFamily: {
         display: ['var(--font-display)', ...fontFamily.serif],
@@ -25,18 +34,24 @@ module.exports = {
         mono: ['var(--font-mono)', ...fontFamily.mono],
       },
       keyframes: {
-        'slide-in': {
-          '0%': { transform: 'translateX(100%)' },
-          '100%': { transform: 'translateX(-100%)' },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
         },
-        'pulse-glow': {
-          '0%, 100%': { opacity: '1' },
-          '50%': { opacity: '0.5' },
+        'pulse-node': {
+          '0%, 100%': { opacity: '0.9' },
+          '50%': { opacity: '0.25' },
+        },
+        'fade-in-up': {
+          '0%': { opacity: '0', transform: 'translateY(12px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
       },
       animation: {
-        'slide-in': 'slide-in 30s linear infinite',
-        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+        marquee: 'marquee 40s linear infinite',
+        'marquee-slow': 'marquee 60s linear infinite',
+        'pulse-node': 'pulse-node 2.5s ease-in-out infinite',
+        'fade-in-up': 'fade-in-up 0.8s ease-out both',
       },
     },
   },

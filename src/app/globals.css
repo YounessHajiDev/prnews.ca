@@ -5,32 +5,71 @@
 @theme inline {
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
-  --color-wire-charcoal: #14161C;
-  --color-wire-amber: #D4A017;
-  --color-wire-amber-light: #EAB82A;
-  --color-wire-amber-dark: #B8860B;
-  --color-wire-bg: #FAFAF8;
+  /* Ink + paper */
+  --color-wire-ink: #14161C;
+  --color-wire-paper: #F7F5EF;
   --color-wire-surface: #FFFFFF;
-  --color-wire-border: #E5E7EB;
+
+  /* Brass accent */
+  --color-wire-brass: #B8924A;
+  --color-wire-brass-light: #D1B27A;
+  --color-wire-brass-dark: #8F7238;
+
+  /* Status / wire-red (reserved for live/delivery states) */
+  --color-wire-red: #B23A2E;
+  --color-wire-success: #0F5C3E;
+  --color-wire-warning: #A66A18;
+  --color-wire-error: #B23A2E;
+
+  /* Utility neutrals */
+  --color-wire-slate: #6B7280;
+  --color-wire-rule: #E4E0D6;
   --color-wire-muted: #6B7280;
-  --color-wire-success: #059669;
-  --color-wire-warning: #D97706;
-  --color-wire-error: #DC2626;
+
+  /* Legacy aliases — keep until components are fully migrated */
+  --color-wire-charcoal: #14161C;
+  --color-wire-bg: #F7F5EF;
+  --color-wire-amber: #B8924A;
+  --color-wire-amber-light: #D1B27A;
+  --color-wire-amber-dark: #8F7238;
+  --color-wire-border: #E4E0D6;
+}
+
+@theme {
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee-slow: marquee 60s linear infinite;
+  --animate-pulse-node: pulse-node 2.5s ease-in-out infinite;
+  --animate-fade-in-up: fade-in-up 0.8s ease-out both;
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @keyframes pulse-node {
+    0%, 100% { opacity: 0.9; }
+    50% { opacity: 0.25; }
+  }
+
+  @keyframes fade-in-up {
+    0% { opacity: 0; transform: translateY(12px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
 }
 
 @layer base {
   * {
-    @apply border-[var(--color-wire-border)];
+    @apply border-[var(--color-wire-rule)];
   }
 
   body {
-    @apply bg-[var(--color-wire-bg)] font-body text-[var(--color-wire-charcoal)] antialiased;
+    @apply bg-[var(--color-wire-paper)] font-body text-[var(--color-wire-ink)] antialiased;
   }
 
   ::selection {
-    background-color: var(--color-wire-amber);
+    background-color: var(--color-wire-brass);
     color: white;
   }
 }
@@ -43,7 +82,7 @@
   .prose-release h1,
   .prose-release h2,
   .prose-release h3 {
-    @apply font-display text-wire-charcoal font-semibold;
+    @apply font-display text-[var(--color-wire-ink)] font-semibold;
   }
 
   .prose-release p {
@@ -51,7 +90,7 @@
   }
 
   .prose-release a {
-    @apply text-wire-amber no-underline hover:underline;
+    @apply text-[var(--color-wire-brass)] no-underline hover:underline;
   }
 
   .prose-release img {
@@ -60,7 +99,7 @@
 
   .prose-release blockquote {
     @apply border-l-4 pl-4 italic;
-    border-color: var(--color-wire-amber);
+    border-color: var(--color-wire-brass);
   }
 
   .prose-release strong {
@@ -68,7 +107,7 @@
   }
 
   .heading-xl {
-    @apply font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight;
+    @apply font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05];
   }
 
   .heading-lg {
@@ -84,7 +123,7 @@
   }
 
   .body-large {
-    @apply font-body text-lg leading-relaxed;
+    @apply font-body text-lg md:text-xl leading-relaxed;
   }
 
   .body-base {
@@ -96,15 +135,15 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-md bg-wire-amber px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-wire-amber-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-amber focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+    @apply inline-flex items-center justify-center rounded-md bg-[var(--color-wire-brass)] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[var(--color-wire-brass-dark)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-wire-brass)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
   }
 
   .btn-outline {
-    @apply inline-flex items-center justify-center rounded-md border border-wire-border bg-transparent px-5 py-2.5 text-sm font-medium transition-colors hover:bg-wire-charcoal hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-amber focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+    @apply inline-flex items-center justify-center rounded-md border border-[var(--color-wire-rule)] bg-[var(--color-wire-surface)] px-5 py-2.5 text-sm font-medium text-[var(--color-wire-ink)] transition-colors hover:bg-[var(--color-wire-ink)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-wire-brass)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
   }
 
   .card {
-    @apply rounded-lg border border-wire-border bg-wire-surface shadow-sm;
+    @apply rounded-lg border border-[var(--color-wire-rule)] bg-[var(--color-wire-surface)] shadow-sm;
   }
 
   .section {
@@ -117,5 +156,20 @@
 
   .container-narrow {
     @apply mx-auto max-w-4xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Editorial dateline mono treatment */
+  .dateline {
+    @apply font-mono text-xs uppercase tracking-widest text-[var(--color-wire-slate)];
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

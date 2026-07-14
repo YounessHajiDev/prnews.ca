@@ -17,41 +17,41 @@ interface ReleaseCardProps {
 }
 
 export function ReleaseCard({ release }: ReleaseCardProps) {
+  const href = `/news/${release.category.toLowerCase().replace(/\s+/g, '-')}/${release.slug}`;
+
   return (
-    <article className="card overflow-hidden group hover:shadow-md transition-shadow">
+    <article className="card group overflow-hidden transition-shadow hover:shadow-md">
       <div className="p-6">
-        <div className="flex items-center gap-2 mb-3">
+        <div className="mb-3 flex items-center gap-2">
           <Badge variant="secondary" className="text-xs">
             {release.category}
           </Badge>
           {release.province && (
-            <span className="flex items-center gap-1 text-xs text-wire-muted">
-              <MapPin className="w-3 h-3" />
+            <span className="flex items-center gap-1 text-xs text-wire-slate">
+              <MapPin className="h-3 w-3" />
               {release.province}
             </span>
           )}
         </div>
-        <h3 className="font-display text-lg font-semibold mb-2 group-hover:text-wire-amber transition-colors">
-          <Link href={`/news/${release.category.toLowerCase().replace(/\s+/g, '-')}/${release.slug}`}>
+        <h3 className="mb-2 font-display text-lg font-semibold transition-colors group-hover:text-wire-brass">
+          <Link href={href} className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-brass focus-visible:ring-offset-2 rounded-sm">
             {release.headline}
           </Link>
         </h3>
-        <p className="text-sm text-wire-muted line-clamp-2 mb-4">
-          {release.summary}
-        </p>
-        <div className="flex items-center justify-between text-xs text-wire-muted">
+        <p className="mb-4 line-clamp-2 text-sm text-wire-slate">{release.summary}</p>
+        <div className="flex items-center justify-between text-xs text-wire-slate">
           <div className="flex items-center gap-3">
-            <span className="font-medium text-wire-charcoal">{release.company}</span>
+            <span className="font-medium text-wire-ink">{release.company}</span>
             <span className="flex items-center gap-1">
-              <Calendar className="w-3 h-3" />
+              <Calendar className="h-3 w-3" />
               {formatDate(release.publishedAt)}
             </span>
           </div>
           <Link
-            href={`/news/${release.category.toLowerCase().replace(/\s+/g, '-')}/${release.slug}`}
-            className="flex items-center gap-1 text-wire-amber hover:underline"
+            href={href}
+            className="flex items-center gap-1 text-wire-brass hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wire-brass focus-visible:ring-offset-2 rounded-sm"
           >
-            Read <ArrowRight className="w-3 h-3" />
+            Read <ArrowRight className="h-3 w-3" />
           </Link>
         </div>
       </div>
