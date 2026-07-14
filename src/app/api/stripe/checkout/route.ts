@@ -1,5 +1,4 @@
 import { stripe } from '@/lib/stripe';
-import { db } from '@/lib/db/prisma';
 
 const PLANS = {
   starter: {
@@ -17,6 +16,13 @@ const PLANS = {
 };
 
 export async function GET() {
+  if (!stripe) {
+    return Response.json(
+      { error: 'Stripe is not configured' },
+      { status: 503 }
+    );
+  }
+
   try {
     const products = await stripe.products.list({
       expand: ['data.default_price'],
@@ -33,6 +39,13 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  if (!stripe) {
+    return Response.json(
+      { error: 'Stripe is not configured' },
+      { status: 503 }
+    );
+  }
+
   const body = await request.json();
   const { priceId, quantity = 1 } = body;
 

@@ -1,6 +1,13 @@
 import { stripe } from '@/lib/stripe';
 
 export async function POST(request: Request) {
+  if (!stripe) {
+    return Response.json(
+      { error: 'Stripe is not configured' },
+      { status: 503 }
+    );
+  }
+
   const { searchParams } = new URL(request.url);
   const planId = searchParams.get('plan');
 

@@ -2,6 +2,13 @@ import { stripe } from '@/lib/stripe';
 import Stripe from 'stripe';
 
 export async function POST() {
+  if (!stripe) {
+    return Response.json(
+      { error: 'Stripe is not configured' },
+      { status: 503 }
+    );
+  }
+
   try {
     const customer = await stripe.customers.create({
       email: 'demo@prnews.ca',

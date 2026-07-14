@@ -1,4 +1,3 @@
-import { stripe } from '@/lib/stripe';
 import { db } from '@/lib/db/prisma';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth/auth';

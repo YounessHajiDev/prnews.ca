@@ -1,6 +1,13 @@
 import { stripe } from '@/lib/stripe';
 
 export async function GET() {
+  if (!stripe) {
+    return Response.json(
+      { error: 'Stripe is not configured' },
+      { status: 503 }
+    );
+  }
+
   try {
     const products = await stripe.products.list();
     const prices = await stripe.prices.list();
