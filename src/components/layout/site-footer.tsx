@@ -17,7 +17,7 @@ export function SiteFooter() {
               PR NEWS
             </Link>
             <p className="mt-4 max-w-xs text-sm text-wire-slate">
-              Modern, transparent press release distribution for the Canadian market.
+              {t('site.description')}
             </p>
           </div>
 
@@ -74,22 +74,22 @@ export function SiteFooter() {
             <ul className="space-y-2">
               <li>
                 <Link href="/terms" className="text-sm text-wire-slate transition-colors hover:text-white">
-                  Terms
+                  {t('terms.title')}
                 </Link>
               </li>
               <li>
                 <Link href="/privacy" className="text-sm text-wire-slate transition-colors hover:text-white">
-                  Privacy
+                  {t('privacy.title')}
                 </Link>
               </li>
               <li>
                 <Link href="/accessibility-statement" className="text-sm text-wire-slate transition-colors hover:text-white">
-                  Accessibility
+                  {t('accessibility.title')}
                 </Link>
               </li>
               <li>
                 <Link href="/casl-compliance" className="text-sm text-wire-slate transition-colors hover:text-white">
-                  CASL
+                  {t('casl.title')}
                 </Link>
               </li>
             </ul>
@@ -115,11 +115,11 @@ export function SiteFooter() {
               id="footer-email"
               type="email"
               name="email"
-              placeholder="you@company.ca"
+              placeholder={t('common.emailPlaceholder')}
               className="flex-1 border-white/10 bg-white/5 text-white placeholder:text-wire-slate"
             />
             <Button type="submit" size="sm" className="shrink-0">
-              Subscribe
+              {t('common.subscribe')}
             </Button>
           </form>
         </div>

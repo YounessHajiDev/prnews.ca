@@ -16,11 +16,11 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface TiptapEditorProps {
   value: string;
   onChange: (value: string) => void;
-  placeholder?: string;
 }
 
 function ToolbarButton({
@@ -50,7 +50,8 @@ function ToolbarButton({
   );
 }
 
-export function TiptapEditor({ value, onChange, placeholder = 'Write your press release...' }: TiptapEditorProps) {
+export function TiptapEditor({ value, onChange }: TiptapEditorProps) {
+  const t = useTranslations('submission.editor');
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -69,8 +70,6 @@ export function TiptapEditor({ value, onChange, placeholder = 'Write your press 
     },
   });
 
-  const [linkUrl, setLinkUrl] = useState('');
-
   if (!editor) return null;
 
   return (
@@ -80,21 +79,21 @@ export function TiptapEditor({ value, onChange, placeholder = 'Write your press 
         <ToolbarButton
           active={editor.isActive('heading', { level: 1 })}
           onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-          title="Heading 1"
+          title={t('heading1')}
         >
           <Heading1 className="w-4 h-4" />
         </ToolbarButton>
         <ToolbarButton
           active={editor.isActive('heading', { level: 2 })}
           onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-          title="Heading 2"
+          title={t('heading2')}
         >
           <Heading2 className="w-4 h-4" />
         </ToolbarButton>
         <ToolbarButton
           active={editor.isActive('heading', { level: 3 })}
           onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-          title="Heading 3"
+          title={t('heading3')}
         >
           <Heading3 className="w-4 h-4" />
         </ToolbarButton>
@@ -102,21 +101,21 @@ export function TiptapEditor({ value, onChange, placeholder = 'Write your press 
         <ToolbarButton
           active={editor.isActive('bold')}
           onClick={() => editor.chain().focus().toggleBold().run()}
-          title="Bold"
+          title={t('bold')}
         >
           <Bold className="w-4 h-4" />
         </ToolbarButton>
         <ToolbarButton
           active={editor.isActive('italic')}
           onClick={() => editor.chain().focus().toggleItalic().run()}
-          title="Italic"
+          title={t('italic')}
         >
           <Italic className="w-4 h-4" />
         </ToolbarButton>
         <ToolbarButton
           active={editor.isActive('blockquote')}
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
-          title="Quote"
+          title={t('quote')}
         >
           <Quote className="w-4 h-4" />
         </ToolbarButton>
@@ -124,14 +123,14 @@ export function TiptapEditor({ value, onChange, placeholder = 'Write your press 
         <ToolbarButton
           active={editor.isActive('bulletList')}
           onClick={() => editor.chain().focus().toggleBulletList().run()}
-          title="Bullet list"
+          title={t('bulletList')}
         >
           <List className="w-4 h-4" />
         </ToolbarButton>
         <ToolbarButton
           active={editor.isActive('orderedList')}
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          title="Ordered list"
+          title={t('orderedList')}
         >
           <ListOrdered className="w-4 h-4" />
         </ToolbarButton>
@@ -139,12 +138,12 @@ export function TiptapEditor({ value, onChange, placeholder = 'Write your press 
         <ToolbarButton
           active={editor.isActive('link')}
           onClick={() => {
-            const url = prompt('Enter URL:');
+            const url = prompt(t('linkPrompt'));
             if (url) {
               editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
             }
           }}
-          title="Add link"
+          title={t('addLink')}
         >
           <LinkIcon className="w-4 h-4" />
         </ToolbarButton>

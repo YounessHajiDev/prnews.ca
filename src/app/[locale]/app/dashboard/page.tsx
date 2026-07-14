@@ -5,6 +5,8 @@ import { db } from '@/lib/db/prisma';
 import { redirect } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { EmptyState } from '@/components/ui/empty-state';
+import { formatDate } from '@/lib/utils';
+import { getTranslations, getLocale } from 'next-intl/server';
 
 const STAT_ICONS = {
   releases: FileText,
@@ -16,6 +18,10 @@ const STAT_ICONS = {
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
   if (!session) redirect('/login');
+
+  const t = await getTranslations('dashboard');
+  const tc = await getTranslations('common');
+  const locale = await getLocale();
 
   const myReleases = await db.pressRelease.findMany({
     where: { authorId: session.user.id },
@@ -45,15 +51,15 @@ export default async function DashboardPage() {
   });
 
   const stats = [
-    { label: 'My Releases', value: myReleases.length, icon: STAT_ICONS.releases },
-    { label: 'Views', value: totalViews, icon: STAT_ICONS.views },
-    { label: 'Shares', value: totalShares, icon: STAT_ICONS.shares },
-    { label: 'Outlet Clicks', value: totalOutlets, icon: STAT_ICONS.outlets },
+    { label: t('myReleases'), value: myReleases.length, icon: STAT_ICONS.releases },
+    { label: t('views'), value: totalViews, icon: STAT_ICONS.views },
+    { label: t('shares'), value: totalShares, icon: STAT_ICONS.shares },
+    { label: t('outletClicks'), value: totalOutlets, icon: STAT_ICONS.outlets },
   ];
 
   return (
     <div className="p-4 md:p-8">
-      <h1 className="heading-lg mb-6">Dashboard</h1>
+      <h1 className="heading-lg mb-6">{t('title')}</h1>
 
       <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map(({ label, value, icon: Icon }) => (
@@ -69,13 +75,13 @@ export default async function DashboardPage() {
         ))}
       </div>
 
-      <h2 className="heading-md mb-4">Recent Releases</h2>
+      <h2 className="heading-md mb-4">{t('recentReleases')}</h2>
       {myReleases.length === 0 ? (
         <EmptyState
           icon={FileText}
-          title="No releases yet"
-          description="Submit your first press release to see it here and track its performance."
-          action={{ label: 'Submit a release', href: '/app/submit' }}
+          title={t('empty.title')}
+          description={t('empty.description')}
+          action={{ label: t('empty.action'), href: '/app/submit' }}
         />
       ) : (
         <div className="card overflow-hidden">
@@ -83,10 +89,10 @@ export default async function DashboardPage() {
             <table className="w-full text-sm">
               <thead className="bg-wire-paper">
                 <tr>
-                  <th className="px-4 py-3 text-left font-medium text-wire-slate">Headline</th>
-                  <th className="px-4 py-3 text-left font-medium text-wire-slate">Status</th>
-                  <th className="px-4 py-3 text-left font-medium text-wire-slate">Published</th>
-                  <th className="px-4 py-3 text-left font-medium text-wire-slate">Views</th>
+                  <th className="px-4 py-3 text-left font-medium text-wire-slate">{t('table.headline')}</th>
+                  <th className="px-4 py-3 text-left font-medium text-wire-slate">{t('table.status')}</th>
+                  <th className="px-4 py-3 text-left font-medium text-wire-slate">{t('table.published')}</th>
+                  <th className="px-4 py-3 text-left font-medium text-wire-slate">{t('table.views')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -99,7 +105,7 @@ export default async function DashboardPage() {
                       </Badge>
                     </td>
                     <td className="px-4 py-3 text-wire-slate">
-                      {release.publishedAt?.toLocaleDateString()}
+                      {release.publishedAt ? formatDate(release.publishedAt, locale) : '—'}
                     </td>
                     <td className="px-4 py-3 text-wire-slate">
                       {release.analytics?.length ?? 0}

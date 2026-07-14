@@ -2,11 +2,14 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth/auth';
 import { db } from '@/lib/db/prisma';
 import { redirect } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
 
 export default async function AdminDistributionPage() {
   const session = await getServerSession(authOptions);
   if (!session) redirect('/login');
   if (session.user?.role !== 'ADMIN') redirect('/app');
+
+  const t = await getTranslations('admin.distributionPartners');
 
   const partners = await db.distributionPartner.findMany({
     orderBy: { name: 'asc' },
@@ -14,11 +17,9 @@ export default async function AdminDistributionPage() {
 
   return (
     <div className="p-8">
-      <h1 className="heading-lg mb-6">Distribution Partners</h1>
-      <p className="text-wire-muted mb-6">
-        {partners.length} registered distribution partners.
-      </p>
-      <p className="text-wire-muted">Coming in Phase 2.</p>
+      <h1 className="heading-lg mb-6">{t('title')}</h1>
+      <p className="text-wire-muted mb-6">{t('count', { count: partners.length })}</p>
+      <p className="text-wire-muted">{t('comingSoon')}</p>
     </div>
   );
 }

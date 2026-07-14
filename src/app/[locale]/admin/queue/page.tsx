@@ -5,11 +5,14 @@ import { redirect } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, XCircle, Clock } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
 
 export default async function AdminQueuePage() {
   const session = await getServerSession(authOptions);
   if (!session) redirect('/login');
   if (session.user?.role !== 'ADMIN' && session.user?.role !== 'EDITOR') redirect('/app');
+
+  const t = await getTranslations('admin.queue');
 
   const pendingReleases = await db.pressRelease.findMany({
     where: { status: { in: ['SUBMITTED', 'IN_REVIEW'] } },
@@ -23,14 +26,14 @@ export default async function AdminQueuePage() {
   return (
     <div className="p-8">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="heading-lg">Release Queue</h1>
-        <span className="text-sm text-wire-muted">{pendingReleases.length} pending</span>
+        <h1 className="heading-lg">{t('title')}</h1>
+        <span className="text-sm text-wire-muted">{t('pending', { count: pendingReleases.length })}</span>
       </div>
 
       {pendingReleases.length === 0 ? (
         <div className="card p-8 text-center">
           <Clock className="w-12 h-12 mx-auto text-wire-muted mb-4" />
-          <p className="text-wire-muted">No releases pending review.</p>
+          <p className="text-wire-muted">{t('noPending')}</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -40,20 +43,20 @@ export default async function AdminQueuePage() {
                 <div>
                   <h3 className="font-display font-semibold text-lg">{release.headline}</h3>
                   <p className="text-sm text-wire-muted mt-1">
-                    {release.company?.name} · Submitted by {release.author?.name || release.author?.email}
+                    {release.company?.name} · {t('submittedBy', { name: release.author?.name || release.author?.email })}
                   </p>
                 </div>
               </div>
               <p className="text-sm text-wire-muted mb-4 line-clamp-2">{release.summary}</p>
               <div className="flex items-center gap-3">
                 <Button variant="default" size="sm" className="gap-1">
-                  <CheckCircle className="w-4 h-4" /> Approve
+                  <CheckCircle className="w-4 h-4" /> {t('approve')}
                 </Button>
                 <Button variant="outline" size="sm" className="gap-1">
-                  <XCircle className="w-4 h-4" /> Reject
+                  <XCircle className="w-4 h-4" /> {t('reject')}
                 </Button>
                 <Button variant="ghost" size="sm">
-                  Request Changes
+                  {t('requestChanges')}
                 </Button>
               </div>
             </div>

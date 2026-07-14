@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
 
 interface DistributionPoint {
@@ -48,6 +49,7 @@ function seededRandom(seed: number) {
 }
 
 export function CanadaMap({ distributionPoints }: CanadaMapProps) {
+  const t = useTranslations('canadaMap');
   const reducedMotion = useReducedMotion();
   const [activeIds, setActiveIds] = useState<Set<string>>(new Set());
 
@@ -104,7 +106,7 @@ export function CanadaMap({ distributionPoints }: CanadaMapProps) {
 
   return (
     <div className="relative mx-auto aspect-[2/1] w-full max-w-4xl">
-      <svg viewBox={`0 0 ${VIEWBOX_W} ${VIEWBOX_H}`} className="h-full w-full" aria-label="Dot-matrix map of Canada showing active distribution nodes">
+      <svg viewBox={`0 0 ${VIEWBOX_W} ${VIEWBOX_H}`} className="h-full w-full" aria-label={t('ariaLabel')}>
         <defs>
           <clipPath id="canada-clip">
             {Object.entries(PROVINCE_PATHS).map(([code, d]) => (

@@ -22,94 +22,8 @@
     "submitRelease": "Submit Release",
     "myReleases": "My Releases",
     "billing": "Billing",
-    "settings": "Settings"
-  },
-  "home": {
-    "hero": {
-      "headline": "Press Releases, Distributed Nationwide",
-      "subheadline": "Publish once. Reach every outlet, province, and audience. Real-time delivery confirmation included.",
-      "ctaPrimary": "Get Started",
-      "ctaSecondary": "See Pricing"
-    },
-    "stats": {
-      "releasesToday": "Releases Sent Today",
-      "outletsReached": "Media Outlets Reached",
-      "newsrooms": "Active Newsrooms"
-    },
-    "ticker": {
-      "label": "Latest Releases"
-    },
-    "features": {
-      "title": "Why PR NEWS?",
-      "transparency": {
-        "title": "Full Distribution Transparency",
-        "desc": "Track every delivery in real-time. Know exactly which outlets picked up your story."
-      },
-      "speed": {
-        "title": "Fast Turnaround",
-        "desc": "Editorial review in under 2 hours. Publish on your schedule."
-      },
-      "bilingual": {
-        "title": "Genuinely Bilingual",
-        "desc": "Publish in both English and French. Reach every Canadian audience."
-      }
-    }
-  },
-  "pricing": {
-    "title": "Simple, Transparent Pricing",
-    "subtitle": "No hidden fees. No sales calls required.",
-    "starter": {
-      "name": "Starter",
-      "description": "Perfect for one-off announcements",
-      "price": "CAD $299",
-      "features": [
-        "1 press release",
-        "National distribution",
-        "1 category",
-        "Basic analytics"
-      ],
-      "cta": "Get Started"
-    },
-    "growth": {
-      "name": "Growth",
-      "description": "For teams that publish regularly",
-      "monthlyPrice": "CAD $199/mo",
-      "features": [
-        "4 releases per month",
-        "Both English and French",
-        "Priority review (under 1 hour)",
-        "Branded newsroom",
-        "Advanced analytics"
-      ],
-      "cta": "Subscribe"
-    },
-    "agency": {
-      "name": "Agency",
-      "description": "For agencies managing multiple clients",
-      "contactSales": "Contact Sales"
-    },
-    "enterprise": {
-      "name": "Enterprise",
-      "description": "Custom solutions for large organizations",
-      "contactSales": "Contact Sales"
-    }
-  },
-  "footer": {
-    "product": "Product",
-    "resources": "Resources",
-    "legal": "Legal",
-    "subscribeNewsletter": "Subscribe to our newsletter",
-    "copyright": "All rights reserved."
-  },
-  "release": {
-    "published": "Published",
-    "shared": "Share",
-    "category": "Category",
-    "related": "More From This Company",
-    "meta": {
-      "by": "by",
-      "in": "in"
-    }
+    "settings": "Settings",
+    "team": "Team"
   },
   "common": {
     "readMore": "Read More",
@@ -130,11 +44,513 @@
     "poweredBy": "Powered by PR NEWS",
     "language": "Language",
     "english": "English",
-    "français": "Français"
+    "français": "Français",
+    "goHome": "Go Home",
+    "refresh": "Please try refreshing the page",
+    "somethingWentWrong": "Something went wrong",
+    "pageNotFound": "Page not found",
+    "pageNotFoundDescription": "The page you're looking for doesn't exist.",
+    "and": "and",
+    "by": "by",
+    "in": "in",
+    "comingSoon": "Coming in Phase 2.",
+    "contactUs": "Contact us",
+    "email": "Email",
+    "emailPlaceholder": "you@company.ca",
+    "phone": "Phone",
+    "address": "Address",
+    "toggleMenu": "Toggle menu",
+    "status": "Status",
+    "company": "Company",
+    "date": "Date",
+    "type": "Type",
+    "amount": "Amount",
+    "reference": "Reference",
+    "partner": "Partner",
+    "delivered": "Delivered",
+    "pending": "Pending",
+    "failed": "Failed",
+    "pressReleases": "Press Releases",
+    "latest": "Latest",
+    "live": "Live",
+    "releases": "Releases",
+    "noResults": "No results found.",
+    "manage": "Manage",
+    "subscribe": "Subscribe",
+    "backToHome": "Back to home",
+    "contactSales": "Contact Sales",
+    "getStarted": "Get Started",
+    "seeLiveReleases": "See live releases",
+    "createAccount": "Create Account",
+    "month": "month"
+  },
+  "home": {
+    "hero": {
+      "headline": "Press Releases, Distributed Nationwide",
+      "subheadline": "Publish once. Reach every outlet, province, and audience. Real-time delivery confirmation included.",
+      "ctaPrimary": "Get Started",
+      "ctaSecondary": "See live releases"
+    },
+    "stats": {
+      "releasesToday": "Releases Sent Today",
+      "outletsReached": "Media Outlets Reached",
+      "newsrooms": "Active Newsrooms"
+    },
+    "ticker": {
+      "label": "Latest Releases"
+    },
+    "map": {
+      "caption": "Live distribution nodes pulse as releases reach newsrooms across the country."
+    },
+    "features": {
+      "title": "Why PR NEWS?",
+      "transparency": {
+        "title": "Full Distribution Transparency",
+        "desc": "Track every delivery in real-time. Know exactly which outlets picked up your story."
+      },
+      "speed": {
+        "title": "Fast Turnaround",
+        "desc": "Editorial review in under 2 hours. Publish on your schedule."
+      },
+      "bilingual": {
+        "title": "Genuinely Bilingual",
+        "desc": "Publish in both English and French. Reach every Canadian audience."
+      }
+    }
+  },
+  "pricing": {
+    "title": "Simple, Transparent Pricing",
+    "subtitle": "No hidden fees. No sales calls required.",
+    "comparisonTitle": "PR NEWS vs. Traditional Newswires",
+    "comparison": {
+      "feature": "Feature",
+      "prnews": "PR NEWS",
+      "others": "Traditional Newswires",
+      "yes": "Yes",
+      "no": "No",
+      "partial": "Partial"
+    },
+    "plans": [
+      {
+        "name": "Starter",
+        "description": "Perfect for one-off announcements",
+        "price": "CAD $299",
+        "features": ["1 press release", "National distribution", "1 category", "Basic analytics"],
+        "cta": "Get Started",
+        "href": "/api/subscribe?plan=starter"
+      },
+      {
+        "name": "Growth",
+        "description": "For teams that publish regularly",
+        "price": "CAD $199",
+        "priceSuffix": "/month",
+        "features": ["4 press releases per month", "English and French", "Priority review (under 1 hour)", "Branded newsroom", "Advanced analytics"],
+        "cta": "Subscribe",
+        "href": "/api/subscribe?plan=growth",
+        "featured": true
+      },
+      {
+        "name": "Agency",
+        "description": "For agencies managing multiple clients",
+        "features": ["Volume credits", "Team seats", "White-label", "API access"],
+        "cta": "Contact Sales",
+        "href": "/contact"
+      },
+      {
+        "name": "Enterprise",
+        "description": "Custom solutions for large organizations",
+        "features": ["Volume credits", "Team seats", "White-label", "API access", "Dedicated support"],
+        "cta": "Contact Sales",
+        "href": "/contact"
+      }
+    ],
+    "comparisonRows": [
+      { "feature": "Transparent, public pricing", "prnews": "yes", "others": "no" },
+      { "feature": "Self-serve checkout", "prnews": "yes", "others": "no" },
+      { "feature": "Live distribution tracking", "prnews": "yes", "others": "partial" },
+      { "feature": "Bilingual English / French publishing", "prnews": "yes", "others": "no" },
+      { "feature": "Branded newsroom", "prnews": "yes", "others": "partial" },
+      { "feature": "No sales call required", "prnews": "yes", "others": "no" },
+      { "feature": "Real-time analytics dashboard", "prnews": "yes", "others": "partial" },
+      { "feature": "Canadian media outlet focus", "prnews": "yes", "others": "no" }
+    ]
+  },
+  "howItWorks": {
+    "dateline": "PR NEWS · PROCESS",
+    "title": "How It Works",
+    "subtitle": "Three simple steps to distribute your story nationwide.",
+    "steps": [
+      {
+        "step": "1",
+        "title": "Write & Submit",
+        "desc": "Use our intuitive submission wizard to craft your press release. Our rich text editor makes formatting effortless, and bilingual publishing is just one toggle away."
+      },
+      {
+        "step": "2",
+        "title": "Editorial Review",
+        "desc": "Our editorial team reviews your release for quality and compliance. Most reviews are completed within 2 business hours, with priority review available for Growth subscribers."
+      },
+      {
+        "step": "3",
+        "title": "Distribute & Track",
+        "desc": "Once approved, your release is distributed to our network of media outlets across Canada. Track every delivery in real-time through your dashboard."
+      }
+    ],
+    "ctaTitle": "Ready to Get Started?",
+    "ctaDescription": "Publish your first press release today."
+  },
+  "about": {
+    "dateline": "TORONTO, ON — EST. 2026",
+    "title": "About PR NEWS",
+    "intro": "PR NEWS is a Canadian press release distribution platform designed for the modern era. We believe that every Canadian business deserves access to transparent, affordable, and effective press release distribution — regardless of size or budget.",
+    "mission": "Make press release distribution transparent, fast, and accessible to every Canadian business.",
+    "missionCaption": "PR NEWS mission",
+    "closing": "Our mission is simple: make press release distribution transparent, fast, and accessible to every Canadian business. From startups in Vancouver to non-profits in Halifax, we help stories find their audience."
+  },
+  "contact": {
+    "dateline": "PR NEWS · CONTACT DESK",
+    "title": "Contact Us",
+    "intro": "Have questions about PR NEWS? We'd love to hear from you.",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address"
+  },
+  "news": {
+    "title": "News",
+    "subtitle": "Latest press releases from companies across Canada.",
+    "empty": {
+      "title": "No releases yet",
+      "description": "Releases will appear here as soon as they go live. Check back soon or submit your own story.",
+      "action": "Submit a release"
+    },
+    "category": {
+      "pressReleasesInCategory": "{count} press releases in this category.",
+      "noReleases": "No releases in this category yet."
+    },
+    "detail": {
+      "company": "Company",
+      "canada": "Canada"
+    }
+  },
+  "newsroom": {
+    "title": "Newsroom",
+    "pressReleases": "Press Releases",
+    "noReleases": "No releases yet from {company}.",
+    "breadcrumb": "Newsrooms"
+  },
+  "search": {
+    "title": "Search Releases",
+    "subtitle": "Search across all published press releases.",
+    "comingSoon": "Search functionality coming soon."
+  },
+  "trending": {
+    "title": "Trending",
+    "subtitle": "The most discussed topics across Canadian press releases.",
+    "comingSoon": "Trending topics coming soon."
+  },
+  "journalists": {
+    "title": "Journalists",
+    "intro": "PR NEWS provides journalists with easy access to press releases across Canada. Browse releases by category, province, or topic.",
+    "forJournalists": "For Journalists",
+    "benefits": [
+      "Access to verified press releases from Canadian companies",
+      "Option to join our media list for beat-matching alerts",
+      "Embargo access for time-sensitive stories"
+    ],
+    "joinTitle": "Join Our Media List",
+    "joinDescription": "Sign up to receive press releases relevant to your beat."
+  },
+  "resources": {
+    "title": "Resources",
+    "intro": "Guides, templates, and tips for effective press release distribution.",
+    "sections": [
+      {
+        "title": "How to Write a Press Release",
+        "content": "A press release is a written communication that reports some relatively newsworthy event. The purpose of a press release is to provide information to journalists and the public."
+      },
+      {
+        "title": "Best Practices",
+        "content": [
+          "Keep your headline clear and compelling",
+          "Lead with the most newsworthy information",
+          "Include a dateline (City, Province — Date)",
+          "Add a quote from a company executive",
+          "End with a boilerplate about your company"
+        ]
+      },
+      {
+        "title": "Distributing a Press Release in Canada",
+        "content": "When distributing a press release in Canada, consider reaching out to national and regional outlets across multiple provinces for maximum reach."
+      }
+    ]
+  },
+  "resource": {
+    "title": "Resource: {slug}",
+    "comingSoon": "Content coming soon."
+  },
+  "blog": {
+    "title": "Blog: {slug}",
+    "comingSoon": "Content coming soon."
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: July 10, 2026",
+    "intro": "PR NEWS is committed to protecting your personal information in compliance with Quebec Law 25 and PIPEDA.",
+    "sections": [
+      {
+        "title": "1. Information We Collect",
+        "content": "We collect information you provide directly, such as your name, email, and company details when you create an account."
+      },
+      {
+        "title": "2. How We Use Your Information",
+        "content": "We use your information to provide, maintain, and improve our services, and to communicate with you about our products."
+      },
+      {
+        "title": "3. Data Sharing",
+        "content": "We do not sell your personal information. We may share information with service providers who assist us in operating our platform."
+      },
+      {
+        "title": "4. Your Rights",
+        "content": "Under Quebec Law 25 and PIPEDA, you have the right to access, correct, and delete your personal information."
+      },
+      {
+        "title": "5. Cookies",
+        "content": "We use cookies to enhance your experience. You can manage your cookie preferences at any time."
+      },
+      {
+        "title": "6. Contact",
+        "content": "For privacy inquiries, contact us at privacy@prnews.ca."
+      }
+    ]
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "lastUpdated": "Last updated: July 10, 2026",
+    "intro": "These Terms of Service govern your use of the PR NEWS platform and services.",
+    "sections": [
+      {
+        "title": "1. Acceptance of Terms",
+        "content": "By accessing or using our services, you agree to be bound by these Terms of Service."
+      },
+      {
+        "title": "2. Use of Services",
+        "content": "You may use our services only for lawful purposes and in accordance with these terms."
+      },
+      {
+        "title": "3. Content",
+        "content": "You retain ownership of the content you submit. By submitting content, you grant us a license to distribute it through our network."
+      },
+      {
+        "title": "4. Prohibited Content",
+        "content": "Content must not be defamatory, illegal, or violate the rights of others. We reserve the right to reject any content."
+      },
+      {
+        "title": "5. Limitation of Liability",
+        "content": "PR NEWS shall not be liable for any indirect, incidental, or consequential damages arising from the use of our services."
+      },
+      {
+        "title": "6. Governing Law",
+        "content": "These terms are governed by the laws of Ontario, Canada, applicable in Toronto without regard to conflict of law principles."
+      }
+    ]
+  },
+  "casl": {
+    "title": "CASL Compliance",
+    "intro": "PR NEWS complies with Canada's Anti-Spam Legislation (CASL). Our email practices include:",
+    "practices": [
+      "Explicit consent: We only send emails to people who have explicitly opted in.",
+      "Identification: All emails clearly identify PR NEWS as the sender.",
+      "Unsubscribe: Every marketing email includes a one-click unsubscribe link.",
+      "Physical address: Our mailing address appears in the footer of every email."
+    ],
+    "contact": "For CASL-related inquiries, contact us at casl@prnews.ca."
+  },
+  "accessibility": {
+    "title": "Accessibility Statement",
+    "intro": "PR NEWS is committed to ensuring digital accessibility for people with disabilities. We are continually improving the user experience for everyone and applying the relevant accessibility standards.",
+    "sections": [
+      {
+        "title": "Conformance Status",
+        "content": "The Web Content Accessibility Guidelines (WCAG) defines requirements for designers and developers to improve accessibility for people with disabilities. It defines three levels of conformance: Level A, Level AA, and Level AAA. PR NEWS is partially conformant with WCAG 2.1 Level AA. Partially conformant means that some parts of the content do not fully conform to the accessibility standard."
+      },
+      {
+        "title": "Feedback",
+        "content": "We welcome your feedback on the accessibility of PR NEWS. Please let us know if you encounter accessibility barriers:"
+      }
+    ],
+    "email": "Email: accessibility@prnews.ca",
+    "phone": "Phone: 1-800-PR-NEWS"
+  },
+  "release": {
+    "published": "Published",
+    "shared": "Share",
+    "category": "Category",
+    "related": "More From This Company",
+    "meta": {
+      "by": "by",
+      "in": "in"
+    },
+    "read": "Read"
+  },
+  "releaseCard": {
+    "read": "Read"
+  },
+  "emptyState": {
+    "defaultTitle": "Nothing here",
+    "defaultDescription": "There’s nothing to show right now."
+  },
+  "wireTicker": {
+    "live": "LIVE",
+    "label": "Latest Releases:",
+    "reducedLabel": "Latest:"
+  },
+  "canadaMap": {
+    "ariaLabel": "Dot-matrix map of Canada showing active distribution nodes"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "myReleases": "My Releases",
+    "views": "Views",
+    "shares": "Shares",
+    "outletClicks": "Outlet Clicks",
+    "recentReleases": "Recent Releases",
+    "empty": {
+      "title": "No releases yet",
+      "description": "Submit your first press release to see it here and track its performance.",
+      "action": "Submit a release"
+    },
+    "table": {
+      "headline": "Headline",
+      "status": "Status",
+      "published": "Published",
+      "views": "Views"
+    }
+  },
+  "analytics": {
+    "title": "Analytics: {headline}",
+    "views": "Views",
+    "shares": "Shares",
+    "outletClicks": "Outlet Clicks",
+    "distribution": "Distribution",
+    "recentEvents": "Recent Events",
+    "empty": {
+      "title": "No events yet",
+      "description": "Once your release is distributed, views, shares, and outlet clicks will appear here."
+    },
+    "table": {
+      "event": "Event",
+      "geo": "Geo",
+      "referrer": "Referrer",
+      "timestamp": "Timestamp"
+    }
+  },
+  "releases": {
+    "title": "My Releases",
+    "empty": "No releases yet.",
+    "view": "View"
+  },
+  "submit": {
+    "title": "Submit a Release",
+    "drafts": "Draft Releases",
+    "comingSoon": "Release submission wizard — coming in Phase 2."
+  },
+  "billing": {
+    "title": "Billing",
+    "currentPlan": "Current Plan",
+    "noSubscription": "No active subscription",
+    "manage": "Manage",
+    "transactionHistory": "Transaction History",
+    "noTransactions": "No transactions yet.",
+    "table": {
+      "date": "Date",
+      "type": "Type",
+      "amount": "Amount",
+      "reference": "Reference"
+    },
+    "credits": "credits",
+    "plans": [
+      {
+        "name": "Starter",
+        "price": "$299",
+        "priceSuffix": "/month",
+        "features": ["1 release", "National distribution", "Basic analytics"],
+        "priceId": "price_starter_monthly"
+      },
+      {
+        "name": "Growth",
+        "price": "$199",
+        "priceSuffix": "/month",
+        "features": ["4 releases", "Bilingual", "Priority review", "Newsroom"],
+        "priceId": "price_growth_monthly",
+        "featured": true
+      }
+    ]
+  },
+  "appNewsroom": {
+    "title": "Newsroom",
+    "noNewsroom": "No newsroom configured yet."
+  },
+  "settings": {
+    "title": "Settings",
+    "comingSoon": "Account settings — coming in Phase 2."
+  },
+  "team": {
+    "title": "Team",
+    "comingSoon": "Team management — coming in Phase 2."
+  },
+  "releaseDetail": {
+    "notFound": "Release not found.",
+    "distributionStatus": "Distribution Status",
+    "table": {
+      "partner": "Partner",
+      "status": "Status",
+      "delivered": "Delivered"
+    }
+  },
+  "releaseEdit": {
+    "title": "Edit Release",
+    "comingSoon": "Coming in Phase 2."
+  },
+  "newsroomSettings": {
+    "title": "Newsroom Settings",
+    "comingSoon": "Manage your branded newsroom — coming in Phase 2."
+  },
+  "admin": {
+    "queue": {
+      "title": "Release Queue",
+      "pending": "{count} pending",
+      "noPending": "No releases pending review.",
+      "submittedBy": "Submitted by {name}",
+      "approve": "Approve",
+      "reject": "Reject",
+      "requestChanges": "Request Changes"
+    },
+    "releases": {
+      "title": "All Releases",
+      "count": "{count} releases in system.",
+      "comingSoon": "All releases management — coming in Phase 2."
+    },
+    "clients": {
+      "title": "Clients",
+      "count": "{count} registered clients.",
+      "comingSoon": "Client management — coming in Phase 2."
+    },
+    "analytics": {
+      "title": "Platform Analytics",
+      "totalReleases": "Total Releases",
+      "totalViews": "Total Views",
+      "registeredCompanies": "Registered Companies"
+    },
+    "distributionPartners": {
+      "title": "Distribution Partners",
+      "count": "{count} registered distribution partners.",
+      "comingSoon": "Coming in Phase 2."
+    }
   },
   "auth": {
     "login": {
-      "title": "Log in to your account",
+      "title": "Log in",
+      "subtitle": "Access your PR NEWS account.",
       "email": "Email",
       "password": "Password",
       "forgotPassword": "Forgot your password?",
@@ -142,17 +558,175 @@
       "signUp": "Sign up",
       "continueWithGoogle": "Continue with Google",
       "continueWithEmail": "Continue with email",
-      "magicLinkSent": "We've sent you a magic link. Check your inbox!"
+      "magicLinkSent": "We've sent you a magic link. Check your inbox!",
+      "logInButton": "Log in"
     },
     "signup": {
       "title": "Create your account",
+      "subtitle": "Start distributing press releases today.",
       "fullName": "Full name",
       "companyName": "Company name",
-      "industry": "Industry",
-      "role": "Role",
+      "email": "Email",
+      "password": "Password",
       "alreadyHaveAccount": "Already have an account?",
-      "login": "Log in"
+      "login": "Log in",
+      "createAccount": "Create account"
+    },
+    "forgotPassword": {
+      "title": "Reset Password",
+      "subtitle": "Enter your email to receive a reset link.",
+      "emailPlaceholder": "you@example.com",
+      "sendResetLink": "Send Reset Link"
+    },
+    "resetPassword": {
+      "title": "Set New Password",
+      "subtitle": "Enter your new password.",
+      "newPasswordPlaceholder": "New password",
+      "confirmPasswordPlaceholder": "Confirm password",
+      "resetPassword": "Reset Password"
+    },
+    "callback": {
+      "title": "Authentication",
+      "subtitle": "Redirecting...",
+      "signInWithGoogle": "Sign in with Google"
     }
+  },
+  "submission": {
+    "steps": [
+      { "key": "basics", "label": "Basics" },
+      { "key": "body", "label": "Body" },
+      { "key": "media", "label": "Media" },
+      { "key": "distribution", "label": "Distribution" },
+      { "key": "contact", "label": "Contact" },
+      { "key": "review", "label": "Review" }
+    ],
+    "basics": {
+      "title": "Release Basics",
+      "headlineEn": "Headline (English)",
+      "headlineEnPlaceholder": "Your press release headline",
+      "headlineFr": "Headline (French)",
+      "headlineFrPlaceholder": "Titre du communiqué (optionnel)",
+      "summary": "Summary / Lead",
+      "summaryPlaceholder": "A brief summary of your release",
+      "category": "Category",
+      "categoryPlaceholder": "Select category",
+      "language": "Language",
+      "dateline": "Dateline (City, Province)",
+      "datelinePlaceholder": "TORONTO, ON",
+      "keywords": "Keywords (comma separated)",
+      "keywordsPlaceholder": "AI, technology, funding"
+    },
+    "languageOptions": [
+      { "value": "en", "label": "English" },
+      { "value": "fr", "label": "Français" },
+      { "value": "both", "label": "Bilingual (EN + FR)" }
+    ],
+    "categories": [
+      { "value": "Business", "label": "Business" },
+      { "value": "Technology", "label": "Technology" },
+      { "value": "Health", "label": "Health" },
+      { "value": "Finance & Economy", "label": "Finance & Economy" },
+      { "value": "Government & Politics", "label": "Government & Politics" },
+      { "value": "Environment", "label": "Environment" },
+      { "value": "Consumer Products", "label": "Consumer Products" },
+      { "value": "Company Earnings", "label": "Company Earnings" },
+      { "value": "Nonprofit & Public Interest", "label": "Nonprofit & Public Interest" },
+      { "value": "Sports & Entertainment", "label": "Sports & Entertainment" },
+      { "value": "Real Estate", "label": "Real Estate" },
+      { "value": "Energy & Mining", "label": "Energy & Mining" },
+      { "value": "Indigenous Affairs & Reconciliation", "label": "Indigenous Affairs & Reconciliation" },
+      { "value": "Cannabis", "label": "Cannabis" }
+    ],
+    "provinces": [
+      { "value": "Alberta", "label": "Alberta" },
+      { "value": "British Columbia", "label": "British Columbia" },
+      { "value": "Manitoba", "label": "Manitoba" },
+      { "value": "New Brunswick", "label": "New Brunswick" },
+      { "value": "Newfoundland and Labrador", "label": "Newfoundland and Labrador" },
+      { "value": "Nova Scotia", "label": "Nova Scotia" },
+      { "value": "Ontario", "label": "Ontario" },
+      { "value": "Prince Edward Island", "label": "Prince Edward Island" },
+      { "value": "Quebec", "label": "Quebec" },
+      { "value": "Saskatchewan", "label": "Saskatchewan" },
+      { "value": "Northwest Territories", "label": "Northwest Territories" },
+      { "value": "Nunavut", "label": "Nunavut" },
+      { "value": "Yukon", "label": "Yukon" }
+    ],
+    "body": {
+      "title": "Release Body",
+      "englishBody": "English Body",
+      "englishPlaceholder": "Write your press release body...",
+      "frenchBody": "French Body",
+      "frenchPlaceholder": "Rédigez le corps de votre communiqué..."
+    },
+    "media": {
+      "title": "Media Assets",
+      "images": "Images",
+      "dragDropImages": "Drag and drop images here, or click to browse",
+      "imageFormats": "JPG, PNG, WebP supported",
+      "videoUrl": "Video URLs",
+      "videoPlaceholder": "YouTube or Vimeo URL",
+      "pdf": "PDF / Media Kit",
+      "pdfPlaceholder": "Upload PDF media kit"
+    },
+    "distribution": {
+      "title": "Distribution",
+      "tier": "Distribution Tier",
+      "targetProvinces": "Target Provinces",
+      "schedule": "Schedule / Embargo"
+    },
+    "distributionTiers": [
+      { "value": "National Distribution", "label": "National Distribution" },
+      { "value": "Regional Distribution", "label": "Regional Distribution" },
+      { "value": "Provincial", "label": "Provincial" }
+    ],
+    "contact": {
+      "title": "Media Contact",
+      "note": "This information is visible only to journalists and will not appear in the published release.",
+      "name": "Contact Name",
+      "namePlaceholder": "Jane Smith",
+      "email": "Contact Email",
+      "emailPlaceholder": "jane@company.ca",
+      "phone": "Contact Phone",
+      "phonePlaceholder": "416-555-0100"
+    },
+    "review": {
+      "title": "Review & Submit",
+      "noHeadline": "(No headline)",
+      "category": "Category",
+      "language": "Language",
+      "wordCount": "Word count",
+      "words": "words",
+      "contact": "Contact",
+      "notSelected": "Not selected",
+      "notSet": "Not set",
+      "turnaround": "Submitting this release will enter it into our editorial review queue. Expected turnaround: under 2 business hours."
+    },
+    "navigation": {
+      "back": "Back",
+      "continue": "Continue",
+      "submit": "Submit for Review"
+    },
+    "editor": {
+      "placeholder": "Write your press release...",
+      "heading1": "Heading 1",
+      "heading2": "Heading 2",
+      "heading3": "Heading 3",
+      "bold": "Bold",
+      "italic": "Italic",
+      "quote": "Quote",
+      "bulletList": "Bullet list",
+      "orderedList": "Ordered list",
+      "addLink": "Add link",
+      "linkPrompt": "Enter URL:"
+    }
+  },
+  "footer": {
+    "product": "Product",
+    "resources": "Resources",
+    "legal": "Legal",
+    "subscribeNewsletter": "Subscribe to our newsletter",
+    "copyright": "All rights reserved."
   },
   "categories": {
     "business": "Business",

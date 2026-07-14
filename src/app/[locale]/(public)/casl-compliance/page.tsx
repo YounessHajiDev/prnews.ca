@@ -1,19 +1,27 @@
-export const metadata = { title: 'CASL Compliance — PR NEWS' };
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
-export default function CASLPage() {
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('casl');
+  return { title: t('title') };
+}
+
+export default async function CASLPage() {
+  const t = await getTranslations('casl');
+  const practices = t.raw('practices') as string[];
+
   return (
     <section className="section bg-wire-bg">
       <div className="container-narrow">
-        <h1 className="heading-lg mb-8">CASL Compliance</h1>
+        <h1 className="heading-lg mb-8">{t('title')}</h1>
         <div className="prose-release">
-          <p>PR NEWS complies with Canada&apos;s Anti-Spam Legislation (CASL). Our email practices include:</p>
+          <p>{t('intro')}</p>
           <ul>
-            <li><strong>Explicit consent:</strong> We only send emails to people who have explicitly opted in.</li>
-            <li><strong>Identification:</strong> All emails clearly identify PR NEWS as the sender.</li>
-            <li><strong>Unsubscribe:</strong> Every marketing email includes a one-click unsubscribe link.</li>
-            <li><strong>Physical address:</strong> Our mailing address appears in the footer of every email.</li>
+            {practices.map((practice, i) => (
+              <li key={i}>{practice}</li>
+            ))}
           </ul>
-          <p>For CASL-related inquiries, contact us at casl@prnews.ca.</p>
+          <p>{t('contact')}</p>
         </div>
       </div>
     </section>

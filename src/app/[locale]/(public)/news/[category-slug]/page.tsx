@@ -1,7 +1,18 @@
+import { Metadata } from 'next';
 import { db } from '@/lib/db/prisma';
 import { notFound } from 'next/navigation';
 import { ReleaseGrid } from '@/components/news/release-grid';
 import { Breadcrumb } from '@/components/layout/breadcrumb';
+import { getTranslations } from 'next-intl/server';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { categorySlug: string };
+}): Promise<Metadata> {
+  const { categorySlug } = params;
+  return { title: `${categorySlug} — PR NEWS` };
+}
 
 export default async function CategoryPage({
   params,
@@ -9,6 +20,8 @@ export default async function CategoryPage({
   params: { categorySlug: string };
 }) {
   const { categorySlug } = params;
+  const t = await getTranslations('news');
+  const tNav = await getTranslations('nav');
 
   const releases = await db.pressRelease.findMany({
     where: {
@@ -26,15 +39,15 @@ export default async function CategoryPage({
     <section className="section bg-wire-bg">
       <div className="container-page">
         <Breadcrumb items={[
-          { label: 'News', href: '/news' },
+          { label: tNav('news'), href: '/news' },
           { label: categorySlug },
         ]} />
         <h1 className="heading-lg mb-2">{categorySlug}</h1>
         <p className="text-wire-muted mb-8">
-          {releases.length} press releases in this category.
+          {t('category.pressReleasesInCategory', { count: releases.length })}
         </p>
         {releases.length === 0 ? (
-          <p className="text-wire-muted">No releases in this category yet.</p>
+          <p className="text-wire-muted">{t('category.noReleases')}</p>
         ) : (
           <ReleaseGrid
             releases={releases.map((r: any) => ({
