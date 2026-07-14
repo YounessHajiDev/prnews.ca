@@ -1,4 +1,4 @@
-import { getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth/auth';
 import { db } from '@/lib/db/prisma';
 import { redirect } from 'next/navigation';
@@ -7,12 +7,12 @@ import { Badge } from '@/components/ui/badge';
 export default async function ReleaseAnalyticsPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) {
   const session = await getServerSession(authOptions);
   if (!session) redirect('/login');
 
-  const { id } = await params;
+  const { id } = params;
 
   const release = await db.pressRelease.findUnique({
     where: { id },
@@ -20,6 +20,9 @@ export default async function ReleaseAnalyticsPage({
       analytics: {
         orderBy: { timestamp: 'desc' },
         take: 100,
+      },
+      distributionLogs: {
+        include: { partner: true },
       },
     },
   });

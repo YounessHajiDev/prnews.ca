@@ -1,3 +1,5 @@
+import createNextIntlPlugin from 'next-intl/plugin';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -8,16 +10,8 @@ const nextConfig = {
       },
     ],
   },
-  experimental: {
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['raw-loader'],
-          as: '*.js',
-        },
-      },
-    },
-  },
 };
 
-export default nextConfig;
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
+
+export default withNextIntl(nextConfig);

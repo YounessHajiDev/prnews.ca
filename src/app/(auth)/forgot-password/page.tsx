@@ -1,6 +1,6 @@
 export const revalidate = 0;
 
-import { getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth/auth';
 import { redirect } from 'next/navigation';
 

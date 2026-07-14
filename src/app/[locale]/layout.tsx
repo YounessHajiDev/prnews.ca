@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import { Playfair_Display, Inter } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
+import { SiteHeader } from '@/components/layout/site-header';
+import { SiteFooter } from '@/components/layout/site-footer';
 import { routing } from '@/i18n/routing';
 
 const playfair = Playfair_Display({
@@ -28,23 +30,28 @@ export const metadata: Metadata = {
 
 interface LocaleLayoutProps {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 }
 
 export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
-  const { locale } = await params;
+  const { locale } = params;
 
   if (!routing.locales.includes(locale)) {
     notFound();
   }
 
-  const messages = await getMessages();
+  setRequestLocale(locale);
+  const messages = await getMessages({ locale });
 
   return (
     <html lang={locale} className={`${playfair.variable} ${inter.variable}`} suppressHydrationWarning>
       <body className="min-h-screen bg-wire-bg font-body text-wire-charcoal antialiased">
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <div className="flex min-h-screen flex-col">
+            <SiteHeader />
+            <div className="flex-1">{children}</div>
+            <SiteFooter />
+          </div>
         </NextIntlClientProvider>
       </body>
     </html>

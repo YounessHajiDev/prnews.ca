@@ -13,15 +13,17 @@ export const GET = async () => {
     },
   });
 
+  const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://prnews.ca').replace(/\/$/, '');
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>PR NEWS - Canadian Press Releases</title>
-    <link>https://prnews.ca</link>
+    <link>${baseUrl}</link>
     <description>Latest Canadian press releases</description>
     ${releases.map((r: any) => `    <item>
       <title>${r.headline}</title>
-      <link>https://prnews.ca/en/news/${r.categorySlug}/${r.slug}</link>
+      <link>${baseUrl}/en/news/${r.categorySlug}/${r.slug}</link>
       <pubDate>${r.publishedAt.toUTCString()}</pubDate>
     </item>`).join('\n')}
   </channel>

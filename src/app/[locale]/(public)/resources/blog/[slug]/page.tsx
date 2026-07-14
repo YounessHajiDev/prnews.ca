@@ -1,14 +1,14 @@
 import { db } from '@/lib/db/prisma';
-import { getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth/auth';
 import { redirect } from 'next/navigation';
 
 export default async function BlogPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
-  const { slug } = await params;
+  const { slug } = params;
 
   return (
     <section className="section bg-wire-bg">

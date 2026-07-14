@@ -1,5 +1,5 @@
 import { stripe } from '@/lib/stripe';
-import { db } from '@/lib/db/prisma';
+import Stripe from 'stripe';
 
 export async function POST() {
   try {
@@ -18,9 +18,12 @@ export async function POST() {
       expand: ['latest_invoice.payment_intent'],
     });
 
+    const latestInvoice = subscription.latest_invoice as Stripe.Invoice | null;
+    const paymentIntent = latestInvoice?.payment_intent as Stripe.PaymentIntent | null;
+
     return Response.json({
       subscriptionId: subscription.id,
-      clientSecret: subscription.latest_invoice?.payment_intent?.client_secret,
+      clientSecret: paymentIntent?.client_secret,
     });
   } catch (error) {
     return Response.json({ error: 'Failed to create subscription' }, { status: 500 });

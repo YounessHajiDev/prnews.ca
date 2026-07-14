@@ -5,9 +5,9 @@ import { Breadcrumb } from '@/components/layout/breadcrumb';
 export default async function NewsroomPage({
   params,
 }: {
-  params: Promise<{ companySlug: string }>;
+  params: { companySlug: string };
 }) {
-  const { companySlug } = await params;
+  const { companySlug } = params;
 
   const company = await db.company.findUnique({
     where: { slug: companySlug },

@@ -1,76 +1,97 @@
-import { getServerSession, signIn, signOut } from 'next-auth';
-import NextAuth from 'next-auth';
+import { compare } from 'bcryptjs';
+import NextAuth, { type NextAuthOptions } from 'next-auth';
+import { getServerSession } from 'next-auth/next';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { db } from '@/lib/db/prisma';
 
-export { getServerSession, signIn, signOut };
+export { getServerSession };
 
-export const authOptions = {
-  adapter: PrismaAdapter(db) as any,
-  providers: [
+const googleClientId = process.env.GOOGLE_CLIENT_ID;
+const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
+
+const providers: NextAuthOptions['providers'] = [
+  CredentialsProvider({
+    id: 'credentials',
+    name: 'Credentials',
+    credentials: {
+      email: { label: 'Email', type: 'email' },
+      password: { label: 'Password', type: 'password' },
+    },
+    async authorize(credentials: Record<string, string> | undefined) {
+      if (!credentials?.email || !credentials?.password) {
+        return null;
+      }
+
+      const user = await db.user.findUnique({
+        where: { email: credentials.email },
+      });
+
+      if (!user?.passwordHash) {
+        return null;
+      }
+
+      const isValid = await compare(credentials.password, user.passwordHash);
+      if (!isValid) {
+        return null;
+      }
+
+      return {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        image: user.image,
+        role: user.role,
+      };
+    },
+  }),
+];
+
+if (googleClientId && googleClientSecret) {
+  providers.push(
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
-    CredentialsProvider({
-      name: 'Credentials',
-      credentials: {
-        email: { label: 'Email', type: 'email' },
-        password: { label: 'Password', type: 'password' },
-      },
-      async authorize(credentials: any) {
-        if (!credentials?.email || !credentials?.password) {
-          return null;
-        }
-
-        const user = await db.user.findUnique({
-          where: { email: credentials.email as string },
-        });
-
-        if (!user || !user.passwordHash) {
-          return null;
-        }
-
-        // TODO: Use bcrypt.compare in production
-        const isValid = credentials.password === user.passwordHash;
-
-        if (!isValid) {
-          return null;
-        }
-
+      clientId: googleClientId,
+      clientSecret: googleClientSecret,
+      profile(profile) {
         return {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          image: user.image,
-          role: user.role,
+          id: profile.sub,
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture,
+          role: 'CLIENT',
         };
       },
     }),
-  ],
+  );
+}
+
+export const authOptions: NextAuthOptions = {
+  providers,
   pages: {
     signIn: '/login',
-    signUp: '/signup',
     error: '/login',
   },
+  session: {
+    strategy: 'jwt',
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
+  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async session({ session, user }: { session: any; user: any }) {
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          id: user.id,
-          role: user.role,
-        },
-      };
+    async jwt({ token, user, account }) {
+      if (account && user) {
+        token.id = user.id;
+        token.role = user.role ?? 'CLIENT';
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (token?.id) {
+        session.user.id = token.id as string;
+        session.user.role = (token.role as string) ?? 'CLIENT';
+      }
+      return session;
     },
   },
-  session: {
-    strategy: 'jwt' as const,
-  },
-} as any;
+};
 
-// Re-export for use in /api/auth/[...nextauth]/route.ts
 export default NextAuth(authOptions);

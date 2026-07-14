@@ -6,7 +6,7 @@ export default function CASLPage() {
       <div className="container-narrow">
         <h1 className="heading-lg mb-8">CASL Compliance</h1>
         <div className="prose-release">
-          <p>PR NEWS complies with Canada's Anti-Spam Legislation (CASL). Our email practices include:</p>
+          <p>PR NEWS complies with Canada&apos;s Anti-Spam Legislation (CASL). Our email practices include:</p>
           <ul>
             <li><strong>Explicit consent:</strong> We only send emails to people who have explicitly opted in.</li>
             <li><strong>Identification:</strong> All emails clearly identify PR NEWS as the sender.</li>
