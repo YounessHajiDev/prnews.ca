@@ -86,10 +86,23 @@
   },
   "home": {
     "hero": {
-      "headline": "Communiqués de presse, diffusés partout au Canada",
+      "eyebrow": "AGENCE DE PRESSE CANADIENNE",
+      "headline": "Communiqués de presse, diffusés à l'échelle nationale",
       "subheadline": "Publiez une fois. Touchez chaque média, province et audience. Confirmation de livraison en temps réel incluse.",
       "ctaPrimary": "Commencer",
-      "ctaSecondary": "Voir les communiqués en direct"
+      "ctaSecondary": "Voir les communiqués en direct",
+      "visual": {
+        "title": "État de la diffusion",
+        "delivered": "Livré",
+        "pickedUp": "Repri",
+        "audienceReach": "Portée",
+        "totalViews": "Vues totales",
+        "outletClicks": "Clics médias"
+      }
+    },
+    "trustBar": {
+      "label": "Des équipes de communication et des journalistes font confiance à",
+      "partners": ["CBC News", "CTV News", "Global News", "The Globe and Mail", "La Presse canadienne", "La Presse", "Toronto Star", "Financial Post"]
     },
     "stats": {
       "releasesToday": "Communiqués envoyés aujourd'hui",
@@ -103,7 +116,9 @@
       "caption": "Les nœuds de diffusion s'activent au fur et à mesure que les communiqués atteignent les salles de presse à travers le pays."
     },
     "features": {
+      "eyebrow": "FONCTIONNALITÉS",
       "title": "Pourquoi PR NEWS ?",
+      "subtitle": "Tout ce dont vous avez besoin pour mettre votre histoire devant les bonnes personnes — en anglais, en français ou les deux.",
       "transparency": {
         "title": "Transparence totale de la diffusion",
         "desc": "Suivez chaque livraison en temps réel. Sachez quels médias ont repris votre histoire."
@@ -115,7 +130,44 @@
       "bilingual": {
         "title": "Vraiment bilingue",
         "desc": "Publiez en anglais et en français. Touchez toutes les audiences canadiennes."
+      },
+      "reach": {
+        "title": "Portée nationale et locale",
+        "desc": "Ciblez chaque province et territoire ou concentrez-vous sur les marchés qui comptent le plus."
+      },
+      "analytics": {
+        "title": "Analyses en temps réel",
+        "desc": "Consultez les vues, les partages et les clics des médias au moment où ils se produisent, dans un seul tableau de bord."
+      },
+      "support": {
+        "title": "Soutien éditorial",
+        "desc": "Notre équipe révise chaque communiqué pour qu'il respecte les normes professionnelles des fils de presse."
       }
+    },
+    "howItWorks": {
+      "eyebrow": "PROCESSUS",
+      "title": "Comment ça marche",
+      "subtitle": "De l'ébauche à la diffusion en trois étapes simples.",
+      "steps": [
+        { "title": "Rédiger", "desc": "Rédigez votre communiqué en anglais, en français ou les deux. Ajoutez des médias, des contacts et des cibles." },
+        { "title": "Réviser", "desc": "Notre équipe éditoriale révise votre histoire et suggère des améliorations si nécessaire." },
+        { "title": "Diffuser", "desc": "Votre communiqué est publié dans les salles de presse, les agrégateurs et auprès des journalistes à travers le Canada." }
+      ]
+    },
+    "testimonials": {
+      "eyebrow": "TÉMOIGNAGES",
+      "title": "Recommandé par des communicateurs canadiens",
+      "subtitle": "Découvrez comment des équipes utilisent PR NEWS pour atteindre le bon public.",
+      "items": [
+        { "quote": "Nous avons obtenu une couverture médiatique auprès de titres que nous n'avions jamais atteints auparavant. Le suivi en temps réel change la donne.", "author": "Sarah Chen", "role": "Directrice des communications", "company": "MapleAI Inc." },
+        { "quote": "Enfin, un fil de presse bilingue qui comprend le marché canadien. La diffusion en français est impeccable.", "author": "Marc Dubois", "role": "Responsable des affaires publiques", "company": "SantéNumérique" },
+        { "quote": "Le tableau de bord seul nous a fait gagner des heures de rapports. Fortement recommandé pour toute équipe de communication interne.", "author": "Alex Thompson", "role": "VP Marketing", "company": "Urban Capital Realty" }
+      ]
+    },
+    "finalCta": {
+      "headline": "Prêt à mettre votre histoire devant le Canada ?",
+      "subheadline": "Rejoignez des centaines d'équipes qui utilisent PR NEWS pour distribuer leurs communiqués avec transparence.",
+      "cta": "Commencer la diffusion"
     }
   },
   "pricing": {
