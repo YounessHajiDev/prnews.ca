@@ -46,12 +46,52 @@ module.exports = {
           '0%': { opacity: '0', transform: 'translateY(12px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'fade-up': {
+          '0%': { opacity: '0', transform: 'translateY(30px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'slide-left': {
+          '0%': { opacity: '0', transform: 'translateX(40px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        'slide-right': {
+          '0%': { opacity: '0', transform: 'translateX(-40px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        'scale-in': {
+          '0%': { opacity: '0', transform: 'scale(0.96)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-12px)' },
+        },
+        'pulse-soft': {
+          '0%, 100%': { opacity: '0.6' },
+          '50%': { opacity: '1' },
+        },
+        'gradient-x': {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+        },
       },
       animation: {
         marquee: 'marquee 40s linear infinite',
         'marquee-slow': 'marquee 60s linear infinite',
         'pulse-node': 'pulse-node 2.5s ease-in-out infinite',
         'fade-in-up': 'fade-in-up 0.8s ease-out both',
+        'fade-in': 'fade-in 0.8s ease-out both',
+        'fade-up': 'fade-up 0.7s ease-out both',
+        'slide-left': 'slide-left 0.7s ease-out both',
+        'slide-right': 'slide-right 0.7s ease-out both',
+        'scale-in': 'scale-in 0.6s ease-out both',
+        float: 'float 6s ease-in-out infinite',
+        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+        'gradient-x': 'gradient-x 8s ease infinite',
       },
     },
   },

@@ -86,10 +86,24 @@
   },
   "home": {
     "hero": {
+      "eyebrow": "CANADIAN PRESS WIRE",
       "headline": "Press Releases, Distributed Nationwide",
       "subheadline": "Publish once. Reach every outlet, province, and audience. Real-time delivery confirmation included.",
       "ctaPrimary": "Get Started",
-      "ctaSecondary": "See live releases"
+      "ctaSecondary": "See live releases",
+      "visual": {
+        "title": "Distribution Status",
+        "live": "LIVE",
+        "delivered": "Delivered",
+        "pickedUp": "Picked up",
+        "audienceReach": "Audience reach",
+        "totalViews": "Total Views",
+        "outletClicks": "Outlet Clicks"
+      }
+    },
+    "trustBar": {
+      "label": "Trusted by communications teams and journalists at",
+      "partners": ["CBC News", "CTV News", "Global News", "The Globe and Mail", "Canadian Press", "La Presse", "Toronto Star", "Financial Post"]
     },
     "stats": {
       "releasesToday": "Releases Sent Today",
@@ -103,7 +117,9 @@
       "caption": "Live distribution nodes pulse as releases reach newsrooms across the country."
     },
     "features": {
+      "eyebrow": "FEATURES",
       "title": "Why PR NEWS?",
+      "subtitle": "Everything you need to get your story in front of the right people — in English, French, or both.",
       "transparency": {
         "title": "Full Distribution Transparency",
         "desc": "Track every delivery in real-time. Know exactly which outlets picked up your story."
@@ -115,7 +131,44 @@
       "bilingual": {
         "title": "Genuinely Bilingual",
         "desc": "Publish in both English and French. Reach every Canadian audience."
+      },
+      "reach": {
+        "title": "National + Local Reach",
+        "desc": "Target every province and territory or focus on the markets that matter most."
+      },
+      "analytics": {
+        "title": "Real-Time Analytics",
+        "desc": "See views, shares, and outlet clicks as they happen, all in one dashboard."
+      },
+      "support": {
+        "title": "Editorial Support",
+        "desc": "Our team reviews every release so it meets professional newswire standards."
       }
+    },
+    "howItWorks": {
+      "eyebrow": "PROCESS",
+      "title": "How It Works",
+      "subtitle": "From draft to distribution in three simple steps.",
+      "steps": [
+        { "title": "Draft", "desc": "Write your release in English, French, or both. Add media, contacts, and targets." },
+        { "title": "Review", "desc": "Our editorial team reviews your story and suggests improvements if needed." },
+        { "title": "Distribute", "desc": "Your release goes live to newsrooms, aggregators, and journalists across Canada." }
+      ]
+    },
+    "testimonials": {
+      "eyebrow": "TESTIMONIALS",
+      "title": "Trusted by Canadian Communicators",
+      "subtitle": "See how teams use PR NEWS to reach the right audience.",
+      "items": [
+        { "quote": "We saw pickup from outlets we had never reached before. The live tracking is a game changer.", "author": "Sarah Chen", "role": "Communications Director", "company": "MapleAI Inc." },
+        { "quote": "Finally, a bilingual newswire that understands the Canadian market. The French distribution is flawless.", "author": "Marc Dubois", "role": "Public Affairs Lead", "company": "SantéNumérique" },
+        { "quote": "The dashboard alone saved us hours of reporting. Highly recommended for any in-house comms team.", "author": "Alex Thompson", "role": "VP Marketing", "company": "Urban Capital Realty" }
+      ]
+    },
+    "finalCta": {
+      "headline": "Ready to put your story in front of Canada?",
+      "subheadline": "Join hundreds of teams using PR NEWS to distribute press releases with transparency.",
+      "cta": "Start Distributing"
     }
   },
   "pricing": {
