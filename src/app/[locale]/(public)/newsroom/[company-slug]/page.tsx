@@ -6,13 +6,29 @@ import { Breadcrumb } from '@/components/layout/breadcrumb';
 import { formatDate } from '@/lib/utils';
 import { getTranslations } from 'next-intl/server';
 import { getNewsroomStructuredData } from '@/lib/seo';
+import { routing } from '@/i18n/routing';
+
+export async function generateStaticParams() {
+  const companies = await db.company.findMany({
+    select: { slug: true },
+    take: 200,
+  });
+
+  const params: { locale: string; 'company-slug': string }[] = [];
+  for (const locale of routing.locales) {
+    for (const c of companies) {
+      params.push({ locale, 'company-slug': c.slug });
+    }
+  }
+  return params;
+}
 
 export async function generateMetadata({
   params,
 }: {
-  params: { 'company-slug': string; locale: string };
+  params: Promise<{ 'company-slug': string; locale: string }>;
 }): Promise<Metadata> {
-  const { 'company-slug': companySlug, locale } = params;
+  const { 'company-slug': companySlug, locale } = await params;
   const company = await db.company.findUnique({
     where: { slug: companySlug },
     select: { name: true, bio: true },
@@ -43,9 +59,9 @@ export async function generateMetadata({
 export default async function NewsroomPage({
   params,
 }: {
-  params: { 'company-slug': string; locale: string };
+  params: Promise<{ 'company-slug': string; locale: string }>;
 }) {
-  const { 'company-slug': companySlug, locale } = params;
+  const { 'company-slug': companySlug, locale } = await params;
   const t = await getTranslations({ locale, namespace: 'newsroom' });
 
   const company = await db.company.findUnique({

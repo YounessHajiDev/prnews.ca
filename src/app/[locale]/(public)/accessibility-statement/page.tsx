@@ -6,13 +6,23 @@ interface Section {
   content: string;
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations('accessibility');
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'accessibility' });
   return { title: t('title') };
 }
 
-export default async function AccessibilityPage() {
-  const t = await getTranslations('accessibility');
+export default async function AccessibilityPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'accessibility' });
   const sections = t.raw('sections') as Section[];
 
   return (

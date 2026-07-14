@@ -9,14 +9,24 @@ interface Step {
   desc: string;
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations('howItWorks');
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'howItWorks' });
   return { title: t('title') };
 }
 
-export default async function HowItWorksPage() {
-  const t = await getTranslations('howItWorks');
-  const tc = await getTranslations('common');
+export default async function HowItWorksPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'howItWorks' });
+  const tc = await getTranslations({ locale, namespace: 'common' });
   const steps = t.raw('steps') as Step[];
 
   return (

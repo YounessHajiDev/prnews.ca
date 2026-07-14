@@ -9,12 +9,12 @@ import { formatDate } from '@/lib/utils';
 export default async function ReleaseDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
   const session = await getServerSession(authOptions);
   if (!session) redirect('/login');
 
-  const { id } = params;
+  const { id } = await params;
   const t = await getTranslations('releaseDetail');
   const tc = await getTranslations('common');
   const locale = await getLocale();

@@ -1,13 +1,23 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations('journalists');
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'journalists' });
   return { title: t('title') };
 }
 
-export default async function JournalistsPage() {
-  const t = await getTranslations('journalists');
+export default async function JournalistsPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'journalists' });
   const benefits = t.raw('benefits') as string[];
 
   return (

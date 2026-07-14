@@ -4,19 +4,20 @@ import { getTranslations } from 'next-intl/server';
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
-  const t = await getTranslations('blog');
-  return { title: t('title', { slug: params.slug }) };
+  const { slug, locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'blog' });
+  return { title: t('title', { slug }) };
 }
 
 export default async function BlogPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string; locale: string }>;
 }) {
-  const { slug } = params;
-  const t = await getTranslations('blog');
+  const { slug, locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'blog' });
 
   return (
     <section className="section bg-wire-bg">

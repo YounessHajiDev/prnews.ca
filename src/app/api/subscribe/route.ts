@@ -29,7 +29,7 @@ export async function GET(request: Request) {
     return Response.json({ error: 'Stripe is not configured' }, { status: 503 });
   }
 
-  if (!verifyOrigin(request)) {
+  if (!(await verifyOrigin(request))) {
     return Response.json({ error: 'Invalid origin' }, { status: 403 });
   }
 
@@ -51,7 +51,7 @@ export async function GET(request: Request) {
     return Response.json({ error: 'Invalid plan' }, { status: 400 });
   }
 
-  const ip = getClientIp();
+  const ip = await getClientIp();
   const limit = await rateLimit('stripe-subscribe', `${ip}:${session.user.id}`, 10, 60 * 1000);
   if (!limit.success) {
     return Response.json({ error: 'Rate limit exceeded' }, { status: 429 });

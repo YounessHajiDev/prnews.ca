@@ -39,7 +39,7 @@ function sanitizeName(name: string): string {
 }
 
 export async function POST(request: Request) {
-  if (!verifyOrigin(request)) {
+  if (!(await verifyOrigin(request))) {
     return Response.json({ error: 'Invalid origin' }, { status: 403 });
   }
 
@@ -48,7 +48,7 @@ export async function POST(request: Request) {
     return Response.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const ip = getClientIp();
+  const ip = await getClientIp();
   const limit = await rateLimit('upload', `${ip}:${session.user.id}`, 20, 60 * 1000);
   if (!limit.success) {
     return Response.json({ error: 'Too many uploads. Please try again later.' }, { status: 429 });

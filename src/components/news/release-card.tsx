@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { ArrowRight, Calendar, MapPin } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { formatDate } from '@/lib/utils';
-import { getTranslations, getLocale } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 
 interface ReleaseCardProps {
   release: {
@@ -15,11 +15,11 @@ interface ReleaseCardProps {
     publishedAt: Date;
     slug: string;
   };
+  locale: string;
 }
 
-export async function ReleaseCard({ release }: ReleaseCardProps) {
-  const t = await getTranslations('releaseCard');
-  const locale = await getLocale();
+export async function ReleaseCard({ release, locale }: ReleaseCardProps) {
+  const t = await getTranslations({ locale, namespace: 'releaseCard' });
   const href = `/news/${release.category.toLowerCase().replace(/\s+/g, '-')}/${release.slug}`;
 
   return (

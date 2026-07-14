@@ -36,8 +36,8 @@ function getMemoryLimiter(maxRequests: number, windowMs: number) {
   };
 }
 
-export function getClientIp(): string {
-  const h = headers();
+export async function getClientIp(): Promise<string> {
+  const h = await headers();
   const forwarded = h.get('x-forwarded-for');
   if (forwarded) {
     return forwarded.split(',')[0].trim() || 'unknown';

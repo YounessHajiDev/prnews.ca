@@ -9,11 +9,11 @@ const NewsletterSchema = z.object({
 });
 
 export async function POST(request: Request) {
-  if (!verifyOrigin(request)) {
+  if (!(await verifyOrigin(request))) {
     return Response.json({ error: 'Invalid origin' }, { status: 403 });
   }
 
-  const ip = getClientIp();
+  const ip = await getClientIp();
   const limit = await rateLimit('newsletter', ip, 5, 15 * 60 * 1000);
   if (!limit.success) {
     return Response.json({ error: 'Too many requests. Please try again later.' }, { status: 429 });
